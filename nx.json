@@ -18,5 +18,15 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "forum-api": {
+      "tags": []
+    },
+    "backend-forum-main-post": {
+      "tags": []
+    },
+    "backend-shared": {
+      "tags": []
+    }
+  }
 }

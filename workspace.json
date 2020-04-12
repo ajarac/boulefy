@@ -1,8 +1,121 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "forum-api": {
+      "root": "apps/forum-api",
+      "sourceRoot": "apps/forum-api/src",
+      "projectType": "application",
+      "prefix": "forum-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/forum-api",
+            "main": "apps/forum-api/src/main.ts",
+            "tsConfig": "apps/forum-api/tsconfig.app.json",
+            "assets": ["apps/forum-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/forum-api/src/environments/environment.ts",
+                  "with": "apps/forum-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "forum-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/forum-api/.eslintrc",
+            "tsConfig": [
+              "apps/forum-api/tsconfig.app.json",
+              "apps/forum-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/forum-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/forum-api/jest.config.js",
+            "tsConfig": "apps/forum-api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-forum-main-post": {
+      "root": "libs/backend/forum/post",
+      "sourceRoot": "libs/backend/forum/post/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/backend/forum/post/tsconfig.lib.json",
+              "libs/backend/forum/post/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/backend/forum/main/post/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend/forum/post/jest.config.js",
+            "tsConfig": "libs/backend/forum/post/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-shared": {
+      "root": "libs/backend/shared",
+      "sourceRoot": "libs/backend/shared/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/backend/shared/tsconfig.lib.json",
+              "libs/backend/shared/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/backend/shared/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend/shared/jest.config.js",
+            "tsConfig": "libs/backend/shared/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/nest"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -59,5 +172,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "forum-api"
 }
