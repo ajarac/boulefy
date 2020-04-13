@@ -1,24 +1,24 @@
 import { Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
+
+import { HealthCheckController } from '@forum-api/shared/intrastructure/controller/health-check/health-check.controller';
+import { PostModule } from '@forum-api/post/post.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { ForumPostModule } from '@backend/forum/post/forum-post.module';
-
-import { HealthCheckController } from './controller/health-check/health-check.controller';
-import { FindPostsController } from './controller/post/find-posts.controller';
-import { CreatePostController } from './controller/post/create-post.controller';
-import { MONGO_DB_CONFIG } from './config/mongodb.config';
+import { MONGO_DB_CONFIG } from '@forum-api/config/mongo.config';
 
 @Module({
     imports: [
-        CqrsModule,
-        ForumPostModule,
+        PostModule,
+        /*
+            ClientsModule.register([ {
+            name: 'FORUM_SERVICES',
+            transport: Transport.REDIS,
+            options: { url: 'redis://localhost:6379' }
+        } ]),
+        */
         TypeOrmModule.forRoot(MONGO_DB_CONFIG)
     ],
     controllers: [
-        HealthCheckController,
-        FindPostsController,
-        CreatePostController
+        HealthCheckController
     ],
     providers: []
 })

@@ -21,14 +21,11 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@backend/stared/*": [
-                "./libs/backend/shared/*"
+            "@forum-api/*": [
+                "apps/forum-api/src/app/*"
             ],
-            "@backend/forum/post/*": [
-                "./libs/backend/forum/post/src/*"
-            ],
-            "@backend/forum/post/test/*": [
-                "./libs/backend/forum/post/test/*"
+            "@forum-api/test/*": [
+                "apps/forum-api/test/*"
             ],
             "@backend/shared/*": [
                 "libs/backend/shared/src/*"

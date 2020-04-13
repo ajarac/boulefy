@@ -58,35 +58,6 @@
         }
       }
     },
-    "backend-forum-main-post": {
-      "root": "libs/backend/forum/post",
-      "sourceRoot": "libs/backend/forum/post/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/backend/forum/post/tsconfig.lib.json",
-              "libs/backend/forum/post/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/backend/forum/main/post/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/backend/forum/post/jest.config.js",
-            "tsConfig": "libs/backend/forum/post/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "backend-shared": {
       "root": "libs/backend/shared",
       "sourceRoot": "libs/backend/shared/src",
