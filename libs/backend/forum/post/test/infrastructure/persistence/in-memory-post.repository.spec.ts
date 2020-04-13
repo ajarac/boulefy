@@ -1,6 +1,6 @@
-import { InMemoryPostRepository } from '../../../src/infrastructure/persistence/in-memory-post.repository';
-import { Post, PostId } from '../../../src/domain';
-import { PostIdMother, PostMother } from '../../domain';
+import { InMemoryPostRepository } from '@backend/forum/post/infrastructure/persistence/in-memory-post.repository';
+import { Post, PostId } from '@backend/forum/post/domain';
+import { PostIdMother, PostMother } from '@backend/forum/post/test/domain';
 
 describe('InMemoryPostRepository', () => {
 

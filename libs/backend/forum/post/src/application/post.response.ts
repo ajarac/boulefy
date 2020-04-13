@@ -1,4 +1,5 @@
-import { Post } from '@backend/forum/post/src/domain';
+import { Post } from '@backend/forum/post/domain';
+
 
 export class PostResponse {
     constructor(

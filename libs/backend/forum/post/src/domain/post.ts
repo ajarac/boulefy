@@ -2,10 +2,10 @@ import { AggregateRoot } from '@nestjs/cqrs';
 
 
 import { PostCreatedDomainEvent } from '@backend/stared/src/domain/post/post-created-domain-event';
-import { PostCounterMessages } from '@backend/forum/post/src/domain/post-counter-messages';
-import { PostTitle } from '@backend/forum/post/src/domain/post-title';
-import { PostRanking } from '@backend/forum/post/src/domain/post-ranking';
-import { PostId } from '@backend/forum/post/src/domain/post-id';
+import { PostCounterMessages } from '@backend/forum/post/domain/post-counter-messages';
+import { PostTitle } from '@backend/forum/post/domain/post-title';
+import { PostRanking } from '@backend/forum/post/domain/post-ranking';
+import { PostId } from '@backend/forum/post/domain/post-id';
 
 export class Post extends AggregateRoot {
 

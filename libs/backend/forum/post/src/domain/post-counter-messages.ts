@@ -1,4 +1,4 @@
-import { NumberValueObject } from '@backend/stared/src/domain/number-value-object';
+import { NumberValueObject } from '@backend/shared/domain/number-value-object';
 
 export class PostCounterMessages extends NumberValueObject {
 }

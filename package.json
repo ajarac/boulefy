@@ -31,8 +31,11 @@
     "@nestjs/core": "^6.8.3",
     "@nestjs/cqrs": "^6.1.0",
     "@nestjs/platform-express": "^6.8.3",
+    "@nestjs/typeorm": "^7.0.0",
     "faker": "^4.1.0",
+    "mongodb": "^3.5.5",
     "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.24",
     "uuidv4": "^6.0.7"
   },
   "devDependencies": {

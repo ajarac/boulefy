@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
 
-import { Post, PostId, PostRepository } from '../../domain';
+import { Post, PostId, PostRepository } from '@backend/forum/post/domain';
 
 @Injectable()
 export class InMemoryPostRepository extends PostRepository {
     private readonly posts: Map<string, Post> = new Map<string, Post>();
 
-    save(post: Post): void {
+    async save(post: Post): Promise<void> {
         this.posts.set(post.id.value, post);
     }
 
-    search(id: PostId): Post {
+    async search(id: PostId): Promise<Post> {
         return this.posts.get(id.value);
     }
 
-    searchAll(): Array<Post> {
+    async searchAll(): Promise<Array<Post>> {
         return Array.from(this.posts.values());
     }
 

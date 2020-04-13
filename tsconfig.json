@@ -25,7 +25,10 @@
                 "./libs/backend/shared/*"
             ],
             "@backend/forum/post/*": [
-                "./libs/backend/forum/post/*"
+                "./libs/backend/forum/post/src/*"
+            ],
+            "@backend/forum/post/test/*": [
+                "./libs/backend/forum/post/test/*"
             ],
             "@backend/shared/*": [
                 "libs/backend/shared/src/*"

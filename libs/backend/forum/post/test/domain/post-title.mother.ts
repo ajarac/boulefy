@@ -1,6 +1,5 @@
-import { PostTitle } from '../../src/domain';
-
 import { WordMother } from '@backend/stared/test/domain/word.mother';
+import { PostTitle } from '@backend/forum/post/domain';
 
 export class PostTitleMother {
     static create(value: string): PostTitle {

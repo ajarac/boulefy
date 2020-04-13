@@ -1,6 +1,11 @@
-import { CreatePostCommand } from '../../../src/application/create/create-post.command';
-import { PostCounterMessages, PostId, PostRanking, PostTitle } from '../../../src/domain';
-import { PostCounterMessagesMother, PostIdMother, PostRankingMother, PostTitleMother } from '../../domain';
+import { PostCounterMessages, PostId, PostRanking, PostTitle } from '@backend/forum/post/domain';
+import { CreatePostCommand } from '@backend/forum/post/application/create/create-post.command';
+import {
+    PostCounterMessagesMother,
+    PostIdMother,
+    PostRankingMother,
+    PostTitleMother
+} from '@backend/forum/post/test/domain';
 
 export class CreatePostCommandMother {
     static create(id: PostId, title: PostTitle, counterMessages: PostCounterMessages, ranking: PostRanking): CreatePostCommand {

@@ -1,7 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 
-import { CreatePostCommand } from '@backend/forum/post/src/application/create/create-post.command';
+import { CreatePostCommand } from '@backend/forum/post/application/create/create-post.command';
+
 
 @Controller('posts')
 export class CreatePostController {
@@ -11,9 +12,9 @@ export class CreatePostController {
 
     @Post(':id')
     @HttpCode(HttpStatus.ACCEPTED)
-    createPost(@Param('id') id: string, @Body() request: Request): Promise<void> {
+    createPost(@Param('id') id: string, @Body() request: Request): void {
         const command: CreatePostCommand = new CreatePostCommand(id, request.title, 0, 0);
-        return this.commandBus.execute(command).then((data) => console.log('data', data));
+        this.commandBus.execute(command);
     }
 }
 

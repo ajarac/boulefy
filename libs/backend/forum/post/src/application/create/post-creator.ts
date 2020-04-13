@@ -1,13 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import {
-    Post,
-    PostCounterMessages,
-    PostId,
-    PostRanking,
-    PostRepository,
-    PostTitle
-} from '@backend/forum/post/src/domain';
+import { Post, PostCounterMessages, PostId, PostRanking, PostRepository, PostTitle } from '@backend/forum/post/domain';
+
 
 @Injectable()
 export class PostCreator {
@@ -15,12 +9,20 @@ export class PostCreator {
     constructor(private repository: PostRepository) {
     }
 
-    create(id: PostId, title: PostTitle, counterMessages: PostCounterMessages, ranking: PostRanking): void {
-        const post: Post = Post.create(id, title, counterMessages, ranking);
+    async create(id: PostId, title: PostTitle, counterMessages: PostCounterMessages, ranking: PostRanking): Promise<void> {
+        if (await this.ensurePostNotExist(id)) {
 
-        this.repository.save(post);
+            const post: Post = Post.create(id, title, counterMessages, ranking);
 
-        post.commit();
+            await this.repository.save(post);
+
+            post.commit();
+        }
+    }
+
+    private async ensurePostNotExist(id: PostId): Promise<boolean> {
+        const post: Post = await this.repository.search(id);
+        return !post;
     }
 
 }

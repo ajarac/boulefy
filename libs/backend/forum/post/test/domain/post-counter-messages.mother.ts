@@ -1,5 +1,5 @@
-import { PostCounterMessages } from '../../src/domain';
 import { NumberMother } from '@backend/stared/test/domain/number.mother';
+import { PostCounterMessages } from '@backend/forum/post/domain';
 
 export class PostCounterMessagesMother {
     static create(value: number): PostCounterMessages {
