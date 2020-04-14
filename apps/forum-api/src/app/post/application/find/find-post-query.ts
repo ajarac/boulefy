@@ -1,4 +1,3 @@
 export class FindPostQuery {
-    constructor(public readonly id: string) {
-    }
+    constructor(public readonly id: string) {}
 }

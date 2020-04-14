@@ -1,4 +1,3 @@
-import { NumberValueObject } from '@backend/shared/domain/number-value-object';
+import { NumberValueObject } from '@backend/shared/domain/number-value-object'
 
-export class PostRanking extends NumberValueObject {
-}
+export class PostRanking extends NumberValueObject {}

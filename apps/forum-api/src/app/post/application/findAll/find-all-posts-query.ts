@@ -1,2 +1,1 @@
-export class FindAllPostsQuery {
-}
+export class FindAllPostsQuery {}

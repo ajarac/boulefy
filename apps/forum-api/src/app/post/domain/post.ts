@@ -1,43 +1,42 @@
-import { AggregateRoot } from '@nestjs/cqrs';
+import { AggregateRoot } from '@nestjs/cqrs'
 
-import { PostCreated } from '@backend/shared/domain/post/post-created';
-import { PostCounterMessages } from '@forum-api/post/domain/post-counter-messages';
-import { PostTitle } from '@forum-api/post/domain/post-title';
-import { PostRanking } from '@forum-api/post/domain/post-ranking';
-import { PostId } from '@forum-api/post/domain/post-id';
+import { PostCreated } from '@backend/shared/domain/post/post-created'
+import { PostCounterComments } from '@forum-api/post/domain/post-counter-comments'
+import { PostTitle } from '@forum-api/post/domain/post-title'
+import { PostRanking } from '@forum-api/post/domain/post-ranking'
+import { PostId } from '@forum-api/post/domain/post-id'
 
 export class Post extends AggregateRoot {
-
     constructor(
         private _id: PostId,
         private _title: PostTitle,
-        private _counterMessages: PostCounterMessages,
+        private _counterComments: PostCounterComments,
         private _ranking: PostRanking
     ) {
-        super();
+        super()
     }
 
     get id(): PostId {
-        return this._id;
+        return this._id
     }
 
     get title(): PostTitle {
-        return this._title;
+        return this._title
     }
 
-    get counterMessages(): PostCounterMessages {
-        return this._counterMessages;
+    get counterComments(): PostCounterComments {
+        return this._counterComments
     }
 
     get ranking(): PostRanking {
-        return this._ranking;
+        return this._ranking
     }
 
-    public static create(id: PostId, title: PostTitle, counterMessages: PostCounterMessages, ranking: PostRanking): Post {
-        const post: Post = new Post(id, title, counterMessages, ranking);
+    public static create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking): Post {
+        const post: Post = new Post(id, title, counterComments, ranking)
 
-        post.apply(new PostCreated(id.value, title.value, counterMessages.value, ranking.value));
+        post.apply(new PostCreated(id.value, title.value, counterComments.value, ranking.value))
 
-        return post;
+        return post
     }
 }

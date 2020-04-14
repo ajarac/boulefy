@@ -1,8 +1,7 @@
 export abstract class NumberValueObject {
-  constructor(protected _value: number) {
-  }
+    constructor(protected _value: number) {}
 
-  get value(): number {
-    return this._value;
-  }
+    get value(): number {
+        return this._value
+    }
 }

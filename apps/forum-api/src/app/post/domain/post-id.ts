@@ -1,4 +1,3 @@
-import { Identifier } from '@backend/shared/domain/identifier';
+import { Identifier } from '@backend/shared/domain/identifier'
 
-export class PostId extends Identifier {
-}
+export class PostId extends Identifier {}

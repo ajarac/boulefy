@@ -1,10 +1,4 @@
-import { Post } from '@forum-api/post/domain/post';
-import { PostId } from '@forum-api/post/domain/post-id';
+import { Post } from '@forum-api/post/domain/post'
+import { BaseMongoRepository } from '@backend/shared/intrastructure/persistence/mongo/base-mongo.repository'
 
-export abstract class PostRepository {
-    abstract save(post: Post): Promise<void>;
-
-    abstract search(id: PostId): Promise<Post>
-
-    abstract searchAll(): Promise<Array<Post>>
-}
+export abstract class PostRepository extends BaseMongoRepository<Post> {}

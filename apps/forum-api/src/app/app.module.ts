@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
 
-import { HealthCheckController } from '@forum-api/shared/intrastructure/controller/health-check/health-check.controller';
-import { PostModule } from '@forum-api/post/post.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { MONGO_DB_CONFIG } from '@forum-api/config/mongo.config';
+import { HealthCheckController } from '@forum-api/shared/intrastructure/controller/health-check/health-check.controller'
+import { PostModule } from '@forum-api/post/post.module'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { MONGO_DB_CONFIG } from '@forum-api/config/mongo.config'
 
 @Module({
     imports: [
@@ -17,10 +17,7 @@ import { MONGO_DB_CONFIG } from '@forum-api/config/mongo.config';
         */
         TypeOrmModule.forRoot(MONGO_DB_CONFIG)
     ],
-    controllers: [
-        HealthCheckController
-    ],
+    controllers: [HealthCheckController],
     providers: []
 })
-export class AppModule {
-}
+export class AppModule {}

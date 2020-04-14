@@ -1,3 +1,1 @@
-describe('CreatePostCommandHandler', () =>  {
-
-})
+describe('CreatePostCommandHandler', () => {})

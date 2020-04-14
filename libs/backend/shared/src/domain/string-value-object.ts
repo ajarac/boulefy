@@ -1,9 +1,7 @@
 export abstract class StringValueObject {
+    constructor(protected _value: string) {}
 
-  constructor(protected _value: string) {
-  }
-
-  get value(): string {
-    return this._value;
-  }
+    get value(): string {
+        return this._value
+    }
 }
