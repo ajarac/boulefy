@@ -10,11 +10,12 @@ export class CreatePostController {
     @Post(':id')
     @HttpCode(HttpStatus.ACCEPTED)
     createPost(@Param('id') id: string, @Body() request: Request): void {
-        const command: CreatePostCommand = new CreatePostCommand(id, request.title)
+        const command: CreatePostCommand = new CreatePostCommand(id, request.title, request.userId)
         this.commandBus.execute(command)
     }
 }
 
 interface Request {
     title: string
+    userId: string
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { UserRepository } from '@users/users/domain/user.repository'
-import { UserId } from '@users/users/domain/user-id'
+import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@users/users/domain/user-name'
 import { UserCounterComments } from '@users/users/domain/user-counter-comments'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'

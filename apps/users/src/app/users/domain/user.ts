@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs'
 import { UserName } from '@users/users/domain/user-name'
-import { UserId } from '@users/users/domain/user-id'
+import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
 import { UserCounterComments } from '@users/users/domain/user-counter-comments'
 import { UserCreated } from '@backend/shared/domain/user/user-created'
@@ -29,6 +29,10 @@ export class User extends AggregateRoot {
 
     get counterPosts(): UserCounterPosts {
         return this._counterPosts
+    }
+
+    incrementCounterPost(): void {
+        this._counterPosts = new UserCounterPosts(this._counterPosts.value + 1)
     }
 
     public static create(id: UserId, name: UserName, counterComments: UserCounterComments, counterPosts: UserCounterPosts): User {

@@ -4,17 +4,18 @@ import { HealthCheckController } from '@forum-api/shared/intrastructure/controll
 import { PostModule } from '@forum-api/post/post.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { MONGO_DB_CONFIG } from '@forum-api/config/mongo.config'
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
     imports: [
         PostModule,
-        /*
-            ClientsModule.register([ {
-            name: 'FORUM_SERVICES',
-            transport: Transport.REDIS,
-            options: { url: 'redis://localhost:6379' }
-        } ]),
-        */
+        ClientsModule.register([
+            {
+                name: 'FORUM_SERVICES',
+                transport: Transport.REDIS,
+                options: { url: 'redis://localhost:6379' }
+            }
+        ]),
         TypeOrmModule.forRoot(MONGO_DB_CONFIG)
     ],
     controllers: [HealthCheckController],

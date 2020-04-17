@@ -1,17 +1,19 @@
 import { AggregateRoot } from '@nestjs/cqrs'
 
-import { PostCreated } from '@backend/shared/domain/post/post-created'
+import { PostCreatedEvent } from '@backend/shared/domain/post/post-created-event'
 import { PostCounterComments } from '@forum-api/post/domain/post-counter-comments'
 import { PostTitle } from '@forum-api/post/domain/post-title'
 import { PostRanking } from '@forum-api/post/domain/post-ranking'
 import { PostId } from '@forum-api/post/domain/post-id'
+import { UserId } from '@backend/shared/domain/user/user-id'
 
 export class Post extends AggregateRoot {
     constructor(
         private _id: PostId,
         private _title: PostTitle,
         private _counterComments: PostCounterComments,
-        private _ranking: PostRanking
+        private _ranking: PostRanking,
+        private _userId: UserId
     ) {
         super()
     }
@@ -32,10 +34,14 @@ export class Post extends AggregateRoot {
         return this._ranking
     }
 
-    public static create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking): Post {
-        const post: Post = new Post(id, title, counterComments, ranking)
+    get userId(): UserId {
+        return this._userId
+    }
 
-        post.apply(new PostCreated(id.value, title.value, counterComments.value, ranking.value))
+    public static create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking, userId: UserId): Post {
+        const post: Post = new Post(id, title, counterComments, ranking, userId)
+
+        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value))
 
         return post
     }

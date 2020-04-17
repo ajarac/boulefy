@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { RegisterUserCommand } from '@users/users/application/register/register-user-command'
 import { UserRegistration } from '@users/users/application/register/user-registration'
-import { UserId } from '@users/users/domain/user-id'
+import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@users/users/domain/user-name'
 import { UserCounterComments } from '@users/users/domain/user-counter-comments'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
