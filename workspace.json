@@ -1,20 +1,20 @@
 {
     "version": 1,
     "projects": {
-        "forum-api": {
-            "root": "apps/forum-api",
-            "sourceRoot": "apps/forum-api/src",
+        "forum": {
+            "root": "apps/forum",
+            "sourceRoot": "apps/forum/src",
             "projectType": "application",
-            "prefix": "forum-api",
+            "prefix": "forum",
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
-                        "outputPath": "dist/apps/forum-api",
-                        "main": "apps/forum-api/src/main.ts",
-                        "tsConfig": "apps/forum-api/tsconfig.app.json",
-                        "assets": ["apps/forum-api/src/assets"]
+                        "outputPath": "dist/apps/forum",
+                        "main": "apps/forum/src/main.ts",
+                        "tsConfig": "apps/forum/tsconfig.app.json",
+                        "assets": ["apps/forum/src/assets"]
                     },
                     "configurations": {
                         "production": {
@@ -23,8 +23,8 @@
                             "inspect": false,
                             "fileReplacements": [
                                 {
-                                    "replace": "apps/forum-api/src/environments/environment.ts",
-                                    "with": "apps/forum-api/src/environments/environment.prod.ts"
+                                    "replace": "apps/forum/src/environments/environment.ts",
+                                    "with": "apps/forum/src/environments/environment.prod.ts"
                                 }
                             ]
                         }
@@ -33,23 +33,23 @@
                 "serve": {
                     "builder": "@nrwl/node:execute",
                     "options": {
-                        "buildTarget": "forum-api:build"
+                        "buildTarget": "forum:build"
                     }
                 },
                 "lint": {
                     "builder": "@nrwl/linter:lint",
                     "options": {
                         "linter": "eslint",
-                        "config": "apps/forum-api/.eslintrc",
-                        "tsConfig": ["apps/forum-api/tsconfig.app.json", "apps/forum-api/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**", "!apps/forum-api/**"]
+                        "config": "apps/forum/.eslintrc",
+                        "tsConfig": ["apps/forum/tsconfig.app.json", "apps/forum/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!apps/forum/**"]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "apps/forum-api/jest.config.js",
-                        "tsConfig": "apps/forum-api/tsconfig.spec.json",
+                        "jestConfig": "apps/forum/jest.config.js",
+                        "tsConfig": "apps/forum/tsconfig.spec.json",
                         "passWithNoTests": true
                     }
                 }
@@ -131,6 +131,60 @@
                     }
                 }
             }
+        },
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
+            "projectType": "application",
+            "prefix": "api",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api/src/environments/environment.ts",
+                                    "with": "apps/api/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "eslint",
+                        "config": "apps/api/.eslintrc",
+                        "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!apps/api/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api/jest.config.js",
+                        "tsConfig": "apps/api/tsconfig.spec.json",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         }
     },
     "cli": {
@@ -192,5 +246,5 @@
             }
         }
     },
-    "defaultProject": "forum-api"
+    "defaultProject": "api"
 }

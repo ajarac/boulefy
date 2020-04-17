@@ -16,8 +16,10 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@forum-api/*": ["apps/forum-api/src/app/*"],
-            "@forum-api/test/*": ["apps/forum-api/test/*"],
+            "@api/*": ["apps/api/src/app/*"],
+            "@api/test/*": ["apps/api/src/app/test/*"],
+            "@forum/*": ["apps/forum/src/app/*"],
+            "@forum/test/*": ["apps/forum/test/*"],
             "@users/*": ["apps/users/src/app/*"],
             "@users/test/*": ["apps/users/test/*"],
             "@backend/shared/*": ["libs/backend/shared/src/*"],

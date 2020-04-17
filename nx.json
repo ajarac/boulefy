@@ -19,13 +19,16 @@
         }
     },
     "projects": {
-        "forum-api": {
+        "forum": {
             "tags": []
         },
         "backend-shared": {
             "tags": []
         },
         "users": {
+            "tags": []
+        },
+        "api": {
             "tags": []
         }
     }
