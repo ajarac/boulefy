@@ -1,14 +1,19 @@
 import { AggregateRoot } from '@nestjs/cqrs'
+import { UserCreated } from '@backend/shared/domain/user/user-created'
+
 import { UserName } from '@users/users/domain/user-name'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
 import { UserCounterComments } from '@users/users/domain/user-counter-comments'
-import { UserCreated } from '@backend/shared/domain/user/user-created'
+import { UserEmail } from '@users/users/domain/user-email'
+import { UserPassword } from '@users/users/domain/user-password'
 
 export class User extends AggregateRoot {
     constructor(
         private _id: UserId,
         private _name: UserName,
+        private _password: UserPassword,
+        private _email: UserEmail,
         private _counterComments: UserCounterComments,
         private _counterPosts: UserCounterPosts
     ) {
@@ -23,6 +28,14 @@ export class User extends AggregateRoot {
         return this._name
     }
 
+    get password(): UserPassword {
+        return this._password
+    }
+
+    get email(): UserEmail {
+        return this._email
+    }
+
     get counterComments(): UserCounterComments {
         return this._counterComments
     }
@@ -35,10 +48,17 @@ export class User extends AggregateRoot {
         this._counterPosts = new UserCounterPosts(this._counterPosts.value + 1)
     }
 
-    public static create(id: UserId, name: UserName, counterComments: UserCounterComments, counterPosts: UserCounterPosts): User {
-        const user: User = new User(id, name, counterComments, counterPosts)
+    public static create(
+        id: UserId,
+        name: UserName,
+        password: UserPassword,
+        email: UserEmail,
+        counterComments: UserCounterComments,
+        counterPosts: UserCounterPosts
+    ): User {
+        const user: User = new User(id, name, password, email, counterComments, counterPosts)
 
-        user.apply(new UserCreated(id.value, name.value, counterComments.value, counterPosts.value))
+        user.apply(new UserCreated(id.value, name.value, email.value, counterComments.value, counterPosts.value))
 
         return user
     }

@@ -1,4 +1,4 @@
-export class RegisterUserCommand {
+export class RegisterUserEvent {
     constructor(
         public readonly id: string,
         public readonly name: string,

@@ -7,6 +7,12 @@ export class UserSchema extends MongoSchema {
     name: string
 
     @Column()
+    password: string
+
+    @Column()
+    email: string
+
+    @Column()
     counterComments: number
 
     @Column()

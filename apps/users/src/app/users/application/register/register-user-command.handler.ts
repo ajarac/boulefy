@@ -5,6 +5,8 @@ import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@users/users/domain/user-name'
 import { UserCounterComments } from '@users/users/domain/user-counter-comments'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
+import { UserEmail } from '@users/users/domain/user-email'
+import { UserPassword } from '@users/users/domain/user-password'
 
 @CommandHandler(RegisterUserCommand)
 export class RegisterUserCommandHandler implements ICommandHandler<RegisterUserCommand> {
@@ -13,9 +15,11 @@ export class RegisterUserCommandHandler implements ICommandHandler<RegisterUserC
     execute(command: RegisterUserCommand): Promise<void> {
         const id: UserId = new UserId(command.id)
         const name: UserName = new UserName(command.name)
+        const password: UserPassword = new UserPassword(command.password)
+        const email: UserEmail = new UserEmail(command.email)
         const counterComments: UserCounterComments = new UserCounterComments(0)
         const counterPosts: UserCounterPosts = new UserCounterPosts(0)
 
-        return this.registration.register(id, name, counterComments, counterPosts)
+        return this.registration.register(id, name, password, email, counterComments, counterPosts)
     }
 }
