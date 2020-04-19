@@ -2,12 +2,10 @@ import { Injectable } from '@nestjs/common'
 import { Post, PostId, PostRepository } from '@forum/post/domain'
 
 @Injectable()
-export class InMemoryPostRepository extends PostRepository {
+export class InMemoryPostRepository implements PostRepository {
     private readonly posts: Map<string, Post> = new Map<string, Post>()
 
-    constructor() {
-        super();
-    }
+    constructor() {}
 
     async save(post: Post): Promise<void> {
         this.posts.set(post.id.value, post)

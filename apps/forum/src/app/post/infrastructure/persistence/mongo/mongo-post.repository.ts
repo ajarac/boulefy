@@ -8,10 +8,8 @@ import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.sc
 import { PostMapper } from '@forum/post/infrastructure/persistence/mongo/post.mapper'
 
 @Injectable()
-export class MongoPostRepository extends PostRepository {
-    constructor(@InjectRepository(PostSchema) private repository: Repository<PostSchema>) {
-        super()
-    }
+export class MongoPostRepository implements PostRepository {
+    constructor(@InjectRepository(PostSchema) private repository: Repository<PostSchema>) {}
 
     async save(post: Post): Promise<void> {
         const schema: PostSchema = PostMapper.toSchema(post)
