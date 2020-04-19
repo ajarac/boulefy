@@ -7,9 +7,10 @@ export class PostFinder {
     constructor(@Inject('PostRepository') private repository: PostRepository) {}
 
     async find(id: PostId): Promise<PostResponse> {
-        const post: Post = await this.repository.search(id).catch(() => {
+        const post: Post = await this.repository.search(id)
+        if (!post) {
             throw new PostNotFound(id)
-        })
+        }
         return PostResponse.fromAggregate(post)
     }
 }

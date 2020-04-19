@@ -8,7 +8,6 @@ export class PostCreator {
 
     async create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking, userId: UserId): Promise<void> {
         if (await this.ensurePostNotExist(id)) {
-
             const post: Post = Post.create(id, title, counterComments, ranking, userId)
 
             await this.repository.save(post)

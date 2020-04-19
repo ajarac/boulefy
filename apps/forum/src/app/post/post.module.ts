@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mongo/mongo-post.repository'
 import { APPLICATION_SERVICES, COMMAND_HANDLERS, QUERY_HANDLERS } from '@forum/post/application'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
-import { CONTROLLERS } from '@forum/post/infrastructure/controller'
+import { CONTROLLERS } from '@forum/post/infrastructure/controllers'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([PostSchema])],
