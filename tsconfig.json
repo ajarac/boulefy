@@ -16,8 +16,6 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@api/*": ["apps/api/src/app/*"],
-            "@api/test/*": ["apps/api/src/app/test/*"],
             "@forum/*": ["apps/forum/src/app/*"],
             "@forum/test/*": ["apps/forum/test/*"],
             "@users/*": ["apps/users/src/app/*"],

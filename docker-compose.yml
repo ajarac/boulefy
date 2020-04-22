@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    mongodb_container:
+    mongodb:
         image: mongo:latest
         ports:
             - 27017:27017
@@ -13,5 +13,34 @@ services:
         ports:
             - 6379:6379
 
+    forum:
+        build:
+            context: .
+            dockerfile: compose/local/forum/Dockerfile
+        expose:
+            - 3333
+        depends_on:
+            - redis
+            - mongodb
+
+    users:
+        build:
+            context: .
+            dockerfile: compose/local/users/Dockerfile
+        expose:
+            - 3333
+        depends_on:
+            - redis
+            - mongodb
+
+    nginx:
+        build:
+            context: .
+            dockerfile: nginx/local/Dockerfile
+        depends_on:
+            - forum
+            - users
+        ports:
+            - '3000:3000'
 volumes:
-    mongodb_data_container:
+    mongodb_data_container: {}

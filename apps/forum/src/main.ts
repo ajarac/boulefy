@@ -6,15 +6,16 @@
 import { NestFactory } from '@nestjs/core'
 
 import { AppModule } from './app/app.module'
-import { MicroserviceOptions, Transport } from '@nestjs/microservices'
+import { Logger } from '@nestjs/common'
+
+const logger = new Logger()
 
 async function bootstrap() {
-    const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-        transport: Transport.REDIS,
-        options: { url: 'redis://localhost:6379' }
+    const app = await NestFactory.create(AppModule)
+    const port = process.env.port || 3333
+    await app.listen(port, () => {
+        logger.log('Forum Service Listening at http://localhost:' + port)
     })
-
-    app.listen(() => console.log('FORUM SERVICE LISTENING'))
 }
 
 bootstrap()

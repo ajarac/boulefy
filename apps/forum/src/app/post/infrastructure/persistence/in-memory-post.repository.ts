@@ -5,8 +5,6 @@ import { Post, PostId, PostRepository } from '@forum/post/domain'
 export class InMemoryPostRepository implements PostRepository {
     private readonly posts: Map<string, Post> = new Map<string, Post>()
 
-    constructor() {}
-
     async save(post: Post): Promise<void> {
         this.posts.set(post.id.value, post)
     }
