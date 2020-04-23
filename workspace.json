@@ -104,7 +104,8 @@
                                     "replace": "apps/users/src/environments/environment.ts",
                                     "with": "apps/users/src/environments/environment.prod.ts"
                                 }
-                            ]
+                            ],
+                            "externalDependencies": "none"
                         }
                     }
                 },

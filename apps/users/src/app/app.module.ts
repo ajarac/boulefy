@@ -17,4 +17,8 @@ import { MONGO_DB_CONFIG } from '@users/config/mongo.config'
         TypeOrmModule.forRoot(MONGO_DB_CONFIG)
     ]
 })
-export class AppModule {}
+export class AppModule {
+    constructor() {
+        console.log(MONGO_DB_CONFIG)
+    }
+}

@@ -1,0 +1,35 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@forum/*": [
+        "apps/forum/src/app/*"
+      ],
+      "@forum/test/*": [
+        "apps/forum/test/*"
+      ],
+      "@users/*": [
+        "apps/users/src/app/*"
+      ],
+      "@users/test/*": [
+        "apps/users/test/*"
+      ],
+      "@backend/shared/*": [
+        "libs/backend/shared/src/*"
+      ],
+      "@backend/shared/test/*": [
+        "libs/backend/shared/test/*"
+      ]
+    }
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
+}

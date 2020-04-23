@@ -10,6 +10,7 @@
         "test": "nx test",
         "lint": "nx workspace-lint && nx lint",
         "e2e": "nx e2e",
+        "docker:local": "docker-compose -f docker-compose.local.yml",
         "affected:apps": "nx affected:apps",
         "affected:libs": "nx affected:libs",
         "affected:build": "nx affected:build",
