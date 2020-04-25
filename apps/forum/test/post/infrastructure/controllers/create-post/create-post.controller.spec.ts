@@ -8,7 +8,7 @@ import { Post } from '@forum/post/domain'
 import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
 import { PostIdMother, PostTitleMother } from '@forum/test/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
-import { MONGO_DB_TESTING_CONFIG } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mongo/mongo-post.repository'
 import { CreatePostController } from '@forum/post/infrastructure/controllers/create-post.controller'
 import { CreatePostCommandHandler } from '@forum/post/application/create/create-post-command.handler'
@@ -23,8 +23,8 @@ describe('CreatePostController', () => {
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [CqrsModule, TypeOrmModule.forRoot(MONGO_DB_TESTING_CONFIG), TypeOrmModule.forFeature([PostSchema])],
-            controllers: [CreatePostController],
+            imports: [ CqrsModule, TypeOrmModule.forRoot(mongoConfig('createPostTest')), TypeOrmModule.forFeature([ PostSchema ]) ],
+            controllers: [ CreatePostController ],
             providers: [
                 PostCreator,
                 CreatePostCommandHandler,

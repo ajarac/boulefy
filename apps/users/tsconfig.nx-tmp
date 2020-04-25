@@ -23,6 +23,9 @@
       ],
       "@backend/shared/test/*": [
         "libs/backend/shared/test/*"
+      ],
+      "@shared/*": [
+        "libs/shared/*"
       ]
     }
   },

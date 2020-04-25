@@ -1,4 +1,5 @@
 import { isUuid } from 'uuidv4'
+import { IdentifierNotValid } from '@backend/shared/domain/identifier-not-valid'
 
 export abstract class Identifier {
     constructor(protected _value: string) {
@@ -12,7 +13,7 @@ export abstract class Identifier {
     protected isValid(value: string): void {
         const isValid: boolean = isUuid(value)
         if (!isValid) {
-            throw new Error(`Identifier not valid ${this._value}`)
+            throw new IdentifierNotValid(`Identifier not valid ${this._value}`)
         }
     }
 }

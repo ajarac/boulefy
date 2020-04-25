@@ -6,7 +6,7 @@ import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mong
 import { Test } from '@nestjs/testing'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { MONGO_DB_TESTING_CONFIG } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { Post, PostId } from '@forum/post/domain'
 import { PostIdMother, PostMother } from '@forum/test/post/domain'
@@ -23,7 +23,7 @@ describe('FindPostController', () => {
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [CqrsModule, TypeOrmModule.forRoot(MONGO_DB_TESTING_CONFIG), TypeOrmModule.forFeature([PostSchema])],
+            imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('findPostTest')), TypeOrmModule.forFeature([PostSchema])],
             controllers: [FindPostController],
             providers: [
                 PostFinder,
@@ -68,6 +68,7 @@ describe('FindPostController', () => {
             .expect(HttpStatus.NOT_FOUND)
             .expect({
                 message: `Post with id: ${id.value} not found`,
+                error: 'Error',
                 status: HttpStatus.NOT_FOUND,
                 path: '/posts/' + id.value
             } as HttpError)

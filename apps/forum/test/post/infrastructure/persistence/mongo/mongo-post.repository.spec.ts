@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { Connection } from 'typeorm'
 import * as faker from 'faker'
 
-import { MONGO_DB_TESTING_CONFIG } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { PostMother } from '@forum/test/post/domain'
 import { Post } from '@forum/post/domain'
@@ -15,7 +15,7 @@ describe('MongoPostRepository', () => {
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [TypeOrmModule.forRoot(MONGO_DB_TESTING_CONFIG), TypeOrmModule.forFeature([PostSchema])],
+            imports: [TypeOrmModule.forRoot(mongoConfig('mongoPostTest')), TypeOrmModule.forFeature([PostSchema])],
             providers: [MongoPostRepository]
         }).compile()
         mongoPostRepository = moduleRef.get<MongoPostRepository>(MongoPostRepository)

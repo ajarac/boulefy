@@ -5,7 +5,7 @@ import * as request from 'supertest'
 import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mongo/mongo-post.repository'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { MONGO_DB_TESTING_CONFIG } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { FindPostsController } from '@forum/post/infrastructure/controllers/find-posts.controller'
 import { PostFinderAll } from '@forum/post/application/findAll/post-finder-all'
@@ -21,7 +21,7 @@ describe('FindPostsController', () => {
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [CqrsModule, TypeOrmModule.forRoot(MONGO_DB_TESTING_CONFIG), TypeOrmModule.forFeature([PostSchema])],
+            imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('findPostsTest')), TypeOrmModule.forFeature([PostSchema])],
             controllers: [FindPostsController],
             providers: [
                 PostFinderAll,

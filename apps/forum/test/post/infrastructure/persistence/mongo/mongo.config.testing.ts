@@ -1,10 +1,12 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 
-export const MONGO_DB_TESTING_CONFIG: TypeOrmModuleOptions = {
-    type: 'mongodb',
-    host: 'localhost',
-    port: 27017,
-    database: 'test',
-    entities: [PostSchema]
+export function mongoConfig(database: string): TypeOrmModuleOptions {
+    return {
+        type: 'mongodb',
+        host: 'localhost',
+        port: 27017,
+        database,
+        entities: [PostSchema]
+    }
 }

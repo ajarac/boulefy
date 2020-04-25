@@ -10,7 +10,7 @@ export class PostNotFoundFilter implements ExceptionFilter {
         const request = ctx.getRequest()
         const status = HttpStatus.NOT_FOUND
 
-        const error: HttpErrorResponse = new HttpErrorResponse(status, exception.message, request.url)
+        const error: HttpErrorResponse = new HttpErrorResponse(status, exception, request.url)
 
         response.status(status).json(error.toJSON())
     }
