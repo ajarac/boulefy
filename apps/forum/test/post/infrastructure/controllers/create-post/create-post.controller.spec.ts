@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import * as request from 'supertest'
 import { Connection } from 'typeorm'
 
 import { Post } from '@forum/post/domain'
@@ -12,8 +13,10 @@ import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mong
 import { CreatePostController } from '@forum/post/infrastructure/controllers/create-post.controller'
 import { CreatePostCommandHandler } from '@forum/post/application/create/create-post-command.handler'
 import { PostCreator } from '@forum/post/application/create/post-creator'
+import { HttpStatus, INestApplication } from '@nestjs/common'
 
-xdescribe('CreatePostController', () => {
+describe('CreatePostController', () => {
+    let app: INestApplication
     let controller: CreatePostController
     let connection: Connection
     let mongoPostRepository: MongoPostRepository
@@ -32,9 +35,11 @@ xdescribe('CreatePostController', () => {
             ]
         }).compile()
 
+        app = moduleRef.createNestApplication()
         connection = moduleRef.get<Connection>(Connection)
         controller = moduleRef.get<CreatePostController>(CreatePostController)
         mongoPostRepository = moduleRef.get<MongoPostRepository>('PostRepository')
+        await app.init()
     })
 
     beforeEach(async () => {
@@ -46,19 +51,31 @@ xdescribe('CreatePostController', () => {
         await connection.close()
     })
 
-    it('should create a valid post', async () => {
-        const event = {
-            id: PostIdMother.random().value,
+    test('POST Create post', () => {
+        const id = PostIdMother.random().value
+        const body = {
+            title: PostTitleMother.random().value,
+            userId: UserIdMother.random().value
+        }
+        return request(app.getHttpServer())
+            .post('/posts/' + id)
+            .send(body)
+            .expect(HttpStatus.ACCEPTED)
+    })
+
+    test('POST Create a valid post', async () => {
+        const id = PostIdMother.random().value
+        const body = {
             title: PostTitleMother.random().value,
             userId: UserIdMother.random().value
         }
 
-        await controller.createPost(event)
+        await controller.createPost(id, body)
 
-        const post: Post = await mongoPostRepository.search(PostIdMother.create(event.id))
+        const post: Post = await mongoPostRepository.search(PostIdMother.create(id))
 
-        expect(post.id.value).toEqual(event.id)
-        expect(post.title.value).toEqual(event.title)
-        expect(post.userId.value).toEqual(event.userId)
+        expect(post.id.value).toEqual(id)
+        expect(post.title.value).toEqual(body.title)
+        expect(post.userId.value).toEqual(body.userId)
     })
 })

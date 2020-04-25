@@ -21,7 +21,8 @@
             "@users/*": ["apps/users/src/app/*"],
             "@users/test/*": ["apps/users/test/*"],
             "@backend/shared/*": ["libs/backend/shared/src/*"],
-            "@backend/shared/test/*": ["libs/backend/shared/test/*"]
+            "@backend/shared/test/*": ["libs/backend/shared/test/*"],
+            "@shared/*": ["libs/shared/*"]
         }
     },
     "exclude": ["node_modules", "tmp"]

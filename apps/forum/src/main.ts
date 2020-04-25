@@ -20,7 +20,7 @@ async function bootstrap() {
     app.connectMicroservice<MicroserviceOptions>({
         transport: Transport.REDIS,
         options: {
-            url: process.env.REDIS_HOST || 'redis://localhost:6379'
+            url: `redis://${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}`
         }
     })
 

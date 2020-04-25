@@ -24,6 +24,8 @@ services:
         environment:
             - DB_HOST=mongodb
             - DB_PORT=27017
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
         expose:
             - 3333
         depends_on:
@@ -39,6 +41,8 @@ services:
         environment:
             - DB_HOST=mongodb
             - DB_PORT=27017
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
         expose:
             - 3333
         depends_on:

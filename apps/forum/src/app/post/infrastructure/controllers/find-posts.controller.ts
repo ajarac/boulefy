@@ -3,7 +3,7 @@ import { QueryBus } from '@nestjs/cqrs'
 import { PostResponse } from '@forum/post/application/post.response'
 import { FindPostsQuery } from '@forum/post/application/findAll/find-posts-query'
 
-@Controller()
+@Controller('posts')
 export class FindPostsController {
     constructor(private queryBus: QueryBus) {}
 
