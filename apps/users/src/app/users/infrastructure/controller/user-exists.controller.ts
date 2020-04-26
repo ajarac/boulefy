@@ -9,6 +9,7 @@ export class UserExistsController {
 
     @MessagePattern('users.users.user-exists')
     userExists(id: string): Promise<boolean> {
+        console.log('USER EXISTS CONTROLLER', id)
         return this.commandBus.execute(new UserExistsCommand(id))
     }
 }

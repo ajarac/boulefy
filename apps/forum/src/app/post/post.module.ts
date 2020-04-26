@@ -6,6 +6,7 @@ import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mong
 import { APPLICATION_SERVICES, COMMAND_HANDLERS, QUERY_HANDLERS } from '@forum/post/application'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { CONTROLLERS } from '@forum/post/infrastructure/controllers'
+import { GUARDS } from '@forum/post/infrastructure/guards'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([PostSchema])],
@@ -14,6 +15,7 @@ import { CONTROLLERS } from '@forum/post/infrastructure/controllers'
         ...APPLICATION_SERVICES,
         ...COMMAND_HANDLERS,
         ...QUERY_HANDLERS,
+        ...GUARDS,
         {
             provide: 'PostRepository',
             useClass: MongoPostRepository
