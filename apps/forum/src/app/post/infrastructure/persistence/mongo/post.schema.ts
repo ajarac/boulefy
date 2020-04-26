@@ -1,10 +1,11 @@
-import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm'
+import { Column, Entity, Index, ObjectIdColumn, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class PostSchema {
     @ObjectIdColumn()
     _id: string
 
+    @Index()
     @PrimaryColumn()
     id: string
 

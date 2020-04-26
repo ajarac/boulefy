@@ -3,17 +3,27 @@ version: '3'
 services:
     mongodb:
         image: mongo:latest
-        expose:
-          - 27017
         ports:
             - 27017:27017
         volumes:
             - mongodb_data_container:/data/db
+        networks:
+            - database
+            - admin
+
+    mongoclient:
+        image: mongoclient/mongoclient
+        ports:
+            - 3000:3000
+        networks:
+            - admin
 
     redis:
         image: redis
         ports:
             - 6379:6379
+        networks:
+            - backend
 
     forum:
         image: node:lts
@@ -26,11 +36,12 @@ services:
             - DB_PORT=27017
             - REDIS_HOST=redis
             - REDIS_PORT=6379
-        expose:
-            - 3333
         depends_on:
             - redis
             - mongodb
+        networks:
+            - database
+            - backend
 
     users:
         image: node:lts
@@ -43,11 +54,12 @@ services:
             - DB_PORT=27017
             - REDIS_HOST=redis
             - REDIS_PORT=6379
-        expose:
-            - 3333
         depends_on:
             - redis
             - mongodb
+        networks:
+            - database
+            - backend
 
     nginx:
         build:
@@ -57,6 +69,14 @@ services:
             - forum
             - users
         ports:
-            - '3000:3000'
+            - '8000:8000'
+        networks:
+            - backend
+
 volumes:
     mongodb_data_container: {}
+
+networks:
+    admin:
+    database:
+    backend:
