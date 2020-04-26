@@ -13,8 +13,10 @@ import { CONSTROLLERS } from '@users/users/infrastructure/controller'
 import { PASSPORT } from '@users/users/infrastructure/passport'
 import { UserSchema } from '@users/users/infrastructure/persistence/mongo/user.schema'
 import { MongoUserRepository } from '@users/users/infrastructure/persistence/mongo/mongo-user.repository'
-import { JwtUserTokenGenerator } from '@users/users/infrastructure/passport/jwt-user-token.generator'
+import { JwtUserTokenGenerator } from '@users/users/infrastructure/passport/jwt/jwt-user-token.generator'
 import { jwtConstants } from '@users/users/infrastructure/passport/constants'
+import { UserValidateToken } from '@users/users/domain/user-validate-token'
+import { JwtValidateToken } from '@users/users/infrastructure/passport/jwt/jwt-validate-token'
 
 @Module({
     imports: [
@@ -40,6 +42,10 @@ import { jwtConstants } from '@users/users/infrastructure/passport/constants'
         {
             provide: UserTokenGenerator,
             useClass: JwtUserTokenGenerator
+        },
+        {
+            provide: UserValidateToken,
+            useClass: JwtValidateToken
         }
     ]
 })

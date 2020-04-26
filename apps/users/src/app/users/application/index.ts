@@ -8,8 +8,10 @@ import { AuthUser } from '@users/users/application/auth-user/auth-user'
 import { AuthUserCommandHandler } from '@users/users/application/auth-user/auth-user-command.handler'
 import { LoginUserCommandHandler } from '@users/users/application/login-user/login-user-command.handler'
 import { LoginUser } from '@users/users/application/login-user/login-user'
+import { ValidateTokenCommandHandler } from '@users/users/application/validate-token/validate-token-command.handler'
+import { ValidateToken } from '@users/users/application/validate-token/validate-token'
 
-export const APPLICATION_SERVICES = [UserRegistration, IncrementUserCounterPost, UserFinder, AuthUser, LoginUser]
-export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler]
+export const APPLICATION_SERVICES = [UserRegistration, IncrementUserCounterPost, UserFinder, AuthUser, LoginUser, ValidateToken]
+export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler, ValidateTokenCommandHandler]
 export const QUERY_HANDLERS = [FindUserQueryHandler]
 export const EVENT_HANDLERS = [IncrementUserCounterPostOnPostCreatedHandler]

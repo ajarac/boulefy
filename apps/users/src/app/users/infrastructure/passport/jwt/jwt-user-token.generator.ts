@@ -11,7 +11,7 @@ export class JwtUserTokenGenerator extends UserTokenGenerator {
     }
 
     sign(id: UserId, username: UserName): AccessToken {
-        const payload = { sub: id, username }
+        const payload = { id: id.value, username: username.value }
         return {
             accessToken: this.jwtService.sign(payload)
         }
