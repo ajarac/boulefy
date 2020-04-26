@@ -4,7 +4,7 @@ import { MongoSchema } from '@backend/shared/intrastructure/persistence/mongo/mo
 @Entity()
 export class UserSchema extends MongoSchema {
     @Column()
-    name: string
+    username: string
 
     @Column()
     password: string

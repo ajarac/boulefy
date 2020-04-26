@@ -1,3 +1,3 @@
-import { UserExistsGuard } from '@forum/post/infrastructure/guards/user-exists.guard'
+import { AuthGuard } from '@forum/post/infrastructure/guards/auth.guard'
 
-export const GUARDS = [UserExistsGuard]
+export const GUARDS = [AuthGuard]

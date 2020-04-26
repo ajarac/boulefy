@@ -11,7 +11,7 @@ import { UserPassword } from '@users/users/domain/user-password'
 export class User extends AggregateRoot {
     constructor(
         private _id: UserId,
-        private _name: UserName,
+        private _username: UserName,
         private _password: UserPassword,
         private _email: UserEmail,
         private _counterComments: UserCounterComments,
@@ -24,8 +24,8 @@ export class User extends AggregateRoot {
         return this._id
     }
 
-    get name(): UserName {
-        return this._name
+    get username(): UserName {
+        return this._username
     }
 
     get password(): UserPassword {
@@ -50,15 +50,15 @@ export class User extends AggregateRoot {
 
     public static create(
         id: UserId,
-        name: UserName,
+        username: UserName,
         password: UserPassword,
         email: UserEmail,
         counterComments: UserCounterComments,
         counterPosts: UserCounterPosts
     ): User {
-        const user: User = new User(id, name, password, email, counterComments, counterPosts)
+        const user: User = new User(id, username, password, email, counterComments, counterPosts)
 
-        user.apply(new UserCreated(id.value, name.value, email.value, counterComments.value, counterPosts.value))
+        user.apply(new UserCreated(id.value, username.value, email.value, counterComments.value, counterPosts.value))
 
         return user
     }

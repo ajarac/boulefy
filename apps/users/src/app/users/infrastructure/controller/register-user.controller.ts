@@ -2,7 +2,7 @@ import { Body, Controller, Param, Post } from '@nestjs/common'
 import { CommandBus } from '@nestjs/cqrs'
 import { RegisterUserCommand } from '@users/users/application/register/register-user-command'
 
-@Controller()
+@Controller('register')
 export class RegisterUserController {
     constructor(private commandBus: CommandBus) {}
 

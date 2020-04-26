@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { environment } from '../../../../environments/environment'
 
 @Injectable()
-export class UserExistsGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
     constructor(@Inject(environment.clientName) private client: ClientProxy) {}
 
     canActivate(context: ExecutionContext): Observable<boolean> {
