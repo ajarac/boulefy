@@ -64,12 +64,12 @@ services:
     nginx:
         build:
             context: .
-            dockerfile: nginx/local/Dockerfile
+            dockerfile: compose/local/nginx/Dockerfile
         depends_on:
             - forum
             - users
         ports:
-            - '8000:8000'
+            - 8000:8000
         networks:
             - backend
 

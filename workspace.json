@@ -133,6 +133,123 @@
                     }
                 }
             }
+        },
+        "agora-desktop": {
+            "projectType": "application",
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "apps/agora-desktop",
+            "sourceRoot": "apps/agora-desktop/src",
+            "prefix": "agora",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/agora-desktop",
+                        "index": "apps/agora-desktop/src/index.html",
+                        "main": "apps/agora-desktop/src/main.ts",
+                        "polyfills": "apps/agora-desktop/src/polyfills.ts",
+                        "tsConfig": "apps/agora-desktop/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["apps/agora-desktop/src/favicon.ico", "apps/agora-desktop/src/assets"],
+                        "styles": ["apps/agora-desktop/src/styles.scss", "node_modules/@nebular/theme/styles/prebuilt/default.css"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/agora-desktop/src/environments/environment.ts",
+                                    "with": "apps/agora-desktop/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "agora-desktop:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "agora-desktop:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "agora-desktop:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["apps/agora-desktop/tsconfig.app.json", "apps/agora-desktop/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!apps/agora-desktop/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/agora-desktop/jest.config.js",
+                        "tsConfig": "apps/agora-desktop/tsconfig.spec.json",
+                        "passWithNoTests": true,
+                        "setupFile": "apps/agora-desktop/src/test-setup.ts"
+                    }
+                }
+            }
+        },
+        "agora-desktop-e2e": {
+            "root": "apps/agora-desktop-e2e",
+            "sourceRoot": "apps/agora-desktop-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/agora-desktop-e2e/cypress.json",
+                        "tsConfig": "apps/agora-desktop-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "agora-desktop:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "agora-desktop:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["apps/agora-desktop-e2e/tsconfig.e2e.json"],
+                        "exclude": ["**/node_modules/**", "!apps/agora-desktop-e2e/**"]
+                    }
+                }
+            }
         }
     },
     "cli": {
@@ -192,6 +309,13 @@
             "library": {
                 "linter": "eslint"
             }
+        },
+        "@nrwl/angular:application": {
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "unitTestRunner": "jest"
         }
     },
     "defaultProject": "api"

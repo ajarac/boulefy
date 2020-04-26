@@ -16,7 +16,7 @@ async function bootstrap() {
     const port = process.env.port || 3333
     const prefix = '/api/forum'
     app.setGlobalPrefix(prefix)
-
+    app.enableCors()
     app.connectMicroservice<MicroserviceOptions>({
         transport: Transport.REDIS,
         options: {

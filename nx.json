@@ -27,6 +27,13 @@
         },
         "users": {
             "tags": []
+        },
+        "agora-desktop": {
+            "tags": []
+        },
+        "agora-desktop-e2e": {
+            "tags": [],
+            "implicitDependencies": ["agora-desktop"]
         }
     }
 }
