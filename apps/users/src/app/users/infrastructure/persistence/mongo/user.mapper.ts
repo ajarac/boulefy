@@ -9,7 +9,7 @@ import { UserPassword } from '@users/users/domain/user-password'
 
 export class UserMapper {
     static fromSchema(userSchema: UserSchema): User {
-        const id: UserId = new UserId(userSchema.id)
+        const id: UserId = new UserId(userSchema._id)
         const name: UserName = new UserName(userSchema.username)
         const password: UserPassword = new UserPassword(userSchema.password)
         const email: UserEmail = new UserEmail(userSchema.email)
@@ -21,7 +21,7 @@ export class UserMapper {
 
     static toSchema(user: User): UserSchema {
         const userSchema: UserSchema = new UserSchema()
-        userSchema.id = user.id.value
+        userSchema._id = user.id.value
         userSchema.username = user.username.value
         userSchema.password = user.password.value
         userSchema.email = user.email.value

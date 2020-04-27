@@ -1,16 +1,15 @@
-import { Column, Entity, Index, ObjectIdColumn, PrimaryColumn } from 'typeorm'
+import { Column, Entity, ObjectIdColumn } from 'typeorm'
 
 @Entity()
 export class PostSchema {
     @ObjectIdColumn()
     _id: string
 
-    @Index()
-    @PrimaryColumn()
-    id: string
-
     @Column()
     title: string
+
+    @Column()
+    content: string
 
     @Column()
     counterComments: number

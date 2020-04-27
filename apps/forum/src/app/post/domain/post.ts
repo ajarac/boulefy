@@ -6,11 +6,13 @@ import { PostTitle } from '@forum/post/domain/post-title'
 import { PostRanking } from '@forum/post/domain/post-ranking'
 import { PostId } from '@forum/post/domain/post-id'
 import { UserId } from '@backend/shared/domain/user/user-id'
+import { PostContent } from '@forum/post/domain/post-content'
 
 export class Post extends AggregateRoot {
     constructor(
         private _id: PostId,
         private _title: PostTitle,
+        private _content: PostContent,
         private _counterComments: PostCounterComments,
         private _ranking: PostRanking,
         private _userId: UserId
@@ -26,6 +28,10 @@ export class Post extends AggregateRoot {
         return this._title
     }
 
+    get content(): PostContent {
+        return this._content
+    }
+
     get counterComments(): PostCounterComments {
         return this._counterComments
     }
@@ -38,8 +44,15 @@ export class Post extends AggregateRoot {
         return this._userId
     }
 
-    public static create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking, userId: UserId): Post {
-        const post: Post = new Post(id, title, counterComments, ranking, userId)
+    public static create(
+        id: PostId,
+        title: PostTitle,
+        content: PostContent,
+        counterComments: PostCounterComments,
+        ranking: PostRanking,
+        userId: UserId
+    ): Post {
+        const post: Post = new Post(id, title, content, counterComments, ranking, userId)
 
         post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value))
 

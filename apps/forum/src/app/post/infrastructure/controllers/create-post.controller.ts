@@ -11,13 +11,14 @@ export class CreatePostController {
     @Post(':id')
     @HttpCode(HttpStatus.ACCEPTED)
     @UseGuards(AuthGuard)
-    async createPost(@Param('id') id: string, @Body() { title }: Request, @Request() request): Promise<void> {
+    async createPost(@Param('id') id: string, @Body() { title, content }: Request, @Request() request): Promise<void> {
         const userId: string = request.user.sub
-        const command: CreatePostCommand = new CreatePostCommand(id, title, userId)
+        const command: CreatePostCommand = new CreatePostCommand(id, title, content, userId)
         return this.commandBus.execute(command)
     }
 }
 
 interface Request {
     title: string
+    content: string
 }

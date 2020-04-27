@@ -1,14 +1,21 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Post, PostCounterComments, PostId, PostRanking, PostRepository, PostTitle } from '@forum/post/domain'
+import { Post, PostContent, PostCounterComments, PostId, PostRanking, PostRepository, PostTitle } from '@forum/post/domain'
 import { UserId } from '@backend/shared/domain/user/user-id'
 
 @Injectable()
 export class PostCreator {
     constructor(@Inject('PostRepository') private repository: PostRepository) {}
 
-    async create(id: PostId, title: PostTitle, counterComments: PostCounterComments, ranking: PostRanking, userId: UserId): Promise<void> {
+    async create(
+        id: PostId,
+        title: PostTitle,
+        content: PostContent,
+        counterComments: PostCounterComments,
+        ranking: PostRanking,
+        userId: UserId
+    ): Promise<void> {
         if (await this.ensurePostNotExist(id)) {
-            const post: Post = Post.create(id, title, counterComments, ranking, userId)
+            const post: Post = Post.create(id, title, content, counterComments, ranking, userId)
 
             await this.repository.save(post)
 

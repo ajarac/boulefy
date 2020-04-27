@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 
-import { PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
+import { PostContent, PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
 import { PostCreator } from '@forum/post/application/create/post-creator'
 import { CreatePostCommand } from '@forum/post/application/create/create-post-command'
 import { UserId } from '@backend/shared/domain/user/user-id'
@@ -12,10 +12,11 @@ export class CreatePostCommandHandler implements ICommandHandler<CreatePostComma
     async execute(command: CreatePostCommand): Promise<void> {
         const id: PostId = new PostId(command.id)
         const title: PostTitle = new PostTitle(command.title)
+        const content: PostContent = new PostContent(command.content)
         const counterComments: PostCounterComments = new PostCounterComments(0)
         const ranking: PostRanking = new PostRanking(0)
         const userId: UserId = new UserId(command.userId)
 
-        return this.creator.create(id, title, counterComments, ranking, userId)
+        return this.creator.create(id, title, content, counterComments, ranking, userId)
     }
 }

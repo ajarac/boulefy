@@ -1,8 +1,10 @@
-import { Column, Entity } from 'typeorm'
-import { MongoSchema } from '@backend/shared/intrastructure/persistence/mongo/mongoSchema'
+import { Column, Entity, ObjectIdColumn } from 'typeorm'
 
 @Entity()
-export class UserSchema extends MongoSchema {
+export class UserSchema {
+    @ObjectIdColumn()
+    _id: string
+
     @Column()
     username: string
 
