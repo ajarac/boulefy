@@ -13,6 +13,8 @@ services:
 
     mongoclient:
         image: mongoclient/mongoclient
+        volumes:
+            - mongoclient:/data/db
         ports:
             - 3000:3000
         networks:
@@ -61,6 +63,17 @@ services:
             - database
             - backend
 
+    frontend:
+        build:
+            context: .
+            dockerfile: compose/local/frontend/Dockerfile
+        volumes:
+            - .:/app
+        working_dir: /app
+        command: nx serve agora-desktop "--host=0.0.0.0"
+        networks:
+            - frontend
+
     nginx:
         build:
             context: .
@@ -68,15 +81,19 @@ services:
         depends_on:
             - forum
             - users
+            - frontend
         ports:
             - 8000:8000
         networks:
             - backend
+            - frontend
 
 volumes:
     mongodb_data_container: {}
+    mongoclient: {}
 
 networks:
     admin:
     database:
     backend:
+    frontend:

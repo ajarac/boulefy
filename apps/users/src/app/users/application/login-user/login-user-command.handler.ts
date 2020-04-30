@@ -3,7 +3,7 @@ import { LoginUserCommand } from '@users/users/application/login-user/login-user
 import { LoginUser } from '@users/users/application/login-user/login-user'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@users/users/domain/user-name'
-import { AccessToken } from '@users/users/domain/user-token.generator'
+import { AccessToken } from '@shared/auth/accesst-token'
 
 @CommandHandler(LoginUserCommand)
 export class LoginUserCommandHandler implements ICommandHandler<LoginUserCommand> {

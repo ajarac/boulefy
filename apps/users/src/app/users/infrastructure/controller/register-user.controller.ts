@@ -7,14 +7,14 @@ export class RegisterUserController {
     constructor(private commandBus: CommandBus) {}
 
     @Post(':id')
-    registerUser(@Param('id') id: string, @Body() { name, password, email }: Request): void {
-        const command: RegisterUserCommand = new RegisterUserCommand(id, name, password, email)
+    registerUser(@Param('id') id: string, @Body() { username, password, email }: Request): void {
+        const command: RegisterUserCommand = new RegisterUserCommand(id, username, password, email)
         this.commandBus.execute(command)
     }
 }
 
 interface Request {
-    name: string
+    username: string
     password: string
     email: string
 }

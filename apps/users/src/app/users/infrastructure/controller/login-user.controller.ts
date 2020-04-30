@@ -2,7 +2,7 @@ import { Controller, Post, Request, UseGuards } from '@nestjs/common'
 import { LocalAuthGuard } from '@users/users/infrastructure/passport/local/local-auth.guard'
 import { CommandBus } from '@nestjs/cqrs'
 import { LoginUserCommand } from '@users/users/application/login-user/login-user-command'
-import { AccessToken } from '@users/users/domain/user-token.generator'
+import { AccessToken } from '@shared/auth/accesst-token'
 
 @Controller('')
 export class LoginUserController {

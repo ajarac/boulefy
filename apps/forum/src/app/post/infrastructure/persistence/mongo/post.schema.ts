@@ -1,9 +1,10 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { MUUID } from 'uuid-mongodb'
 
 @Entity()
 export class PostSchema {
     @ObjectIdColumn()
-    _id: string
+    _id: MUUID
 
     @Column()
     title: string

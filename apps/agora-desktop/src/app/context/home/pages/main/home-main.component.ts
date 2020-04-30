@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Select } from '@ngxs/store'
-import { PostState } from '../../../../core/post/store/post.state'
 import { Observable } from 'rxjs'
+import { PostState } from '../../../../core/post/store/post.state'
 import { Post } from '../../../../core/post/models/post'
 
 @Component({

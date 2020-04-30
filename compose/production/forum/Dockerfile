@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:lts
 
 COPY dist/apps/forum/main.js ./
 

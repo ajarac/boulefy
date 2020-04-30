@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 import { Post, PostId, PostRepository } from '@forum/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { PostMapper } from '@forum/post/infrastructure/persistence/mongo/post.mapper'
+import { from } from 'uuid-mongodb'
 
 @Injectable()
 export class MongoPostRepository implements PostRepository {
@@ -16,7 +17,7 @@ export class MongoPostRepository implements PostRepository {
     }
 
     async search(id: PostId): Promise<Post> {
-        const schema: PostSchema = await this.repository.findOne({ _id: id.value })
+        const schema: PostSchema = await this.repository.findOne({ _id: from(id.value) })
         return schema ? PostMapper.fromSchema(schema) : null
     }
 

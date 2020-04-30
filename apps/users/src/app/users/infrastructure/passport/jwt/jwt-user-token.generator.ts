@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { AccessToken, UserTokenGenerator } from '@users/users/domain/user-token.generator'
+import { UserTokenGenerator } from '@users/users/domain/user-token.generator'
 import { UserName } from '@users/users/domain/user-name'
 import { UserId } from '@backend/shared/domain/user/user-id'
+import { AccessToken } from '@shared/auth/accesst-token'
 
 @Injectable()
 export class JwtUserTokenGenerator extends UserTokenGenerator {

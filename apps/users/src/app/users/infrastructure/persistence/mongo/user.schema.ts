@@ -1,9 +1,10 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { MUUID } from 'uuid-mongodb'
 
 @Entity()
 export class UserSchema {
     @ObjectIdColumn()
-    _id: string
+    _id: MUUID
 
     @Column()
     username: string

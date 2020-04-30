@@ -1,10 +1,11 @@
 import { Post, PostContent, PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { UserId } from '@backend/shared/domain/user/user-id'
+import { from } from 'uuid-mongodb'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {
-        const id: PostId = new PostId(postSchema._id)
+        const id: PostId = new PostId(from(postSchema._id).toString())
         const title: PostTitle = new PostTitle(postSchema.title)
         const content: PostContent = new PostContent(postSchema.content)
         const counterComments: PostCounterComments = new PostCounterComments(postSchema.counterComments)
@@ -15,7 +16,7 @@ export class PostMapper {
 
     static toSchema(post: Post): PostSchema {
         const postSchema: PostSchema = new PostSchema()
-        postSchema._id = post.id.value
+        postSchema._id = from(post.id.value)
         postSchema.title = post.title.value
         postSchema.content = post.content.value
         postSchema.counterComments = post.counterComments.value

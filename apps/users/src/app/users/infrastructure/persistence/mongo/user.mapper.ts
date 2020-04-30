@@ -6,10 +6,11 @@ import { UserCounterComments } from '@users/users/domain/user-counter-comments'
 import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
 import { UserEmail } from '@users/users/domain/user-email'
 import { UserPassword } from '@users/users/domain/user-password'
+import { from } from 'uuid-mongodb'
 
 export class UserMapper {
     static fromSchema(userSchema: UserSchema): User {
-        const id: UserId = new UserId(userSchema._id)
+        const id: UserId = new UserId(from(userSchema._id).toString())
         const name: UserName = new UserName(userSchema.username)
         const password: UserPassword = new UserPassword(userSchema.password)
         const email: UserEmail = new UserEmail(userSchema.email)
@@ -21,7 +22,7 @@ export class UserMapper {
 
     static toSchema(user: User): UserSchema {
         const userSchema: UserSchema = new UserSchema()
-        userSchema._id = user.id.value
+        userSchema._id = from(user.id.value)
         userSchema.username = user.username.value
         userSchema.password = user.password.value
         userSchema.email = user.email.value

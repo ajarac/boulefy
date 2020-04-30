@@ -10,6 +10,7 @@ import { UserSchema } from '@users/users/infrastructure/persistence/mongo/user.s
 import { UserMapper } from '@users/users/infrastructure/persistence/mongo/user.mapper'
 import { UserName } from '@users/users/domain/user-name'
 import { UserPassword } from '@users/users/domain/user-password'
+import { from } from 'uuid-mongodb'
 
 @Injectable()
 export class MongoUserRepository extends UserRepository {
@@ -24,17 +25,16 @@ export class MongoUserRepository extends UserRepository {
 
     async register(user: User): Promise<void> {
         const userSchema: UserSchema = UserMapper.toSchema(user)
-        userSchema._id = ObjectId.createFromTime(Date.now()).toHexString()
         await this.repository.save(userSchema)
     }
 
     async search(id: UserId): Promise<User> {
-        const userSchema: UserSchema = await this.repository.findOne({ id: id.value })
+        const userSchema: UserSchema = await this.repository.findOne({ _id: from(id.value) })
         return userSchema ? UserMapper.fromSchema(userSchema) : null
     }
 
     async update(user: User): Promise<void> {
         const userSchema: UserSchema = UserMapper.toSchema(user)
-        await this.repository.update({ id: user.id.value }, userSchema)
+        await this.repository.update({ _id: from(user.id.value) }, userSchema)
     }
 }

@@ -14,12 +14,12 @@ export class RegisterUserCommandHandler implements ICommandHandler<RegisterUserC
 
     execute(command: RegisterUserCommand): Promise<void> {
         const id: UserId = new UserId(command.id)
-        const name: UserName = new UserName(command.name)
+        const username: UserName = new UserName(command.username)
         const password: UserPassword = new UserPassword(command.password)
         const email: UserEmail = new UserEmail(command.email)
         const counterComments: UserCounterComments = new UserCounterComments(0)
         const counterPosts: UserCounterPosts = new UserCounterPosts(0)
 
-        return this.registration.register(id, name, password, email, counterComments, counterPosts)
+        return this.registration.register(id, username, password, email, counterComments, counterPosts)
     }
 }

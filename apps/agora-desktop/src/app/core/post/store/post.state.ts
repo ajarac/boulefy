@@ -1,6 +1,5 @@
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
 import { Injectable } from '@angular/core'
-import { Dictionary } from '../../shared/models/dictionary'
 import { Post } from '../models/post'
 import { PostService } from '../services/post.service'
 import { LoadPosts, PostsLoaded } from './post.action'
