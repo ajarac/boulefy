@@ -3,6 +3,7 @@ import { Select } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { PostState } from '@agora-desktop/core/post/store/post.state'
 import { Post } from '@agora-desktop/core/post/models/post'
+import { PostListState } from '@agora-desktop/core/post/store/post-list.state'
 
 @Component({
     selector: 'agora-home',
@@ -11,5 +12,5 @@ import { Post } from '@agora-desktop/core/post/models/post'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
-    @Select(PostState.getPosts) posts$: Observable<Post[]>
+    @Select(PostListState) posts$: Observable<Post[]>
 }

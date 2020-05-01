@@ -1,42 +1,22 @@
-import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
+import { Action, State, StateContext } from '@ngxs/store'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
-
-import { Post } from '@agora-desktop/core/post/models/post'
-import { LoadPosts, PostsLoaded } from '@agora-desktop/core/post/store/post.action'
+import { CreatePost, PostCreated } from '@agora-desktop/core/post/store/post.action'
 import { PostService } from '@agora-desktop/core/post/services/post.service'
+import { PostListState } from '@agora-desktop/core/post/store/post-list.state'
+import { PostDetailState } from '@agora-desktop/core/post/store/post-detail.state'
 
-interface IPostState {
-    entities: Post[]
-}
-
-@State<IPostState>({
+@State<void>({
     name: 'post',
-    defaults: {
-        entities: []
-    }
+    children: [PostListState, PostDetailState]
 })
 @Injectable()
-export class PostState implements NgxsOnInit {
-    @Selector()
-    static getPosts({ entities }: IPostState): Post[] {
-        return entities
-    }
-
+export class PostState {
     constructor(private service: PostService) {}
 
-    ngxsOnInit({ dispatch }: StateContext<IPostState>): void {
-        dispatch(new LoadPosts())
-    }
-
-    @Action(LoadPosts)
-    load({ dispatch }): Observable<Post[]> {
-        return this.service.getPosts().pipe(tap((posts: Post[]) => dispatch(new PostsLoaded(posts))))
-    }
-
-    @Action(PostsLoaded)
-    loaded({ setState }: StateContext<IPostState>, { posts }: PostsLoaded): void {
-        setState({ entities: posts })
+    @Action(CreatePost)
+    create({ dispatch }: StateContext<void>, { title, content }: CreatePost): Observable<string> {
+        return this.service.create(title, content).pipe(tap((postId: string) => dispatch(new PostCreated(postId))))
     }
 }

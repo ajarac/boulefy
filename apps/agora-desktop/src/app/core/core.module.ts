@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment'
 import { AuthModule } from '@agora-desktop/core/auth/auth.module'
 import { PostModule } from '@agora-desktop/core/post/post.module'
 import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
+import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
         {
             provide: 'CONFIG',
             useValue: environment
-        }
+        },
+        INTERCEPTORS
     ]
 })
 export class CoreModule {}

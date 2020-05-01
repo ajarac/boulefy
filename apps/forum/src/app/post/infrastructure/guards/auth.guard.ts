@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest()
         const token: string = AuthGuard.getToken(request)
-
         if (token) {
             const info = await this.client.send('users.users.validate-user', token).toPromise()
             request.user = info

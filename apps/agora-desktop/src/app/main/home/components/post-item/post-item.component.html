@@ -1,3 +1,15 @@
 <nb-card>
     <nb-card-header>{{ post.title }}</nb-card-header>
+    <nb-card-body>
+        <span>{{ post.content }}</span>
+    </nb-card-body>
+    <nb-card-footer>
+        <nb-actions>
+            <nb-action
+                icon="message-circle"
+                [badgeText]="post.counterComments.toString()"
+                [title]="post.counterComments + 'comments'"
+            ></nb-action>
+        </nb-actions>
+    </nb-card-footer>
 </nb-card>

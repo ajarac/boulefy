@@ -12,6 +12,18 @@ export class PostsLoaded {
     constructor(public posts: Post[]) {}
 }
 
+export class LoadPostById {
+    static type = `${KEY_STATE} Load Post By Id`
+
+    constructor(public id: string) {}
+}
+
+export class PostByIdLoaded {
+    static type = `${KEY_STATE} Post By Id Loaded`
+
+    constructor(public post: Post) {}
+}
+
 export class CreatePost {
     static type = `${KEY_STATE} Create Post`
 

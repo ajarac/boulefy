@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import {
     NbActionsModule,
+    NbBadgeModule,
     NbButtonModule,
     NbCardModule,
     NbContextMenuModule,
@@ -21,7 +22,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
         NbContextMenuModule,
         NbInputModule,
         NbButtonModule,
-        NbUserModule
+        NbUserModule,
+        NbBadgeModule
     ]
 })
 export class FeatureModule {}

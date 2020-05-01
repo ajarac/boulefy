@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core'
 import { AccessToken } from '@shared/auth/accesst-token'
 import { tap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
-import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
 import { AuthService } from '@agora-desktop/core/auth/services/auth.service'
 import { LoginUser, RegisterUser, UserLogged, UserRegistered } from '@agora-desktop/core/auth/store/auth/auth.action'
-import { AuthRouteState } from '@agora-desktop/core/auth/store/auth/auth-route.state'
 
 type IAuthState = AccessToken
 
@@ -14,17 +12,21 @@ type IAuthState = AccessToken
     name: 'auth',
     defaults: {
         accessToken: null
-    },
-    children: [AuthRouteState]
+    }
 })
 @Injectable()
 export class AuthState {
+    constructor(private authService: AuthService) {}
+
     @Selector()
     static isLogged({ accessToken }: IAuthState): boolean {
         return !!accessToken
     }
 
-    constructor(private authService: AuthService) {}
+    @Selector()
+    static getToken({ accessToken }: IAuthState): string {
+        return accessToken
+    }
 
     @Action(RegisterUser)
     registerUser({ dispatch }: StateContext<IAuthState>, { username, password, email }: RegisterUser): Observable<void> {

@@ -12,7 +12,7 @@ export class CreatePostController {
     @HttpCode(HttpStatus.ACCEPTED)
     @UseGuards(AuthGuard)
     async createPost(@Param('id') id: string, @Body() { title, content }: Request, @Request() request): Promise<void> {
-        const userId: string = request.user.sub
+        const userId: string = request.user.id
         const command: CreatePostCommand = new CreatePostCommand(id, title, content, userId)
         return this.commandBus.execute(command)
     }
