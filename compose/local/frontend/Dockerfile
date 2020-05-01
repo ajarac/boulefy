@@ -1,3 +1,3 @@
 FROM node:lts
 
-RUN npm install -g @nrwl/cli
+RUN npm install && npm install -g @nrwl/cli

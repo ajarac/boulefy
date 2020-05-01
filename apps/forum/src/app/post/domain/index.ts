@@ -1,6 +1,6 @@
 export * from './post'
 export * from './post-counter-comments'
-export * from './post-id'
+export * from '../../shared/domain/post-id'
 export * from './post-ranking'
 export * from './post.repository'
 export * from './post-title'

@@ -4,7 +4,7 @@ import { PostCreatedEvent } from '@backend/shared/domain/post/post-created-event
 import { PostCounterComments } from '@forum/post/domain/post-counter-comments'
 import { PostTitle } from '@forum/post/domain/post-title'
 import { PostRanking } from '@forum/post/domain/post-ranking'
-import { PostId } from '@forum/post/domain/post-id'
+import { PostId } from '@forum/shared/domain/post-id'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { PostContent } from '@forum/post/domain/post-content'
 

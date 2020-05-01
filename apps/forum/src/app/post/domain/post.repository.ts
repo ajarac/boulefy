@@ -1,5 +1,5 @@
 import { Post } from '@forum/post/domain/post'
-import { PostId } from '@forum/post/domain/post-id'
+import { PostId } from '@forum/shared/domain/post-id'
 
 export interface PostRepository {
     save(post: Post): Promise<void>
