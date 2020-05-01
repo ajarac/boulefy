@@ -18,7 +18,7 @@
         "paths": {
             "@forum/*": ["apps/forum/src/app/*"],
             "@forum/test/*": ["apps/forum/test/*"],
-            "@agora-desktop/*": ["apps/agora-desktop/src/app"],
+            "@agora-desktop/*": ["apps/agora-desktop/src/app/*"],
             "@users/*": ["apps/users/src/app/*"],
             "@users/test/*": ["apps/users/test/*"],
             "@backend/shared/*": ["libs/backend/shared/src/*"],

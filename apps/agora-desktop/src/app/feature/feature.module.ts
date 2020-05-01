@@ -1,5 +1,13 @@
 import { NgModule } from '@angular/core'
-import { NbActionsModule, NbButtonModule, NbCardModule, NbContextMenuModule, NbIconModule, NbInputModule } from '@nebular/theme'
+import {
+    NbActionsModule,
+    NbButtonModule,
+    NbCardModule,
+    NbContextMenuModule,
+    NbIconModule,
+    NbInputModule,
+    NbUserModule
+} from '@nebular/theme'
 import { NbEvaIconsModule } from '@nebular/eva-icons'
 import { FlexLayoutModule } from '@angular/flex-layout'
 
@@ -12,7 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
         NbEvaIconsModule,
         NbContextMenuModule,
         NbInputModule,
-        NbButtonModule
+        NbButtonModule,
+        NbUserModule
     ]
 })
 export class FeatureModule {}

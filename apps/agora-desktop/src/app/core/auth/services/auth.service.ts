@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 
 import { AccessToken } from '@shared/auth/accesst-token'
+import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
 import { Environment } from '../../../../environments/environment.model'
-import { UuidGeneratorService } from '../../shared/services/uuid-generator.service'
 
 @Injectable()
 export class AuthService {

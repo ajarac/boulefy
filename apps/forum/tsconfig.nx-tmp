@@ -13,7 +13,7 @@
         "apps/forum/test/*"
       ],
       "@agora-desktop/*": [
-        "apps/agora-desktop/src/app"
+        "apps/agora-desktop/src/app/*"
       ],
       "@users/*": [
         "apps/users/src/app/*"

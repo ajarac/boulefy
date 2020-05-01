@@ -1,4 +1,4 @@
-import { Entity } from '../../shared/models/entity'
+import { Entity } from '@agora-desktop/core/shared/models/entity'
 
 export interface Post extends Entity {
     title: string

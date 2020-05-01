@@ -1,0 +1,14 @@
+<nb-card>
+    <nb-card-header>
+        <h1>Sign In</h1>
+    </nb-card-header>
+    <nb-card-body>
+        <form (ngSubmit)="login()" [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
+            <agora-input formControlName="username" placeholder="Username"></agora-input>
+            <agora-input formControlName="password" placeholder="Password" type="password"></agora-input>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <button [disabled]="formGroup.invalid" fxFlex="50" nbButton shape="round" status="primary" type="submit">Sign In</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

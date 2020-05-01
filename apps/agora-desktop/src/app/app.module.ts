@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 
-import { ThemeModule } from './theme/theme.module'
-import { AppComponent } from './app.component'
-import { AppRoutingModule } from './app-routing.module'
-import { CoreModule } from './core/core.module'
+import { ThemeModule } from '@agora-desktop/theme/theme.module'
+import { CoreModule } from '@agora-desktop/core/core.module'
+import { AppRoutingModule } from '@agora-desktop/app-routing.module'
+import { AppComponent } from '@agora-desktop/app.component'
 
 @NgModule({
     declarations: [AppComponent],

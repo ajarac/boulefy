@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1>Agora</h1>
+    <nb-actions *ngIf="!(isLogged$ | async)">
+        <nb-action icon="log-in" title="Sign In" link="/login/sign-in"></nb-action>
+        <nb-action icon="person-add" title="Register" link="/login/register"></nb-action>
+    </nb-actions>
+    <div *ngIf="isLogged$ | async" fxLayout="row">
+        <nb-actions>
+            <nb-action icon="plus" title="Create Post" link="/post/new"></nb-action>
+        </nb-actions>
+        <nb-user *ngIf="isLogged$ | async" name="John Doe" title="Engineer"></nb-user>
+    </div>
+</div>

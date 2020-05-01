@@ -1,12 +1,12 @@
 <input
+    (blur)="onBlur()"
     (input)="onInput($event)"
+    [placeholder]="placeholder"
+    [status]="control.dirty ? (control.invalid ? 'danger' : 'success') : 'basic'"
     [type]="type"
     fullWidth
     nbInput
     shape="round"
-    (blur)="onBlur()"
-    [placeholder]="placeholder"
-    [status]="control.dirty ? (control.invalid ? 'danger' : 'success') : 'basic'"
 />
 <ng-container *ngIf="control.dirty && control.touched">
     <p *ngFor="let error of control.errors | keyvalue" class="caption status-danger">{{ error.key }} - {{ error.value }}</p>

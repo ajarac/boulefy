@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
-import { AuthService } from './services/auth.service'
 import { NgxsModule } from '@ngxs/store'
-import { AuthState } from './store/auth/auth.state'
+import { AuthState } from '@agora-desktop/core/auth/store/auth/auth.state'
+import { AuthService } from '@agora-desktop/core/auth/services/auth.service'
+import { AuthRouteState } from '@agora-desktop/core/auth/store/auth/auth-route.state'
 
 @NgModule({
-    imports: [NgxsModule.forFeature([AuthState])],
+    imports: [NgxsModule.forFeature([AuthState, AuthRouteState])],
     providers: [AuthService]
 })
 export class AuthModule {}

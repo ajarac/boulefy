@@ -1,10 +1,11 @@
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
 import { Injectable } from '@angular/core'
-import { Post } from '../models/post'
-import { PostService } from '../services/post.service'
-import { LoadPosts, PostsLoaded } from './post.action'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
+
+import { Post } from '@agora-desktop/core/post/models/post'
+import { LoadPosts, PostsLoaded } from '@agora-desktop/core/post/store/post.action'
+import { PostService } from '@agora-desktop/core/post/services/post.service'
 
 interface IPostState {
     entities: Post[]

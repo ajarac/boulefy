@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>Post Edit</nb-card-header>
+    <nb-card-body>
+        <form (ngSubmit)="save()" [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
+            <agora-input formControlName="title" placeholder="Title"></agora-input>
+            <agora-text-area formControlName="content" placeholder="Content"></agora-text-area>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <button [disabled]="formGroup.invalid" fxFlex="50" nbButton shape="round" status="primary" type="submit">Create</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

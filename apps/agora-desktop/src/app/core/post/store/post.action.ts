@@ -11,3 +11,15 @@ export class PostsLoaded {
 
     constructor(public posts: Post[]) {}
 }
+
+export class CreatePost {
+    static type = `${KEY_STATE} Create Post`
+
+    constructor(public title: string, public content: string) {}
+}
+
+export class PostCreated {
+    static type = `${KEY_STATE} Post Created`
+
+    constructor(public id: string) {}
+}

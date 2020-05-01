@@ -1,10 +1,12 @@
-import { Action, State, StateContext } from '@ngxs/store'
+import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { Injectable } from '@angular/core'
 import { AccessToken } from '@shared/auth/accesst-token'
-import { AuthService } from '../../services/auth.service'
-import { LoginUser, RegisterUser, UserRegistered } from './auth.action'
 import { tap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
+import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
+import { AuthService } from '@agora-desktop/core/auth/services/auth.service'
+import { LoginUser, RegisterUser, UserLogged, UserRegistered } from '@agora-desktop/core/auth/store/auth/auth.action'
+import { AuthRouteState } from '@agora-desktop/core/auth/store/auth/auth-route.state'
 
 type IAuthState = AccessToken
 
@@ -12,10 +14,16 @@ type IAuthState = AccessToken
     name: 'auth',
     defaults: {
         accessToken: null
-    }
+    },
+    children: [AuthRouteState]
 })
 @Injectable()
 export class AuthState {
+    @Selector()
+    static isLogged({ accessToken }: IAuthState): boolean {
+        return !!accessToken
+    }
+
     constructor(private authService: AuthService) {}
 
     @Action(RegisterUser)
@@ -29,7 +37,12 @@ export class AuthState {
     }
 
     @Action(LoginUser)
-    loginUser({ setState }: StateContext<IAuthState>, { username, password }: LoginUser): Observable<AccessToken> {
-        return this.authService.login(username, password).pipe(tap((token: AccessToken) => setState(token)))
+    loginUser({ dispatch }: StateContext<IAuthState>, { username, password }: LoginUser): Observable<AccessToken> {
+        return this.authService.login(username, password).pipe(tap((token: AccessToken) => dispatch(new UserLogged(token))))
+    }
+
+    @Action(UserLogged)
+    logged({ setState }: StateContext<IAuthState>, { accessToken }: UserLogged): void {
+        setState(accessToken)
     }
 }

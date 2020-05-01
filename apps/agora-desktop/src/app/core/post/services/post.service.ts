@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { Post } from '../models/post'
+
 import { Environment } from '../../../../environments/environment.model'
+import { Post } from '@agora-desktop/core/post/models/post'
+
 
 @Injectable()
 export class PostService {

@@ -9,7 +9,7 @@ import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms
 })
 export class InputComponent implements ControlValueAccessor {
     @Input() placeholder: string
-    @Input() type: string
+    @Input() type = 'text'
 
     value: string
     isDisabled: boolean

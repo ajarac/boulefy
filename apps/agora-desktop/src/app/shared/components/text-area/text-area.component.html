@@ -1,0 +1,13 @@
+<textarea
+    (blur)="onBlur()"
+    (input)="onInput($event)"
+    [placeholder]="placeholder"
+    [status]="control.dirty ? (control.invalid ? 'danger' : 'success') : 'basic'"
+    fullWidth
+    nbInput
+    shape="round"
+></textarea>
+<ng-container *ngIf="control.dirty && control.touched">
+    <p *ngFor="let error of control.errors | keyvalue" class="caption status-danger">{{ error.key }} - {{ error.value }}</p>
+</ng-container>
+

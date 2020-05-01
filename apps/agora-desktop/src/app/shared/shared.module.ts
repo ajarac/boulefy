@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { FeatureModule } from '../feature/feature.module'
-import { InputComponent } from './components/input/input.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { InputComponent } from '@agora-desktop/shared/components/input/input.component'
+import { FeatureModule } from '@agora-desktop/feature/feature.module'
+import { TextAreaComponent } from '@agora-desktop/shared/components/text-area/text-area.component'
 
-const COMPONENTS = [InputComponent]
+const COMPONENTS = [InputComponent, TextAreaComponent]
 const MODULES = [CommonModule, FeatureModule, ReactiveFormsModule]
 
 @NgModule({

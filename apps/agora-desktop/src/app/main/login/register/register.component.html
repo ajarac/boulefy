@@ -1,0 +1,15 @@
+<nb-card>
+    <nb-card-header>
+        <h1>Register User</h1>
+    </nb-card-header>
+    <nb-card-body>
+        <form (ngSubmit)="register()" [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
+            <agora-input formControlName="username" placeholder="Username"></agora-input>
+            <agora-input formControlName="password" placeholder="Password" type="password"></agora-input>
+            <agora-input formControlName="email" placeholder="Email"></agora-input>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <button [disabled]="formGroup.invalid" fxFlex="50" nbButton shape="round" status="primary" type="submit">Register</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
