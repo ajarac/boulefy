@@ -9,7 +9,7 @@ import { UserRepository } from '@users/users/domain/user.repository'
 import { UserTokenGenerator } from '@users/users/domain/user-token.generator'
 
 import { APPLICATION_SERVICES, COMMAND_HANDLERS, EVENT_HANDLERS, QUERY_HANDLERS } from '@users/users/application'
-import { CONSTROLLERS } from '@users/users/infrastructure/controller'
+import { CONTROLLERS } from '@users/users/infrastructure/controller'
 import { PASSPORT } from '@users/users/infrastructure/passport'
 import { UserSchema } from '@users/users/infrastructure/persistence/mongo/user.schema'
 import { MongoUserRepository } from '@users/users/infrastructure/persistence/mongo/mongo-user.repository'
@@ -28,7 +28,7 @@ import { JwtValidateToken } from '@users/users/infrastructure/passport/jwt/jwt-v
             signOptions: { expiresIn: '7d' }
         })
     ],
-    controllers: [...CONSTROLLERS],
+    controllers: [...CONTROLLERS],
     providers: [
         ...APPLICATION_SERVICES,
         ...COMMAND_HANDLERS,
