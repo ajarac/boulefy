@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
-import { ObjectId } from 'mongodb'
-
-import { UserRepository } from '../../../domain/user.repository'
-import { User } from '../../../domain/user'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserSchema } from './user.schema'
-import { UserMapper } from './user.mapper'
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserPassword } from '../../../domain/user-password'
 import { from } from 'uuid-mongodb'
+import { Repository } from 'typeorm'
+
+import { UserId } from '@backend/shared/domain/user/user-id'
+import { UserName } from '@backend/shared/domain/user/user-name'
+import { UserMapper } from '@api/users/infrastructure/persistence/mongo/user.mapper'
+import { UserRepository } from '@api/users/domain/user.repository'
+import { UserPassword } from '@api/users/domain/user-password'
+import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
+import { User } from '@api/users/domain/user'
 
 @Injectable()
 export class MongoUserRepository extends UserRepository {
@@ -19,7 +18,10 @@ export class MongoUserRepository extends UserRepository {
     }
 
     async validateUser(username: UserName, password: UserPassword): Promise<User> {
-        const userSchema: UserSchema = await this.repository.findOne({ username: username.value, password: password.value })
+        const userSchema: UserSchema = await this.repository.findOne({
+            username: username.value,
+            password: password.value
+        })
         return userSchema ? UserMapper.fromSchema(userSchema) : null
     }
 

@@ -1,11 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common'
-import { PostRepository } from '../../domain/post.repository'
-import { PostId } from '../../../shared/domain/post-id'
-import { Post } from '../../domain/post'
+import { Injectable } from '@nestjs/common'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { PostRepository } from '@api/forum/post/domain/post.repository'
+import { Post } from '@api/forum/post/domain/post'
 
 @Injectable()
 export class IncrementCounterComment {
-    constructor(@Inject('PostRepository') private repository: PostRepository) {}
+    constructor(private repository: PostRepository) {}
 
     async increment(postId: PostId): Promise<void> {
         const post: Post = await this.repository.search(postId)

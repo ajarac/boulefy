@@ -102,6 +102,6 @@ describe('CreatePostController', () => {
         expect(post.id.value).toEqual(id)
         expect(post.title.value).toEqual(body.title)
         expect(post.content.value).toEqual(body.content)
-        expect(post.userId.value).toEqual(request.user.sub)
+        expect(post.user.value).toEqual(request.user.sub)
     })
 })

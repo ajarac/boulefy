@@ -1,4 +1,5 @@
 import { Post } from '@api/forum/post/domain/post'
+import { PostUserModel } from '@api/forum/post/domain/post-user'
 
 export class PostResponse {
     constructor(
@@ -7,7 +8,7 @@ export class PostResponse {
         public readonly content: string,
         public readonly counterComments: number,
         public readonly ranking: number,
-        public readonly userId: string
+        public readonly user: PostUserModel
     ) {}
 
     static fromAggregate(post: Post): PostResponse {
@@ -17,7 +18,7 @@ export class PostResponse {
             post.content.value,
             post.counterComments.value,
             post.ranking.value,
-            post.userId.value
+            post.user.value
         )
     }
 }

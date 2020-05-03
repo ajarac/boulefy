@@ -1,12 +1,13 @@
 import { AggregateRoot } from '@nestjs/cqrs'
 
 import { PostCreatedEvent } from '@backend/shared/domain/post/post-created-event'
-import { PostCounterComments } from './post-counter-comments'
-import { PostTitle } from './post-title'
-import { PostRanking } from './post-ranking'
-import { PostId } from '../../shared/domain/post-id'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { PostContent } from './post-content'
+import { PostUser } from '@api/forum/post/domain/post-user'
+import { PostCounterComments } from '@api/forum/post/domain/post-counter-comments'
+import { PostContent } from '@api/forum/post/domain/post-content'
+import { PostTitle } from '@api/forum/post/domain/post-title'
+import { PostRanking } from '@api/forum/post/domain/post-ranking'
+import { PostId } from '@api/forum/shared/domain/post-id'
 
 export class Post extends AggregateRoot {
     constructor(
@@ -15,7 +16,7 @@ export class Post extends AggregateRoot {
         private _content: PostContent,
         private _counterComments: PostCounterComments,
         private _ranking: PostRanking,
-        private _userId: UserId
+        private _user: PostUser
     ) {
         super()
     }
@@ -40,8 +41,8 @@ export class Post extends AggregateRoot {
         return this._ranking
     }
 
-    get userId(): UserId {
-        return this._userId
+    get user(): PostUser {
+        return this._user
     }
 
     incrementCounterComments(): void {
@@ -54,11 +55,11 @@ export class Post extends AggregateRoot {
         content: PostContent,
         counterComments: PostCounterComments,
         ranking: PostRanking,
-        userId: UserId
+        user: PostUser
     ): Post {
-        const post: Post = new Post(id, title, content, counterComments, ranking, userId)
+        const post: Post = new Post(id, title, content, counterComments, ranking, user)
 
-        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value))
+        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, user.userId.value))
 
         return post
     }

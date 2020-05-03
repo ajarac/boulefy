@@ -19,5 +19,8 @@ export class PostSchema {
     ranking: number
 
     @Column()
-    userId: string
+    user: {
+        id: string
+        username: string
+    }
 }
