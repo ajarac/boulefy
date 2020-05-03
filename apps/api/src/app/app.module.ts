@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
-import { ForumModule } from './forum/forum.module'
 import { UserModule } from './users/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { MONGO_DB_CONFIG } from '@api/config/mongo.config'
+import { PostModule } from '@api/post/post.module'
+import { CommentModule } from '@api/comment/comment.module'
 
 @Module({
-    imports: [ForumModule, UserModule,  TypeOrmModule.forRoot(MONGO_DB_CONFIG)]
+    imports: [UserModule, PostModule, CommentModule, TypeOrmModule.forRoot(MONGO_DB_CONFIG)]
 })
 export class AppModule {}

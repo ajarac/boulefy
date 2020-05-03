@@ -1,10 +1,10 @@
-import { PostCreator } from '@api/forum/post/application/create/post-creator'
-import { CreatePostCommand } from '@api/forum/post/application/create/create-post-command'
+import { PostCreator } from '@api/post/application/create/post-creator'
+import { CreatePostCommand } from '@api/post/application/create/create-post-command'
 import { PostMother } from '@api/test/forum/post/domain/post.mother'
-import { CreatePostCommandHandler } from '@api/forum/post/application/create/create-post-command.handler'
+import { CreatePostCommandHandler } from '@api/post/application/create/create-post-command.handler'
 import { CreatePostCommandMother } from '@api/test/forum/post/application/create/create-post-command.mother'
-import { PostRepository } from '@api/forum/post/domain/post.repository'
-import { Post } from '@api/forum/post/domain/post'
+import { PostRepository } from '@api/post/domain/post.repository'
+import { Post } from '@api/post/domain/post'
 
 describe('CreatePostCommandHandler', () => {
     let handler: CreatePostCommandHandler

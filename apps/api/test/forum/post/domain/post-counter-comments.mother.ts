@@ -1,5 +1,5 @@
 import { NumberMother } from '@backend/shared/test/domain/number.mother'
-import { PostCounterComments } from '@api/forum/post/domain/post-counter-comments'
+import { PostCounterComments } from '@api/post/domain/post-counter-comments'
 
 
 export class PostCounterCommentsMother {

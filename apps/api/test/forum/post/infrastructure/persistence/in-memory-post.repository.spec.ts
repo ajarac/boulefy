@@ -1,8 +1,8 @@
 import { PostMother } from '@api/test/forum/post/domain/post.mother'
-import { InMemoryPostRepository } from '@api/forum/post/infrastructure/persistence/in-memory-post.repository'
+import { InMemoryPostRepository } from '@api/post/infrastructure/persistence/in-memory-post.repository'
 import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
-import { PostId } from '@api/forum/shared/domain/post-id'
-import { Post } from '@api/forum/post/domain/post'
+import { PostId } from '@api/shared/domain/post-id'
+import { Post } from '@api/post/domain/post'
 
 describe('InMemoryPostRepository', () => {
     let repository: InMemoryPostRepository

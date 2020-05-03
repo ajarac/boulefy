@@ -1,11 +1,11 @@
 import { PostContentMother } from '@api/test/forum/post/domain/post-content.mother'
-import { CreatePostCommand } from '@api/forum/post/application/create/create-post-command'
+import { CreatePostCommand } from '@api/post/application/create/create-post-command'
 import { PostTitleMother } from '@api/test/forum/post/domain/post-title.mother'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
-import { PostContent } from '@api/forum/post/domain/post-content'
-import { PostTitle } from '@api/forum/post/domain/post-title'
-import { PostId } from '@api/forum/shared/domain/post-id'
+import { PostContent } from '@api/post/domain/post-content'
+import { PostTitle } from '@api/post/domain/post-title'
+import { PostId } from '@api/shared/domain/post-id'
 import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
 
 export class CreatePostCommandMother {
