@@ -1,5 +1,5 @@
 import { IdentifierMother } from '@backend/shared/test/domain/identifier.mother';
-import { PostId } from '@forum/../../../../src/forum/shared/domain/post-id'
+import { PostId } from '@api/forum/shared/domain/post-id'
 
 export class PostIdMother {
     static create(value: string): PostId {

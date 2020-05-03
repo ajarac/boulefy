@@ -9,7 +9,7 @@ import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-g
 
 @Injectable()
 export class PostService {
-    private readonly baseUrl: string = this.config.api + 'forum/posts'
+    private readonly baseUrl: string = this.config.api + 'posts'
 
     constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
 

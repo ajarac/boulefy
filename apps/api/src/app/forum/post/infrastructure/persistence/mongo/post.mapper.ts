@@ -1,12 +1,12 @@
 import { PostSchema } from './post.schema'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { from } from 'uuid-mongodb'
-import { PostCounterComments } from '../../../domain/post-counter-comments'
-import { PostContent } from '../../../domain/post-content'
-import { PostTitle } from '../../../domain/post-title'
-import { PostRanking } from '../../../domain/post-ranking'
-import { PostId } from '../../../../shared/domain/post-id'
-import { Post } from '../../../domain/post'
+import { PostCounterComments } from '@api/forum/post/domain/post-counter-comments'
+import { PostContent } from '@api/forum/post/domain/post-content'
+import { PostTitle } from '@api/forum/post/domain/post-title'
+import { PostRanking } from '@api/forum/post/domain/post-ranking'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { Post } from '@api/forum/post/domain/post'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {

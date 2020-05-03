@@ -1,5 +1,5 @@
-import { PostId } from '../../shared/domain/post-id'
-import { Comment } from './comment'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { Comment } from '@api/forum/comment/domain/comment'
 
 export interface CommentRepository {
     save(comment: Comment): Promise<void>

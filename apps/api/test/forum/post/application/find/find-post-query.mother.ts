@@ -1,6 +1,6 @@
-import { FindPostQuery } from '@forum/../../../../../src/forum/post/application/find/find-post-query'
-import { PostIdMother } from '@forum/test/forum/post/domain/post-id.mother'
-import { PostId } from '@forum/../../../../../src/forum/shared/domain/post-id'
+import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
+import { FindPostQuery } from '@api/forum/post/application/find/find-post-query'
+import { PostId } from '@api/forum/shared/domain/post-id'
 
 export class FindPostQueryMother {
     static create(id: PostId): FindPostQuery {

@@ -1,10 +1,8 @@
-import { CommentCreator } from './create/comment.creator'
-import { CreateCommentCommandHandler } from './create/create-comment-command.handler'
-import { CommentFinderByPostId } from './find-comments-by-post-id/comment-finder-by-post-id'
-import { FindCommentsByPostIdQueryHandler } from './find-comments-by-post-id/find-comments-by-post-id-query.handler'
-import { CommentCreatedHandler } from './create/comment-created.handler'
+import { CommentCreator } from '@api/forum/comment/application/create/comment.creator'
+import { FindCommentsByPostIdQueryHandler } from '@api/forum/comment/application/find-comments-by-post-id/find-comments-by-post-id-query.handler'
+import { CommentFinderByPostId } from '@api/forum/comment/application/find-comments-by-post-id/comment-finder-by-post-id'
+import { CreateCommentCommandHandler } from '@api/forum/comment/application/create/create-comment-command.handler'
 
 export const APPLICATION_SERVICES = [CommentCreator, CommentFinderByPostId]
 export const COMMAND_HANDLERS = [CreateCommentCommandHandler]
 export const QUERY_HANDLERS = [FindCommentsByPostIdQueryHandler]
-export const EVENT_HANDLERS = [CommentCreatedHandler]

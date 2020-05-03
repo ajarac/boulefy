@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
-import { PostFinder } from './post-finder'
-import { FindPostQuery } from './find-post-query'
-import { PostResponse } from '../post.response'
-import { PostId } from '../../../shared/domain/post-id'
+import { PostFinder } from '@api/forum/post/application/find/post-finder'
+import { FindPostQuery } from '@api/forum/post/application/find/find-post-query'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { PostResponse } from '@api/forum/post/application/post.response'
 
 @QueryHandler(FindPostQuery)
 export class FindPostQueryHandler implements IQueryHandler<FindPostQuery, PostResponse> {

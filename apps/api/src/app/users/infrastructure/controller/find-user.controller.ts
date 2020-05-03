@@ -3,7 +3,7 @@ import { QueryBus } from '@nestjs/cqrs'
 import { UserResponse } from '../../application/user.response'
 import { FindUserQuery } from '../../application/find-user/find-user-query'
 
-@Controller()
+@Controller('users')
 export class FindUserController {
     constructor(private queryBus: QueryBus) {}
 

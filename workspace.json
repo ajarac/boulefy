@@ -34,23 +34,23 @@
                 "serve": {
                     "builder": "@nrwl/node:execute",
                     "options": {
-                        "buildTarget": "forum:build"
+                        "buildTarget": "api:build"
                     }
                 },
                 "lint": {
                     "builder": "@nrwl/linter:lint",
                     "options": {
                         "linter": "eslint",
-                        "config": "apps/forum/.eslintrc",
-                        "tsConfig": ["apps/forum/tsconfig.app.json", "apps/forum/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**", "!apps/forum/**"]
+                        "config": "apps/api/.eslintrc",
+                        "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!apps/api/**"]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "apps/forum/jest.config.js",
-                        "tsConfig": "apps/forum/tsconfig.spec.json",
+                        "jestConfig": "apps/api/jest.config.js",
+                        "tsConfig": "apps/api/tsconfig.spec.json",
                         "passWithNoTests": true
                     }
                 }

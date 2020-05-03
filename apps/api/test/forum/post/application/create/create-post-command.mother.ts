@@ -1,12 +1,12 @@
-import { CreatePostCommand } from '@forum/../../../../../src/forum/post/application/create/create-post-command'
+import { PostContentMother } from '@api/test/forum/post/domain/post-content.mother'
+import { CreatePostCommand } from '@api/forum/post/application/create/create-post-command'
+import { PostTitleMother } from '@api/test/forum/post/domain/post-title.mother'
 import { UserId } from '@backend/shared/domain/user/user-id'
+import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
+import { PostContent } from '@api/forum/post/domain/post-content'
+import { PostTitle } from '@api/forum/post/domain/post-title'
+import { PostId } from '@api/forum/shared/domain/post-id'
 import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
-import { PostContentMother } from '@forum/test/forum/post/domain/post-content.mother'
-import { PostTitleMother } from '@forum/test/forum/post/domain/post-title.mother'
-import { PostIdMother } from '@forum/test/forum/post/domain/post-id.mother'
-import { PostContent } from '@forum/../../../../../src/forum/post/domain/post-content'
-import { PostTitle } from '@forum/../../../../../src/forum/post/domain/post-title'
-import { PostId } from '@forum/../../../../../src/forum/shared/domain/post-id'
 
 export class CreatePostCommandMother {
     static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId): CreatePostCommand {

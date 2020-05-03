@@ -17,7 +17,7 @@
         "baseUrl": ".",
         "paths": {
             "@api/*": ["apps/api/src/app/*"],
-            "@api/test/*": ["apps/forum/test/*"],
+            "@api/test/*": ["apps/api/test/*"],
             "@agora-desktop/*": ["apps/agora-desktop/src/app/*"],
             "@backend/shared/*": ["libs/backend/shared/src/*"],
             "@backend/shared/test/*": ["libs/backend/shared/test/*"],

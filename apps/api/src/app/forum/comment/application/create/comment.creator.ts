@@ -1,12 +1,13 @@
-import { Inject, Injectable } from '@nestjs/common'
-import { CommentRepository } from '../../domain/comment.repository'
 import { EventPublisher } from '@nestjs/cqrs'
-import { CommentId } from '../../domain/comment-id'
-import { CommentContent } from '../../domain/comment-content'
+import { Inject, Injectable } from '@nestjs/common'
+import { CommentContent } from '@api/forum/comment/domain/comment-content'
+import { CommentRepository } from '@api/forum/comment/domain/comment.repository'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { PostId } from '../../../shared/domain/post-id'
-import { CommentRanking } from '../../domain/comment-ranking'
-import { Comment } from '../../domain/comment'
+import { CommentRanking } from '@api/forum/comment/domain/comment-ranking'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { CommentId } from '@api/forum/comment/domain/comment-id'
+import { Comment } from '@api/forum/comment/domain/comment'
+
 
 @Injectable()
 export class CommentCreator {

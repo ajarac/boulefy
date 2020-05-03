@@ -5,7 +5,7 @@
 
 import { NestFactory } from '@nestjs/core'
 import { Logger } from '@nestjs/common'
-import { AppModule } from './app/app.module'
+import { AppModule } from '@api/app.module'
 
 const logger = new Logger()
 

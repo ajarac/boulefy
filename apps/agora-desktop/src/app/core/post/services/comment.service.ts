@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators'
 
 @Injectable()
 export class CommentService {
-    private readonly baseUrl: string = this.config.api + 'forum/comments'
+    private readonly baseUrl: string = this.config.api + 'comments'
 
     constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
 

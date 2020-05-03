@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { PostSchema } from './post.schema'
-import { PostMapper } from './post.mapper'
 import { from } from 'uuid-mongodb'
-import { PostId } from '../../../../shared/domain/post-id'
-import { PostRepository } from '../../../domain/post.repository'
-import { Post } from '../../../domain/post'
+import { PostMapper } from '@api/forum/post/infrastructure/persistence/mongo/post.mapper'
+import { PostSchema } from '@api/forum/post/infrastructure/persistence/mongo/post.schema'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { PostRepository } from '@api/forum/post/domain/post.repository'
+import { Post } from '@api/forum/post/domain/post'
 
 @Injectable()
 export class MongoPostRepository extends PostRepository {

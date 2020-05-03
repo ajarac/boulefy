@@ -1,11 +1,11 @@
-import { Comment } from '../../../domain/comment'
-import { CommentSchema } from './comment.schema'
-import { CommentId } from '../../../domain/comment-id'
-import { CommentContent } from '../../../domain/comment-content'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { PostId } from '../../../../shared/domain/post-id'
-import { CommentRanking } from '../../../domain/comment-ranking'
 import { from } from 'uuid-mongodb'
+import { CommentSchema } from '@api/forum/comment/infrastructure/persistence/mongo/comment.schema'
+import { CommentContent } from '@api/forum/comment/domain/comment-content'
+import { UserId } from '@backend/shared/domain/user/user-id'
+import { CommentRanking } from '@api/forum/comment/domain/comment-ranking'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { CommentId } from '@api/forum/comment/domain/comment-id'
+import { Comment } from '@api/forum/comment/domain/comment'
 
 export class CommentMapper {
     static fromSchema(commentSchema: CommentSchema): Comment {

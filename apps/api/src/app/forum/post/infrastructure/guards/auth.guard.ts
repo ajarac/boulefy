@@ -1,10 +1,10 @@
-import { CanActivate, ExecutionContext, Inject, Injectable } from '@nestjs/common'
-import { ClientProxy } from '@nestjs/microservices'
-import { environment } from '../../../../../environments/environment'
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
+import { QueryBus } from '@nestjs/cqrs'
+import { ValidateTokenQuery } from '@api/shared/application/validate-token-query'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(@Inject(environment.clientName) private client: ClientProxy) {}
+    constructor(private queryBus: QueryBus) {}
 
     private static getToken(request): string {
         const authorization: string = request.headers.authorization
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest()
         const token: string = AuthGuard.getToken(request)
         if (token) {
-            const info = await this.client.send('users.users.validate-user', token).toPromise()
+            const info = await this.queryBus.execute(new ValidateTokenQuery(token))
             request.user = info
             return !!info
         } else {

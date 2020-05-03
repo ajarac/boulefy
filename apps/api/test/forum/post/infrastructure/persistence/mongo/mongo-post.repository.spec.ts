@@ -1,13 +1,12 @@
-import { MongoPostRepository } from '@forum/../../../../../../src/forum/post/infrastructure/persistence/mongo/mongo-post.repository'
 import { Test } from '@nestjs/testing'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Connection } from 'typeorm'
 import * as faker from 'faker'
-
-import { mongoConfig } from '@forum/test/forum/post/infrastructure/persistence/mongo/mongo.config.testing'
-import { PostSchema } from '@forum/../../../../../../src/forum/post/infrastructure/persistence/mongo/post.schema'
-import { PostMother } from '@forum/test/forum/post/domain/post.mother'
-import { Post } from '@forum/../../../../../../src/forum/post/domain/post'
+import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { mongoConfig } from '@api/test/forum/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { MongoPostRepository } from '@api/forum/post/infrastructure/persistence/mongo/mongo-post.repository'
+import { PostSchema } from '@api/forum/post/infrastructure/persistence/mongo/post.schema'
+import { Post } from '@api/forum/post/domain/post'
 
 describe('MongoPostRepository', () => {
     let mongoPostRepository: MongoPostRepository

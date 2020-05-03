@@ -8,7 +8,7 @@ import { Environment } from '../../../../environments/environment.model'
 
 @Injectable()
 export class AuthService {
-    private readonly baseUrl: string = this.config.api + 'users/'
+    private readonly baseUrl: string = this.config.api
 
     constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
 

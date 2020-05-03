@@ -1,10 +1,10 @@
-import { CreatePostCommandHandler } from '@forum/../../../../../src/forum/post/application/create/create-post-command.handler'
-import { PostCreator } from '@forum/../../../../../src/forum/post/application/create/post-creator'
-import { CreatePostCommandMother } from '@forum/test/forum/post/application/create/create-post-command.mother'
-import { CreatePostCommand } from '@forum/../../../../../src/forum/post/application/create/create-post-command'
-import { PostMother } from '@forum/test/forum/post/domain/post.mother'
-import { PostRepository } from '@forum/../../../../../src/forum/post/domain/post.repository'
-import { Post } from '@forum/../../../../../src/forum/post/domain/post'
+import { PostCreator } from '@api/forum/post/application/create/post-creator'
+import { CreatePostCommand } from '@api/forum/post/application/create/create-post-command'
+import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { CreatePostCommandHandler } from '@api/forum/post/application/create/create-post-command.handler'
+import { CreatePostCommandMother } from '@api/test/forum/post/application/create/create-post-command.mother'
+import { PostRepository } from '@api/forum/post/domain/post.repository'
+import { Post } from '@api/forum/post/domain/post'
 
 describe('CreatePostCommandHandler', () => {
     let handler: CreatePostCommandHandler

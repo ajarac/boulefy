@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
-
-import { CommentRepository } from '../../../domain/comment.repository'
-import { CommentSchema } from './comment.schema'
-import { PostId } from '../../../../shared/domain/post-id'
-import { CommentMapper } from './comment.mapper'
-import { Comment } from '../../../domain/comment'
+import { CommentSchema } from '@api/forum/comment/infrastructure/persistence/mongo/comment.schema'
+import { CommentRepository } from '@api/forum/comment/domain/comment.repository'
+import { CommentMapper } from '@api/forum/comment/infrastructure/persistence/mongo/comment.mapper'
+import { PostId } from '@api/forum/shared/domain/post-id'
+import { Comment } from '@api/forum/comment/domain/comment'
 
 @Injectable()
 export class MongoCommentRepository implements CommentRepository {

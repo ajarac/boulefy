@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common'
 import { QueryBus } from '@nestjs/cqrs'
-import { PostResponse } from '../../application/post.response'
-import { FindPostsQuery } from '../../application/findAll/find-posts-query'
+import { FindPostsQuery } from '@api/forum/post/application/findAll/find-posts-query'
+import { PostResponse } from '@api/forum/post/application/post.response'
 
 @Controller('posts')
 export class FindPostsController {

@@ -8,7 +8,7 @@ import { AuthUser } from './auth-user/auth-user'
 import { AuthUserCommandHandler } from './auth-user/auth-user-command.handler'
 import { LoginUserCommandHandler } from './login-user/login-user-command.handler'
 import { LoginUser } from './login-user/login-user'
-import { ValidateTokenCommandHandler } from './validate-token/validate-token-command.handler'
+import { ValidateTokenQueryHandler } from './validate-token/validate-token-query.handler'
 import { ValidateToken } from './validate-token/validate-token'
 
 import { IncrementUserCounterComment } from './comment-created/increment-user-counter-comment'
@@ -23,6 +23,6 @@ export const APPLICATION_SERVICES = [
     ValidateToken,
     IncrementUserCounterComment
 ]
-export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler, ValidateTokenCommandHandler]
+export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler, ValidateTokenQueryHandler]
 export const QUERY_HANDLERS = [FindUserQueryHandler]
 export const EVENT_HANDLERS = [IncrementUserCounterPostOnPostCreatedHandler, IncrementUserCounterCommentOnCommentCreateHandler]

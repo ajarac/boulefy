@@ -20,44 +20,18 @@ services:
         networks:
             - admin
 
-    redis:
-        image: redis
-        ports:
-            - 6379:6379
-        networks:
-            - backend
-
-    forum:
+    api:
         image: node:lts
         volumes:
             - .:/app
         working_dir: /app
-        command: npm run nx serve forum
+        command: npm run nx serve api
         environment:
             - DB_HOST=mongodb
             - DB_PORT=27017
             - REDIS_HOST=redis
             - REDIS_PORT=6379
         depends_on:
-            - redis
-            - mongodb
-        networks:
-            - database
-            - backend
-
-    users:
-        image: node:lts
-        volumes:
-            - .:/app
-        working_dir: /app
-        command: npm run nx serve users
-        environment:
-            - DB_HOST=mongodb
-            - DB_PORT=27017
-            - REDIS_HOST=redis
-            - REDIS_PORT=6379
-        depends_on:
-            - redis
             - mongodb
         networks:
             - database
@@ -79,8 +53,7 @@ services:
             context: .
             dockerfile: compose/local/nginx/Dockerfile
         depends_on:
-            - forum
-            - users
+            - api
             - frontend
         ports:
             - 8000:8000

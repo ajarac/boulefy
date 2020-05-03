@@ -4,7 +4,7 @@ import { CommandBus } from '@nestjs/cqrs'
 import { LoginUserCommand } from '../../application/login-user/login-user-command'
 import { AccessToken } from '@shared/auth/accesst-token'
 
-@Controller('')
+@Controller()
 export class LoginUserController {
     constructor(private commandBus: CommandBus) {}
 

@@ -1,4 +1,4 @@
-import { Comment } from '../domain/comment'
+import { Comment } from '@api/forum/comment/domain/comment'
 
 export class CommentResponse {
     constructor(

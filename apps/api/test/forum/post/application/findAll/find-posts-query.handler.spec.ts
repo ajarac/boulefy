@@ -1,9 +1,9 @@
-import { FindPostsQueryHandler } from '@forum/../../../../../src/forum/post/application/findAll/find-posts-query.handler'
-import { PostFinderAll } from '@forum/../../../../../src/forum/post/application/findAll/post-finder-all'
-import { PostResponse } from '@forum/../../../../../src/forum/post/application/post.response'
-import { PostMother } from '@forum/test/forum/post/domain/post.mother'
-import { PostRepository } from '@forum/../../../../../src/forum/post/domain/post.repository'
-import { Post } from '@forum/../../../../../src/forum/post/domain/post'
+import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { FindPostsQueryHandler } from '@api/forum/post/application/findAll/find-posts-query.handler'
+import { PostFinderAll } from '@api/forum/post/application/findAll/post-finder-all'
+import { PostRepository } from '@api/forum/post/domain/post.repository'
+import { PostResponse } from '@api/forum/post/application/post.response'
+import { Post } from '@api/forum/post/domain/post'
 
 describe('FindPostsQuery', () => {
     let handler: FindPostsQueryHandler
