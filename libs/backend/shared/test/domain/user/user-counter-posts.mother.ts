@@ -1,4 +1,4 @@
-import { UserCounterPosts } from '@users/users/domain/user-counter-posts'
+import { UserCounterPosts } from '@users/../../../../../../apps/forum/src/users/domain/user-counter-posts'
 import { NumberMother } from '@backend/shared/test/domain/number.mother'
 
 export class UserCounterPostsMother {

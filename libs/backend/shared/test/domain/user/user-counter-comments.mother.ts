@@ -1,4 +1,4 @@
-import { UserCounterComments } from '@users/users/domain/user-counter-comments'
+import { UserCounterComments } from '@users/../../../../../../apps/forum/src/users/domain/user-counter-comments'
 import { NumberMother } from '@backend/shared/test/domain/number.mother'
 
 export class UserCounterCommentsMother {

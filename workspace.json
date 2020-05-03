@@ -1,20 +1,20 @@
 {
     "version": 1,
     "projects": {
-        "forum": {
-            "root": "apps/forum",
-            "sourceRoot": "apps/forum/src",
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
             "projectType": "application",
-            "prefix": "forum",
+            "prefix": "api",
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
-                        "outputPath": "dist/apps/forum",
-                        "main": "apps/forum/src/main.ts",
-                        "tsConfig": "apps/forum/tsconfig.app.json",
-                        "assets": ["apps/forum/src/assets"]
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/assets"]
                     },
                     "configurations": {
                         "production": {
@@ -23,8 +23,8 @@
                             "inspect": false,
                             "fileReplacements": [
                                 {
-                                    "replace": "apps/forum/src/environments/environment.ts",
-                                    "with": "apps/forum/src/environments/environment.prod.ts"
+                                    "replace": "apps/api/src/environments/environment.ts",
+                                    "with": "apps/api/src/environments/environment.prod.ts"
                                 }
                             ],
                             "externalDependencies": "none"
@@ -74,61 +74,6 @@
                     "options": {
                         "jestConfig": "libs/backend/shared/jest.config.js",
                         "tsConfig": "libs/backend/shared/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "users": {
-            "root": "apps/users",
-            "sourceRoot": "apps/users/src",
-            "projectType": "application",
-            "prefix": "users",
-            "schematics": {},
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/node:build",
-                    "options": {
-                        "outputPath": "dist/apps/users",
-                        "main": "apps/users/src/main.ts",
-                        "tsConfig": "apps/users/tsconfig.app.json",
-                        "assets": ["apps/users/src/assets"]
-                    },
-                    "configurations": {
-                        "production": {
-                            "optimization": true,
-                            "extractLicenses": true,
-                            "inspect": false,
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/users/src/environments/environment.ts",
-                                    "with": "apps/users/src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "externalDependencies": "none"
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@nrwl/node:execute",
-                    "options": {
-                        "buildTarget": "users:build"
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "apps/users/.eslintrc",
-                        "tsConfig": ["apps/users/tsconfig.app.json", "apps/users/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**", "!apps/users/**"]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "apps/users/jest.config.js",
-                        "tsConfig": "apps/users/tsconfig.spec.json",
                         "passWithNoTests": true
                     }
                 }
@@ -317,6 +262,5 @@
         "@nrwl/angular:library": {
             "unitTestRunner": "jest"
         }
-    },
-    "defaultProject": "api"
+    }
 }

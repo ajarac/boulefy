@@ -1,0 +1,108 @@
+import { Test } from '@nestjs/testing'
+import { CqrsModule } from '@nestjs/cqrs'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Connection } from 'typeorm'
+import * as request from 'supertest'
+import { of } from 'rxjs'
+
+import { PostSchema } from '@forum/../../../../../../src/forum/post/infrastructure/persistence/mongo/post.schema'
+import { mongoConfig } from '@forum/test/forum/post/infrastructure/persistence/mongo/mongo.config.testing'
+import { MongoPostRepository } from '@forum/../../../../../../src/forum/post/infrastructure/persistence/mongo/mongo-post.repository'
+import { CreatePostController } from '@forum/../../../../../../src/forum/post/infrastructure/controllers/create-post.controller'
+import { CreatePostCommandHandler } from '@forum/../../../../../../src/forum/post/application/create/create-post-command.handler'
+import { PostCreator } from '@forum/../../../../../../src/forum/post/application/create/post-creator'
+import { HttpStatus, INestApplication } from '@nestjs/common'
+import { AuthGuard } from '@forum/../../../../../../src/forum/post/infrastructure/guards/auth.guard'
+import { ClientProxy } from '@nestjs/microservices'
+import { PostContentMother } from '@forum/test/forum/post/domain/post-content.mother'
+import { PostTitleMother } from '@forum/test/forum/post/domain/post-title.mother'
+import { PostIdMother } from '@forum/test/forum/post/domain/post-id.mother'
+import { Post } from '@forum/../../../../../../src/forum/post/domain/post'
+import { PostRepository } from '@forum/../../../../../../src/forum/post/domain/post.repository'
+
+describe('CreatePostController', () => {
+    let app: INestApplication
+    let controller: CreatePostController
+    let connection: Connection
+    let mongoPostRepository: PostRepository
+    let clientProxyMock
+
+    beforeAll(async () => {
+        const Mock = jest.fn<Partial<ClientProxy>, []>(() => ({
+            send: jest.fn()
+        }))
+        clientProxyMock = new Mock()
+        const [moduleRef] = await Promise.all([
+            Test.createTestingModule({
+                imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('createPostTest')), TypeOrmModule.forFeature([PostSchema])],
+                controllers: [CreatePostController],
+                providers: [
+                    PostCreator,
+                    CreatePostCommandHandler,
+                    {
+                        provide: PostRepository,
+                        useClass: MongoPostRepository
+                    },
+                    AuthGuard,
+                    {
+                        provide: 'FORUM_SERVICE',
+                        useValue: clientProxyMock
+                    }
+                ]
+            }).compile()
+        ])
+
+        app = moduleRef.createNestApplication()
+        connection = moduleRef.get<Connection>(Connection)
+        controller = moduleRef.get<CreatePostController>(CreatePostController)
+        mongoPostRepository = moduleRef.get<PostRepository>(PostRepository)
+        await app.init()
+    })
+
+    beforeEach(async () => {
+        await connection.dropDatabase()
+    })
+
+    afterAll(async () => {
+        await connection.dropDatabase()
+        await connection.close()
+    })
+
+    test('POST Create post', () => {
+        const id = PostIdMother.random().value
+        const body = {
+            title: PostTitleMother.random().value,
+            content: PostContentMother.random().value
+        }
+        const userRequest = { sub: id }
+        clientProxyMock.send.mockReturnValue(of(userRequest))
+
+        return request(app.getHttpServer())
+            .post('/posts/' + id)
+            .set({ authorization: 'Bearer tokensuperseguro' })
+            .send(body)
+            .expect(HttpStatus.ACCEPTED)
+    })
+
+    test('POST Create a valid post', async () => {
+        const id = PostIdMother.random().value
+        const body = {
+            title: PostTitleMother.random().value,
+            content: PostContentMother.random().value
+        }
+        const request = {
+            user: {
+                sub: id
+            }
+        }
+
+        await controller.createPost(id, body, request)
+
+        const post: Post = await mongoPostRepository.search(PostIdMother.create(id))
+
+        expect(post.id.value).toEqual(id)
+        expect(post.title.value).toEqual(body.title)
+        expect(post.content.value).toEqual(body.content)
+        expect(post.userId.value).toEqual(request.user.sub)
+    })
+})

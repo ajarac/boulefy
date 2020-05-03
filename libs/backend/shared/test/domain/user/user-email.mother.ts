@@ -1,5 +1,5 @@
 import * as faker from 'faker'
-import { UserEmail } from '@users/users/domain/user-email'
+import { UserEmail } from '@users/../../../../../../apps/forum/src/users/domain/user-email'
 
 export class UserEmailMother {
     static create(value: string): UserEmail {

@@ -1,4 +1,4 @@
-import { UserPassword } from '@users/users/domain/user-password'
+import { UserPassword } from '@users/../../../../../../apps/forum/src/users/domain/user-password'
 import { WordMother } from '@backend/shared/test/domain/word.mother'
 
 export class UserPasswordMother {

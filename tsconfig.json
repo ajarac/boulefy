@@ -16,11 +16,9 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@forum/*": ["apps/forum/src/app/*"],
-            "@forum/test/*": ["apps/forum/test/*"],
+            "@api/*": ["apps/api/src/app/*"],
+            "@api/test/*": ["apps/forum/test/*"],
             "@agora-desktop/*": ["apps/agora-desktop/src/app/*"],
-            "@users/*": ["apps/users/src/app/*"],
-            "@users/test/*": ["apps/users/test/*"],
             "@backend/shared/*": ["libs/backend/shared/src/*"],
             "@backend/shared/test/*": ["libs/backend/shared/test/*"],
             "@shared/*": ["libs/shared/*"]
