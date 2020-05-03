@@ -1,8 +1,9 @@
 import { FindPostsQueryHandler } from '@forum/post/application/findAll/find-posts-query.handler'
 import { PostFinderAll } from '@forum/post/application/findAll/post-finder-all'
-import { Post, PostRepository } from '@forum/post/domain'
-import { PostMother } from '@forum/test/post/domain'
 import { PostResponse } from '@forum/post/application/post.response'
+import { PostMother } from '@forum/test/post/domain/post.mother'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
 
 describe('FindPostsQuery', () => {
     let handler: FindPostsQueryHandler

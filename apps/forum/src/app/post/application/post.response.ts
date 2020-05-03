@@ -1,4 +1,4 @@
-import { Post } from '@forum/post/domain'
+import { Post } from '@forum/post/domain/post'
 
 export class PostResponse {
     constructor(

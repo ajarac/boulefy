@@ -1,7 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Post, PostContent, PostCounterComments, PostId, PostRanking, PostRepository, PostTitle } from '@forum/post/domain'
+
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { EventPublisher } from '@nestjs/cqrs'
+import { PostId } from '@forum/shared/domain/post-id'
+import { PostCounterComments } from '@forum/post/domain/post-counter-comments'
+import { PostContent } from '@forum/post/domain/post-content'
+import { PostTitle } from '@forum/post/domain/post-title'
+import { PostRanking } from '@forum/post/domain/post-ranking'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
 
 @Injectable()
 export class PostCreator {

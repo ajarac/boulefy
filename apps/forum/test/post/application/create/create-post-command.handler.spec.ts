@@ -1,9 +1,10 @@
 import { CreatePostCommandHandler } from '@forum/post/application/create/create-post-command.handler'
 import { PostCreator } from '@forum/post/application/create/post-creator'
-import { Post, PostRepository } from '@forum/post/domain'
-import { PostMother } from '@forum/test/post/domain'
 import { CreatePostCommandMother } from '@forum/test/post/application/create/create-post-command.mother'
 import { CreatePostCommand } from '@forum/post/application/create/create-post-command'
+import { PostMother } from '@forum/test/post/domain/post.mother'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
 
 describe('CreatePostCommandHandler', () => {
     let handler: CreatePostCommandHandler
@@ -18,7 +19,7 @@ describe('CreatePostCommandHandler', () => {
 
         repositoryMock = new Mock()
 
-        postCreator = new PostCreator(repositoryMock)
+        postCreator = new PostCreator(repositoryMock, null)
         handler = new CreatePostCommandHandler(postCreator)
     })
 

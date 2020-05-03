@@ -1,9 +1,13 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 
-import { PostContent, PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
 import { PostCreator } from '@forum/post/application/create/post-creator'
 import { CreatePostCommand } from '@forum/post/application/create/create-post-command'
 import { UserId } from '@backend/shared/domain/user/user-id'
+import { PostCounterComments } from '@forum/post/domain/post-counter-comments'
+import { PostContent } from '@forum/post/domain/post-content'
+import { PostTitle } from '@forum/post/domain/post-title'
+import { PostRanking } from '@forum/post/domain/post-ranking'
+import { PostId } from '@forum/shared/domain/post-id'
 
 @CommandHandler(CreatePostCommand)
 export class CreatePostCommandHandler implements ICommandHandler<CreatePostCommand> {

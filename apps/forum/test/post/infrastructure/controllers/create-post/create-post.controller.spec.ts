@@ -5,9 +5,6 @@ import { Connection } from 'typeorm'
 import * as request from 'supertest'
 import { of } from 'rxjs'
 
-import { Post } from '@forum/post/domain'
-import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
-import { PostContentMother, PostIdMother, PostTitleMother } from '@forum/test/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { MongoPostRepository } from '@forum/post/infrastructure/persistence/mongo/mongo-post.repository'
@@ -17,14 +14,17 @@ import { PostCreator } from '@forum/post/application/create/post-creator'
 import { HttpStatus, INestApplication } from '@nestjs/common'
 import { AuthGuard } from '@forum/post/infrastructure/guards/auth.guard'
 import { ClientProxy } from '@nestjs/microservices'
-import { UserResponseMother } from '@backend/shared/test/application/user/user-response.mother'
-import { UserResponse } from '@users/users/application/user.response'
+import { PostContentMother } from '@forum/test/post/domain/post-content.mother'
+import { PostTitleMother } from '@forum/test/post/domain/post-title.mother'
+import { PostIdMother } from '@forum/test/post/domain/post-id.mother'
+import { Post } from '@forum/post/domain/post'
+import { PostRepository } from '@forum/post/domain/post.repository'
 
 describe('CreatePostController', () => {
     let app: INestApplication
     let controller: CreatePostController
     let connection: Connection
-    let mongoPostRepository: MongoPostRepository
+    let mongoPostRepository: PostRepository
     let clientProxyMock
 
     beforeAll(async () => {
@@ -32,28 +32,30 @@ describe('CreatePostController', () => {
             send: jest.fn()
         }))
         clientProxyMock = new Mock()
-        const moduleRef = await Test.createTestingModule({
-            imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('createPostTest')), TypeOrmModule.forFeature([PostSchema])],
-            controllers: [CreatePostController],
-            providers: [
-                PostCreator,
-                CreatePostCommandHandler,
-                {
-                    provide: 'PostRepository',
-                    useClass: MongoPostRepository
-                },
-                AuthGuard,
-                {
-                    provide: 'FORUM_SERVICE',
-                    useValue: clientProxyMock
-                }
-            ]
-        }).compile()
+        const [moduleRef] = await Promise.all([
+            Test.createTestingModule({
+                imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('createPostTest')), TypeOrmModule.forFeature([PostSchema])],
+                controllers: [CreatePostController],
+                providers: [
+                    PostCreator,
+                    CreatePostCommandHandler,
+                    {
+                        provide: PostRepository,
+                        useClass: MongoPostRepository
+                    },
+                    AuthGuard,
+                    {
+                        provide: 'FORUM_SERVICE',
+                        useValue: clientProxyMock
+                    }
+                ]
+            }).compile()
+        ])
 
         app = moduleRef.createNestApplication()
         connection = moduleRef.get<Connection>(Connection)
         controller = moduleRef.get<CreatePostController>(CreatePostController)
-        mongoPostRepository = moduleRef.get<MongoPostRepository>('PostRepository')
+        mongoPostRepository = moduleRef.get<PostRepository>(PostRepository)
         await app.init()
     })
 

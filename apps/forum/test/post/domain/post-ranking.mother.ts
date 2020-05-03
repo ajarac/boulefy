@@ -1,5 +1,5 @@
-import { PostRanking } from '@forum/post/domain';
 import { NumberMother } from '@backend/shared/test/domain/number.mother';
+import { PostRanking } from '@forum/post/domain/post-ranking'
 
 export class PostRankingMother {
     static create(value: number): PostRanking {

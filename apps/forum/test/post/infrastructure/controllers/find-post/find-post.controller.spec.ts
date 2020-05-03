@@ -8,18 +8,21 @@ import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
-import { Post, PostId } from '@forum/post/domain'
-import { PostIdMother, PostMother } from '@forum/test/post/domain'
 import { PostResponse } from '@forum/post/application/post.response'
 import { PostFinder } from '@forum/post/application/find/post-finder'
 import { FindPostQueryHandler } from '@forum/post/application/find/find-post-query.handler'
 import { FindPostController } from '@forum/post/infrastructure/controllers/find-post.controller'
 import { HttpError } from '@shared/http.error'
+import { Post } from '@forum/post/domain/post'
+import { PostMother } from '@forum/test/post/domain/post.mother'
+import { PostIdMother } from '@forum/test/post/domain/post-id.mother'
+import { PostId } from '@forum/shared/domain/post-id'
+import { PostRepository } from '@forum/post/domain/post.repository'
 
 describe('FindPostController', () => {
     let app: INestApplication
     let connection: Connection
-    let mongoPostRepository: MongoPostRepository
+    let mongoPostRepository: PostRepository
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
@@ -29,7 +32,7 @@ describe('FindPostController', () => {
                 PostFinder,
                 FindPostQueryHandler,
                 {
-                    provide: 'PostRepository',
+                    provide: PostRepository,
                     useClass: MongoPostRepository
                 }
             ]
@@ -37,7 +40,7 @@ describe('FindPostController', () => {
 
         app = moduleRef.createNestApplication()
         connection = moduleRef.get<Connection>(Connection)
-        mongoPostRepository = moduleRef.get<MongoPostRepository>('PostRepository')
+        mongoPostRepository = moduleRef.get<PostRepository>(PostRepository)
         await app.init()
     })
 

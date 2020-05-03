@@ -7,3 +7,21 @@
     </nb-card-body>
 </nb-card>
 
+<h1>Comments</h1>
+
+<nb-card *ngFor="let comment of comments$ | async">
+    <nb-card-header>User: {{ comment.userId }}</nb-card-header>
+    <nb-card-body>{{ comment.content }}</nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="isLogged$ | async">
+    <nb-card-header>Write comment</nb-card-header>
+    <nb-card-body fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="50" fxLayout="column" fxLayoutAlign="center">
+            <agora-text-area fxFlex="50" [formControl]="commentControl" placeholder="Comment"></agora-text-area>
+            <button (click)="createComment()" [disabled]="commentControl.invalid" nbButton shape="round" status="primary">
+                Create Comment
+            </button>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -1,7 +1,0 @@
-export * from './post'
-export * from './post-counter-comments'
-export * from '../../shared/domain/post-id'
-export * from './post-ranking'
-export * from './post.repository'
-export * from './post-title'
-export * from './post-content'

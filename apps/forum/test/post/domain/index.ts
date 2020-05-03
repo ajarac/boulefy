@@ -1,6 +1,0 @@
-export * from './post.mother'
-export * from './post-counter-comments.mother'
-export * from './post-id.mother'
-export * from './post-ranking.mother'
-export * from './post-title.mother'
-export * from './post-content.mother'

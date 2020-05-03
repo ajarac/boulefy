@@ -2,18 +2,27 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { Post, PostId, PostRepository } from '@forum/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { PostMapper } from '@forum/post/infrastructure/persistence/mongo/post.mapper'
 import { from } from 'uuid-mongodb'
+import { PostId } from '@forum/shared/domain/post-id'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
 
 @Injectable()
-export class MongoPostRepository implements PostRepository {
-    constructor(@InjectRepository(PostSchema) private repository: Repository<PostSchema>) {}
+export class MongoPostRepository extends PostRepository {
+    constructor(@InjectRepository(PostSchema) private repository: Repository<PostSchema>) {
+        super()
+    }
 
     async save(post: Post): Promise<void> {
         const schema: PostSchema = PostMapper.toSchema(post)
         await this.repository.save(schema)
+    }
+
+    async update(post: Post): Promise<void> {
+        const schema: PostSchema = PostMapper.toSchema(post)
+        await this.repository.update({ _id: schema._id }, schema)
     }
 
     async search(id: PostId): Promise<Post> {

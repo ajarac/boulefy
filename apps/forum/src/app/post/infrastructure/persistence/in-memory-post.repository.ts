@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { Post, PostId, PostRepository } from '@forum/post/domain'
+import { PostId } from '@forum/shared/domain/post-id'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
+
 
 @Injectable()
 export class InMemoryPostRepository implements PostRepository {

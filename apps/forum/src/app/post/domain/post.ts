@@ -44,6 +44,10 @@ export class Post extends AggregateRoot {
         return this._userId
     }
 
+    incrementCounterComments(): void {
+        this._counterComments = new PostCounterComments(this._counterComments.value + 1)
+    }
+
     public static create(
         id: PostId,
         title: PostTitle,

@@ -1,7 +1,12 @@
-import { Post, PostContent, PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { from } from 'uuid-mongodb'
+import { PostCounterComments } from '@forum/post/domain/post-counter-comments'
+import { PostContent } from '@forum/post/domain/post-content'
+import { PostTitle } from '@forum/post/domain/post-title'
+import { PostRanking } from '@forum/post/domain/post-ranking'
+import { PostId } from '@forum/shared/domain/post-id'
+import { Post } from '@forum/post/domain/post'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {

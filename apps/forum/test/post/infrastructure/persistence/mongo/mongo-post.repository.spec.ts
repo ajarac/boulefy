@@ -6,8 +6,8 @@ import * as faker from 'faker'
 
 import { mongoConfig } from '@forum/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.schema'
-import { PostMother } from '@forum/test/post/domain'
-import { Post } from '@forum/post/domain'
+import { PostMother } from '@forum/test/post/domain/post.mother'
+import { Post } from '@forum/post/domain/post'
 
 describe('MongoPostRepository', () => {
     let mongoPostRepository: MongoPostRepository

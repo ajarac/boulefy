@@ -10,14 +10,15 @@ import { PostSchema } from '@forum/post/infrastructure/persistence/mongo/post.sc
 import { FindPostsController } from '@forum/post/infrastructure/controllers/find-posts.controller'
 import { PostFinderAll } from '@forum/post/application/findAll/post-finder-all'
 import { FindPostsQueryHandler } from '@forum/post/application/findAll/find-posts-query.handler'
-import { PostMother } from '@forum/test/post/domain'
-import { Post } from '@forum/post/domain'
 import { PostResponse } from '@forum/post/application/post.response'
+import { Post } from '@forum/post/domain/post'
+import { PostMother } from '@forum/test/post/domain/post.mother'
+import { PostRepository } from '@forum/post/domain/post.repository'
 
 describe('FindPostsController', () => {
     let app: INestApplication
     let connection: Connection
-    let mongoPostRepository: MongoPostRepository
+    let mongoPostRepository: PostRepository
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
@@ -27,7 +28,7 @@ describe('FindPostsController', () => {
                 PostFinderAll,
                 FindPostsQueryHandler,
                 {
-                    provide: 'PostRepository',
+                    provide: PostRepository,
                     useClass: MongoPostRepository
                 }
             ]
@@ -35,7 +36,7 @@ describe('FindPostsController', () => {
 
         app = moduleRef.createNestApplication()
         connection = moduleRef.get<Connection>(Connection)
-        mongoPostRepository = moduleRef.get<MongoPostRepository>('PostRepository')
+        mongoPostRepository = moduleRef.get<PostRepository>(PostRepository)
         await app.init()
     })
 

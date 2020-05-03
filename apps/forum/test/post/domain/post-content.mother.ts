@@ -1,5 +1,5 @@
-import { PostContent } from '@forum/post/domain'
 import { WordMother } from '@backend/shared/test/domain/word.mother'
+import { PostContent } from '@forum/post/domain/post-content'
 
 export class PostContentMother {
     static create(value: string): PostContent {

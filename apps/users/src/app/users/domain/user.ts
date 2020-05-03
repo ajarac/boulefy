@@ -48,6 +48,10 @@ export class User extends AggregateRoot {
         this._counterPosts = new UserCounterPosts(this._counterPosts.value + 1)
     }
 
+    incrementCounterComments(): void {
+        this._counterComments = new UserCounterComments(this._counterComments.value + 1)
+    }
+
     public static create(
         id: UserId,
         username: UserName,

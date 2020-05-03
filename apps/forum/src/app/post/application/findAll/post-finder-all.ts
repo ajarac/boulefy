@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Post, PostRepository } from '@forum/post/domain'
 import { PostResponse } from '@forum/post/application/post.response'
+import { PostRepository } from '@forum/post/domain/post.repository'
+import { Post } from '@forum/post/domain/post'
 
 @Injectable()
 export class PostFinderAll {

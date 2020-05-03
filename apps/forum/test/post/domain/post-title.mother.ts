@@ -1,5 +1,5 @@
 import { WordMother } from '@backend/shared/test/domain/word.mother';
-import { PostTitle } from '@forum/post/domain';
+import { PostTitle } from '@forum/post/domain/post-title'
 
 export class PostTitleMother {
     static create(value: string): PostTitle {

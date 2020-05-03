@@ -1,8 +1,16 @@
-import { PostContent, PostCounterComments, PostId, PostRanking, PostTitle } from '@forum/post/domain'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { PostResponse } from '@forum/post/application/post.response'
-import { PostContentMother, PostCounterCommentsMother, PostIdMother, PostRankingMother, PostTitleMother } from '@forum/test/post/domain'
 import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
+import { PostContentMother } from '@forum/test/post/domain/post-content.mother'
+import { PostTitleMother } from '@forum/test/post/domain/post-title.mother'
+import { PostRankingMother } from '@forum/test/post/domain/post-ranking.mother'
+import { PostIdMother } from '@forum/test/post/domain/post-id.mother'
+import { PostCounterComments } from '@forum/post/domain/post-counter-comments'
+import { PostContent } from '@forum/post/domain/post-content'
+import { PostTitle } from '@forum/post/domain/post-title'
+import { PostRanking } from '@forum/post/domain/post-ranking'
+import { PostCounterCommentsMother } from '@forum/test/post/domain/post-counter-comments.mother'
+import { PostId } from '@forum/shared/domain/post-id'
 
 export class PostResponseMother {
     static create(

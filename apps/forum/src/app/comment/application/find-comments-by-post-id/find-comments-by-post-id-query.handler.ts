@@ -1,14 +1,14 @@
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { FindCommentsByPostIdCommand } from '@forum/comment/application/find-comments-by-post-id/find-comments-by-post-id-command'
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
+import { FindCommentsByPostIdQuery } from '@forum/comment/application/find-comments-by-post-id/find-comments-by-post-id-query'
 import { CommentFinderByPostId } from '@forum/comment/application/find-comments-by-post-id/comment-finder-by-post-id'
 import { CommentResponse } from '@forum/comment/application/comment.response'
 import { PostId } from '@forum/shared/domain/post-id'
 
-@CommandHandler(FindCommentsByPostIdCommand)
-export class FindCommentsByPostIdCommandHandler implements ICommandHandler<FindCommentsByPostIdCommand> {
+@QueryHandler(FindCommentsByPostIdQuery)
+export class FindCommentsByPostIdQueryHandler implements IQueryHandler<FindCommentsByPostIdQuery> {
     constructor(private commentFinderByPostId: CommentFinderByPostId) {}
 
-    execute(command: FindCommentsByPostIdCommand): Promise<Array<CommentResponse>> {
+    execute(command: FindCommentsByPostIdQuery): Promise<Array<CommentResponse>> {
         const postId: PostId = new PostId(command.id)
         return this.commentFinderByPostId.find(postId)
     }

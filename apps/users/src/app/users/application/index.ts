@@ -10,8 +10,24 @@ import { LoginUserCommandHandler } from '@users/users/application/login-user/log
 import { LoginUser } from '@users/users/application/login-user/login-user'
 import { ValidateTokenCommandHandler } from '@users/users/application/validate-token/validate-token-command.handler'
 import { ValidateToken } from '@users/users/application/validate-token/validate-token'
+import { IncrementUserCounterCommentOnCommentCreateCommand } from '@users/users/application/comment-created/increment-user-counter-comment-on-comment-create-command'
+import { IncrementUserCounterComment } from '@users/users/application/comment-created/increment-user-counter-comment'
 
-export const APPLICATION_SERVICES = [UserRegistration, IncrementUserCounterPost, UserFinder, AuthUser, LoginUser, ValidateToken]
-export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler, ValidateTokenCommandHandler]
+export const APPLICATION_SERVICES = [
+    UserRegistration,
+    IncrementUserCounterPost,
+    UserFinder,
+    AuthUser,
+    LoginUser,
+    ValidateToken,
+    IncrementUserCounterComment
+]
+export const COMMAND_HANDLERS = [
+    RegisterUserCommandHandler,
+    AuthUserCommandHandler,
+    LoginUserCommandHandler,
+    ValidateTokenCommandHandler,
+    IncrementUserCounterCommentOnCommentCreateCommand,
+    IncrementUserCounterPostOnPostCreatedCommandHandler
+]
 export const QUERY_HANDLERS = [FindUserQueryHandler]
-export const EVENT_HANDLERS = [IncrementUserCounterPostOnPostCreatedCommandHandler]
