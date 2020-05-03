@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { AuthUserCommand } from './auth-user-command'
 import { AuthUser } from './auth-user'
-import { UserName } from '../../domain/user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserPassword } from '../../domain/user-password'
 import { UserResponse } from '../user.response'
 

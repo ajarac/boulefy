@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { LoginUserCommand } from './login-user-command'
 import { LoginUser } from './login-user'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '../../domain/user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { AccessToken } from '@shared/auth/accesst-token'
 
 @CommandHandler(LoginUserCommand)

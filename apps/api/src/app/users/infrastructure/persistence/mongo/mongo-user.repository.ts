@@ -8,7 +8,7 @@ import { User } from '../../../domain/user'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserSchema } from './user.schema'
 import { UserMapper } from './user.mapper'
-import { UserName } from '../../../domain/user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserPassword } from '../../../domain/user-password'
 import { from } from 'uuid-mongodb'
 

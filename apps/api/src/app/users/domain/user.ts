@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@nestjs/cqrs'
 import { UserCreated } from '@backend/shared/domain/user/user-created'
 
-import { UserName } from './user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserCounterPosts } from './user-counter-posts'
 import { UserCounterComments } from './user-counter-comments'

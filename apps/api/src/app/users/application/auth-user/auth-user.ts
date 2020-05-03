@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { UserRepository } from '../../domain/user.repository'
-import { UserName } from '../../domain/user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserPassword } from '../../domain/user-password'
 import { User } from '../../domain/user'
 import { UserResponse } from '../user.response'

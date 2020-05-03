@@ -1,3 +1,7 @@
 import { StringValueObject } from '@backend/shared/domain/string-value-object'
 
-export class PostContent extends StringValueObject {}
+export class PostContent extends StringValueObject {
+    constructor(content: string) {
+        super(content)
+    }
+}

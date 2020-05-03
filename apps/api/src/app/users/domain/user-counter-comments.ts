@@ -1,3 +1,7 @@
 import { NumberValueObject } from '@backend/shared/domain/number-value-object'
 
-export class UserCounterComments extends NumberValueObject {}
+export class UserCounterComments extends NumberValueObject {
+    constructor(counterComments: number) {
+        super(counterComments)
+    }
+}

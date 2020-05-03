@@ -1,7 +1,7 @@
-export abstract class NumberValueObject {
-    constructor(protected _value: number) {}
+import { ValueObject } from '@backend/shared/domain/value-object'
 
-    get value(): number {
-        return this._value
+export abstract class NumberValueObject extends ValueObject<number> {
+    protected constructor(_value: number) {
+        super(_value)
     }
 }

@@ -1,11 +1,7 @@
-export abstract class DateValueObject {
-    protected _value: Date
+import { ValueObject } from '@backend/shared/domain/value-object'
 
-    protected constructor(_value: string | number) {
-        this._value = new Date(_value)
-    }
-
-    get value(): Date {
-        return this._value
+export abstract class DateValueObject extends ValueObject<Date> {
+    protected constructor(_value: string | number | Date) {
+        super(new Date(_value))
     }
 }

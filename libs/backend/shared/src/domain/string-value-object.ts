@@ -1,7 +1,7 @@
-export abstract class StringValueObject {
-    constructor(protected _value: string) {}
+import { ValueObject } from '@backend/shared/domain/value-object'
 
-    get value(): string {
-        return this._value
+export abstract class StringValueObject extends ValueObject<string> {
+    protected constructor(protected readonly _value: string) {
+        super(_value)
     }
 }

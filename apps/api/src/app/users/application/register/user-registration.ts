@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { UserRepository } from '../../domain/user.repository'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '../../domain/user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserCounterComments } from '../../domain/user-counter-comments'
 import { UserCounterPosts } from '../../domain/user-counter-posts'
 import { User } from '../../domain/user'

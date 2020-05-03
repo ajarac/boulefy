@@ -1,6 +1,6 @@
 import { User } from './user'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from './user-name'
+import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserPassword } from './user-password'
 
 export abstract class UserRepository {
