@@ -11,8 +11,8 @@ export class CommentMapper {
     static fromSchema(commentSchema: CommentSchema): Comment {
         const id: CommentId = new CommentId(from(commentSchema._id).toString())
         const content: CommentContent = new CommentContent(commentSchema.content)
-        const userId: UserId = new UserId(commentSchema.userId)
-        const postId: PostId = new PostId(commentSchema.postId)
+        const userId: UserId = new UserId(from(commentSchema.userId).toString())
+        const postId: PostId = new PostId(from(commentSchema.postId).toString())
         const ranking: CommentRanking = new CommentRanking(commentSchema.ranking)
 
         return new Comment(id, content, userId, postId, ranking)
@@ -22,8 +22,8 @@ export class CommentMapper {
         const commentSchema: CommentSchema = new CommentSchema()
         commentSchema._id = from(comment.id.value)
         commentSchema.content = comment.content.value
-        commentSchema.userId = comment.userId.value
-        commentSchema.postId = comment.postId.value
+        commentSchema.userId = from(comment.userId.value)
+        commentSchema.postId = from(comment.postId.value)
         commentSchema.ranking = comment.ranking.value
         return commentSchema
     }

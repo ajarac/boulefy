@@ -4,7 +4,7 @@ import { Connection } from 'typeorm'
 import * as faker from 'faker'
 import { PostMother } from '@api/test/forum/post/domain/post.mother'
 import { mongoConfig } from '@api/test/forum/post/infrastructure/persistence/mongo/mongo.config.testing'
-import { MongoPostRepository } from '@api/post/infrastructure/persistence/mongo/mongo-post.repository'
+import { MongoPostRepository } from '@api/post/infrastructure/persistence/mongo/command/mongo-post.repository'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { Post } from '@api/post/domain/post'
 

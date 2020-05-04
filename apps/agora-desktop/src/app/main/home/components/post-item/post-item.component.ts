@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { Post } from '@agora-desktop/core/post/models/post'
+import { PostResponse } from '@shared/models/post/post.response'
 
 @Component({
     selector: 'agora-post-item',
@@ -8,5 +8,5 @@ import { Post } from '@agora-desktop/core/post/models/post'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostItemComponent {
-    @Input() post: Post
+    @Input() post: PostResponse
 }

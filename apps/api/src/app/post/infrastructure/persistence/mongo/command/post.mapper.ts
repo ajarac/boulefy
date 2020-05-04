@@ -1,4 +1,4 @@
-import { PostSchema } from './post.schema'
+import { PostSchema } from '../post.schema'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { from } from 'uuid-mongodb'
 import { PostCounterComments } from '@api/post/domain/post-counter-comments'

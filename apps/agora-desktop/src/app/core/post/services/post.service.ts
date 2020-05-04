@@ -4,8 +4,8 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { Environment } from '../../../../environments/environment.model'
-import { Post } from '@agora-desktop/core/post/models/post'
 import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
+import { PostResponse } from '@shared/models/post/post.response'
 
 @Injectable()
 export class PostService {
@@ -13,13 +13,13 @@ export class PostService {
 
     constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
 
-    getPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(this.baseUrl)
+    getPosts(): Observable<PostResponse[]> {
+        return this.http.get<PostResponse[]>(this.baseUrl)
     }
 
-    getPostById(id: string): Observable<Post> {
+    getPostById(id: string): Observable<PostResponse> {
         const url: string = `${this.baseUrl}/${id}`
-        return this.http.get<Post>(url)
+        return this.http.get<PostResponse>(url)
     }
 
     create(title: string, content: string): Observable<string> {

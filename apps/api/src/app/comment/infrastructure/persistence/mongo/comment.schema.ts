@@ -10,11 +10,11 @@ export class CommentSchema {
     content: string
 
     @Column()
-    userId: string
+    userId: MUUID
 
     @Index()
     @Column()
-    postId: string
+    postId: MUUID
 
     @Column()
     ranking: number

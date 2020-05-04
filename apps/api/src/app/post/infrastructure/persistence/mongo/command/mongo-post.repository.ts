@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 import { from } from 'uuid-mongodb'
-import { PostMapper } from '@api/post/infrastructure/persistence/mongo/post.mapper'
+import { PostMapper } from '@api/post/infrastructure/persistence/mongo/command/post.mapper'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { PostId } from '@api/shared/domain/post-id'
 import { PostRepository } from '@api/post/domain/post.repository'

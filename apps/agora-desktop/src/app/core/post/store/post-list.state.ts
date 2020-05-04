@@ -1,12 +1,12 @@
 import { Action, State, StateContext } from '@ngxs/store'
-import { Post } from '@agora-desktop/core/post/models/post'
 import { Injectable } from '@angular/core'
 import { LoadPosts, PostsLoaded } from '@agora-desktop/core/post/store/post.action'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { PostService } from '@agora-desktop/core/post/services/post.service'
+import { PostResponse } from '@shared/models/post/post.response'
 
-type IPostListState = Post[]
+type IPostListState = PostResponse[]
 
 @State<IPostListState>({
     name: 'postList',
@@ -18,7 +18,7 @@ export class PostListState {
 
     @Action(LoadPosts)
     load({ dispatch }): Observable<IPostListState> {
-        return this.service.getPosts().pipe(tap((posts: Post[]) => dispatch(new PostsLoaded(posts))))
+        return this.service.getPosts().pipe(tap((posts: PostResponse[]) => dispatch(new PostsLoaded(posts))))
     }
 
     @Action(PostsLoaded)

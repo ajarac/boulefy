@@ -1,5 +1,8 @@
 <nb-card>
-    <nb-card-header [routerLink]="'post/' + post.id">{{ post.title }}</nb-card-header>
+    <nb-card-header [routerLink]="'post/' + post.id" fxLayout="row" fxLayoutGap="10px">
+        <nb-user [name]="post.user.username"></nb-user>
+        <h1>{{ post.title }}</h1>
+    </nb-card-header>
     <nb-card-body>
         <span>{{ post.content }}</span>
     </nb-card-body>

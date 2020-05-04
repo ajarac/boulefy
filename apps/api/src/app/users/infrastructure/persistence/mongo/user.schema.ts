@@ -6,13 +6,13 @@ export class UserSchema {
     @ObjectIdColumn()
     _id: MUUID
 
-    @Column()
+    @Column({ unique: true })
     username: string
 
     @Column()
     password: string
 
-    @Column()
+    @Column({ unique: true })
     email: string
 
     @Column()
