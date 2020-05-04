@@ -1,14 +1,14 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { QueryBus } from '@nestjs/cqrs'
-import { CommentResponse } from '@api/comment/application/comment.response'
 import { FindCommentsByPostIdQuery } from '@api/comment/application/find-comments-by-post-id/find-comments-by-post-id-query'
+import { CommentResponse } from '@shared/models/comment/comment.response'
 
 
-@Controller('comments')
+@Controller('posts')
 export class FindCommentsByPostIdController {
     constructor(private queryBus: QueryBus) {}
 
-    @Get(':id')
+    @Get(':id/comments')
     comments(@Param('id') postId: string): Promise<CommentResponse> {
         return this.queryBus.execute(new FindCommentsByPostIdQuery(postId))
     }

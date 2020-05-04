@@ -11,10 +11,11 @@ import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.sch
 import { UserRepository } from '@api/users/domain/user.repository'
 import { JwtValidateToken } from '@api/users/infrastructure/passport/jwt/jwt-validate-token'
 import { PASSPORT } from '@api/users/infrastructure/passport'
-import { MongoUserRepository } from '@api/users/infrastructure/persistence/mongo/mongo-user.repository'
+import { MongoUserRepository } from '@api/users/infrastructure/persistence/mongo/command/mongo-user.repository'
 import { JwtUserTokenGenerator } from '@api/users/infrastructure/passport/jwt/jwt-user-token.generator'
 import { CONTROLLERS } from '@api/users/infrastructure/controller'
 import { APPLICATION_SERVICES, COMMAND_HANDLERS, EVENT_HANDLERS, QUERY_HANDLERS } from '@api/users/application'
+import { QUERIES } from '@api/users/infrastructure/persistence/mongo/query'
 
 @Module({
     imports: [
@@ -33,6 +34,7 @@ import { APPLICATION_SERVICES, COMMAND_HANDLERS, EVENT_HANDLERS, QUERY_HANDLERS 
         ...QUERY_HANDLERS,
         ...EVENT_HANDLERS,
         ...PASSPORT,
+        ...QUERIES,
         {
             provide: UserRepository,
             useClass: MongoUserRepository

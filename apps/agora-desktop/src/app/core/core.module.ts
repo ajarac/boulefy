@@ -19,7 +19,7 @@ import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
         NgxsDispatchPluginModule.forRoot(),
         !environment.production ? NgxsReduxDevtoolsPluginModule.forRoot() : [],
         NgxsStoragePluginModule.forRoot({
-            key: 'auth'
+            key: ['auth']
         }),
         CoreRouterModule,
         PostModule,

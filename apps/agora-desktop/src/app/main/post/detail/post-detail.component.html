@@ -10,7 +10,9 @@
 <h1>Comments</h1>
 
 <nb-card *ngFor="let comment of comments$ | async">
-    <nb-card-header>User: {{ comment.userId }}</nb-card-header>
+    <nb-card-header>
+        <nb-user [name]="comment.user.username"></nb-user>
+    </nb-card-header>
     <nb-card-body>{{ comment.content }}</nb-card-body>
 </nb-card>
 

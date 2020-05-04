@@ -3,7 +3,7 @@ import { AuthUserCommand } from './auth-user-command'
 import { AuthUser } from './auth-user'
 import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserPassword } from '../../domain/user-password'
-import { UserResponse } from '../user.response'
+import { UserResponse } from '@shared/models/user/user.response'
 
 @CommandHandler(AuthUserCommand)
 export class AuthUserCommandHandler implements ICommandHandler<AuthUserCommand> {

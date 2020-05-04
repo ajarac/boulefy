@@ -1,7 +1,7 @@
 <nb-card>
-    <nb-card-header [routerLink]="'post/' + post.id" fxLayout="row" fxLayoutGap="10px">
+    <nb-card-header [routerLink]="'post/' + post.id" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <nb-user [name]="post.user.username"></nb-user>
-        <h1>{{ post.title }}</h1>
+        <h5>{{ post.title }}</h5>
     </nb-card-header>
     <nb-card-body>
         <span>{{ post.content }}</span>
@@ -9,9 +9,9 @@
     <nb-card-footer>
         <nb-actions>
             <nb-action
-                icon="message-circle"
                 [badgeText]="post.counterComments.toString()"
                 [title]="post.counterComments + 'comments'"
+                icon="message-circle"
             ></nb-action>
         </nb-actions>
     </nb-card-footer>

@@ -1,11 +1,11 @@
-import { User } from '../../../domain/user'
-import { UserSchema } from './user.schema'
+import { User } from '../../../../domain/user'
+import { UserSchema } from '../user.schema'
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserCounterComments } from '../../../domain/user-counter-comments'
-import { UserCounterPosts } from '../../../domain/user-counter-posts'
-import { UserEmail } from '../../../domain/user-email'
-import { UserPassword } from '../../../domain/user-password'
+import { UserCounterComments } from '../../../../domain/user-counter-comments'
+import { UserCounterPosts } from '../../../../domain/user-counter-posts'
+import { UserEmail } from '../../../../domain/user-email'
+import { UserPassword } from '../../../../domain/user-password'
 import { from } from 'uuid-mongodb'
 
 export class UserMapper {

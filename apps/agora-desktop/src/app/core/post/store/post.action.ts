@@ -1,4 +1,5 @@
-import { Post } from '../models/post'
+import { PostResponse } from '@shared/models/post/post.response'
+
 
 const KEY_STATE = '[POSTS]'
 
@@ -9,7 +10,7 @@ export class LoadPosts {
 export class PostsLoaded {
     static type = `${KEY_STATE} Posts Loaded`
 
-    constructor(public posts: Post[]) {}
+    constructor(public posts: PostResponse[]) {}
 }
 
 export class LoadPostById {
@@ -21,7 +22,7 @@ export class LoadPostById {
 export class PostByIdLoaded {
     static type = `${KEY_STATE} Post By Id Loaded`
 
-    constructor(public post: Post) {}
+    constructor(public post: PostResponse) {}
 }
 
 export class CreatePost {

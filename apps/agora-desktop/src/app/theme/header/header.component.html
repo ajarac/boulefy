@@ -10,6 +10,6 @@
         <nb-actions>
             <nb-action icon="plus" title="Create Post" link="/post/new"></nb-action>
         </nb-actions>
-        <nb-user *ngIf="isLogged$ | async" name="John Doe" title="Engineer"></nb-user>
+        <nb-user [name]="(profile$ | async).username"></nb-user>
     </div>
 </div>

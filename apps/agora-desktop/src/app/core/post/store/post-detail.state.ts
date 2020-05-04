@@ -8,10 +8,11 @@ import { patch } from '@ngxs/store/operators'
 import { CommentCreated, CommentsByPostIdLoaded, CreateComment, LoadCommentsByPostId } from '@agora-desktop/core/post/store/comment.action'
 import { CommentService } from '@agora-desktop/core/post/services/comment.service'
 import { PostResponse } from '@shared/models/post/post.response'
+import { CommentResponse } from '@shared/models/comment/comment.response'
 
 interface IPostDetailState {
     post: PostResponse
-    comments: Array<Comment>
+    comments: Array<CommentResponse>
 }
 
 @State<IPostDetailState>({
@@ -48,10 +49,10 @@ export class PostDetailState {
     }
 
     @Action(LoadCommentsByPostId)
-    loadComments({ dispatch }: StateContext<IPostDetailState>, { postId }: LoadCommentsByPostId): Observable<Comment[]> {
+    loadComments({ dispatch }: StateContext<IPostDetailState>, { postId }: LoadCommentsByPostId): Observable<CommentResponse[]> {
         return this.commentService
             .getCommentsByPostId(postId)
-            .pipe(tap((comments: Comment[]) => dispatch(new CommentsByPostIdLoaded(comments))))
+            .pipe(tap((comments: CommentResponse[]) => dispatch(new CommentsByPostIdLoaded(comments))))
     }
 
     @Action(CommentsByPostIdLoaded)

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-local'
 import { CommandBus } from '@nestjs/cqrs'
-import { UserResponse } from '../../../application/user.response'
+import { UserResponse } from '@shared/models/user/user.response'
 import { AuthUserCommand } from '../../../application/auth-user/auth-user-command'
 
 @Injectable()

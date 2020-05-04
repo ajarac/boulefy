@@ -1,5 +1,3 @@
-import { AccessToken } from '@shared/auth/accesst-token'
-
 const KEY_STATE = '[Auth]'
 
 export class RegisterUser {
@@ -23,5 +21,5 @@ export class LoginUser {
 export class UserLogged {
     static type = `${KEY_STATE} User Logged`
 
-    constructor(public accessToken: AccessToken) {}
+    constructor(public accessToken: string) {}
 }

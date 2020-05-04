@@ -1,4 +1,5 @@
-import { Comment } from '@agora-desktop/core/post/models/comment'
+import { CommentResponse } from '@shared/models/comment/comment.response'
+
 
 const KEY_STATE = '[Comment]'
 
@@ -11,7 +12,7 @@ export class LoadCommentsByPostId {
 export class CommentsByPostIdLoaded {
     static type = `${KEY_STATE} Comments By PostId Loaded`
 
-    constructor(public comments: Comment[]) {}
+    constructor(public comments: CommentResponse[]) {}
 }
 
 export class CreateComment {

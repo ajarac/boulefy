@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
-import { CommentResponse } from '@api/comment/application/comment.response'
 import { CommentFinderByPostId } from '@api/comment/application/find-comments-by-post-id/comment-finder-by-post-id'
 import { FindCommentsByPostIdQuery } from '@api/comment/application/find-comments-by-post-id/find-comments-by-post-id-query'
 import { PostId } from '@api/shared/domain/post-id'
+import { CommentResponse } from '@shared/models/comment/comment.response'
 
 
 @QueryHandler(FindCommentsByPostIdQuery)

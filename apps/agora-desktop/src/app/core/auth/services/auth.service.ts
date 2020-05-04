@@ -5,6 +5,7 @@ import { Observable } from 'rxjs'
 import { AccessToken } from '@shared/auth/accesst-token'
 import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
 import { Environment } from '../../../../environments/environment.model'
+import { map } from 'rxjs/operators'
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,9 @@ export class AuthService {
         return this.http.post<void>(url, { username, password, email })
     }
 
-    login(username: string, password: string): Observable<AccessToken> {
-        return this.http.post<AccessToken>(this.baseUrl + 'login', { username, password })
+    login(username: string, password: string): Observable<string> {
+        return this.http
+            .post<AccessToken>(this.baseUrl + 'login', { username, password })
+            .pipe(map(({ accessToken }: AccessToken) => accessToken))
     }
 }

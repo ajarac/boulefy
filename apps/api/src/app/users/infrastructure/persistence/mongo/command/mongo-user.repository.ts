@@ -5,7 +5,7 @@ import { Repository } from 'typeorm'
 
 import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserMapper } from '@api/users/infrastructure/persistence/mongo/user.mapper'
+import { UserMapper } from '@api/users/infrastructure/persistence/mongo/command/user.mapper'
 import { UserRepository } from '@api/users/domain/user.repository'
 import { UserPassword } from '@api/users/domain/user-password'
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'

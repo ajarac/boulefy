@@ -3,7 +3,6 @@ import { IncrementUserCounterPost } from './post-created/increment-user-counter-
 import { RegisterUserCommandHandler } from './register/register-user-command.handler'
 import { IncrementUserCounterPostOnPostCreatedHandler } from './post-created/increment-user-counter-post-on-post-created.handler'
 import { FindUserQueryHandler } from './find-user/find-user-query.handler'
-import { UserFinder } from './find-user/user-finder'
 import { AuthUser } from './auth-user/auth-user'
 import { AuthUserCommandHandler } from './auth-user/auth-user-command.handler'
 import { LoginUserCommandHandler } from './login-user/login-user-command.handler'
@@ -17,7 +16,6 @@ import { IncrementUserCounterCommentOnCommentCreateHandler } from '@api/users/ap
 export const APPLICATION_SERVICES = [
     UserRegistration,
     IncrementUserCounterPost,
-    UserFinder,
     AuthUser,
     LoginUser,
     ValidateToken,
