@@ -8,7 +8,7 @@ export class IncrementUserCounterCommentOnCommentCreateHandler implements IEvent
     constructor(private incrementUserCounterComment: IncrementUserCounterComment) {}
 
     handle(command: CommentCreatedEvent): Promise<void> {
-        const userId: UserId = new UserId(command.id)
+        const userId: UserId = new UserId(command.userId)
         return this.incrementUserCounterComment.increment(userId)
     }
 }
