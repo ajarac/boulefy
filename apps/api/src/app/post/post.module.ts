@@ -8,6 +8,7 @@ import { PostSchema } from './infrastructure/persistence/mongo/post.schema'
 import { CONTROLLERS } from './infrastructure/controllers'
 import { GUARDS } from './infrastructure/guards'
 import { PostRepository } from './domain/post.repository'
+import { QUERIES } from '@api/post/infrastructure/persistence/mongo/queries'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([PostSchema])],
@@ -18,6 +19,7 @@ import { PostRepository } from './domain/post.repository'
         ...QUERY_HANDLERS,
         ...EVENT_HANDLERS,
         ...GUARDS,
+        ...QUERIES,
         {
             provide: PostRepository,
             useClass: MongoPostRepository

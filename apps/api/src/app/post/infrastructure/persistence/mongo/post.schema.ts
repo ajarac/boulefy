@@ -1,8 +1,8 @@
-import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, ObjectIdColumn } from 'typeorm'
 import { MUUID } from 'uuid-mongodb'
 
 @Entity()
-export class PostSchema {
+export class PostSchema extends BaseEntity {
     @ObjectIdColumn()
     _id: MUUID
 
@@ -19,5 +19,5 @@ export class PostSchema {
     ranking: number
 
     @Column()
-    userId: string
+    userId: MUUID
 }

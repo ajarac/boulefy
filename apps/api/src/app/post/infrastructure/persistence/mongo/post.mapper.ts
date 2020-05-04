@@ -15,7 +15,7 @@ export class PostMapper {
         const content: PostContent = new PostContent(postSchema.content)
         const counterComments: PostCounterComments = new PostCounterComments(postSchema.counterComments)
         const ranking: PostRanking = new PostRanking(postSchema.ranking)
-        const userId: UserId = new UserId(postSchema.userId)
+        const userId: UserId = new UserId(from(postSchema.userId).toString())
         return new Post(id, title, content, counterComments, ranking, userId)
     }
 
@@ -26,7 +26,7 @@ export class PostMapper {
         postSchema.content = post.content.value
         postSchema.counterComments = post.counterComments.value
         postSchema.ranking = post.ranking.value
-        postSchema.userId = post.userId.value
+        postSchema.userId = from(post.userId.value)
         return postSchema
     }
 }

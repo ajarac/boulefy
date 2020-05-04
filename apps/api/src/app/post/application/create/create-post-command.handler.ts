@@ -1,4 +1,4 @@
-import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs'
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { PostCreator } from '@api/post/application/create/post-creator'
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
 import { UserId } from '@backend/shared/domain/user/user-id'
@@ -10,7 +10,7 @@ import { PostId } from '@api/shared/domain/post-id'
 
 @CommandHandler(CreatePostCommand)
 export class CreatePostCommandHandler implements ICommandHandler<CreatePostCommand> {
-    constructor(private creator: PostCreator, private queryBus: QueryBus) {}
+    constructor(private creator: PostCreator) {}
 
     async execute(command: CreatePostCommand): Promise<void> {
         const id: PostId = new PostId(command.id)
