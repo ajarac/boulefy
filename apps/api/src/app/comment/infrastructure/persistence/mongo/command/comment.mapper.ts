@@ -6,6 +6,8 @@ import { CommentRanking } from '@api/comment/domain/comment-ranking'
 import { PostId } from '@api/shared/domain/post-id'
 import { CommentId } from '@api/comment/domain/comment-id'
 import { Comment } from '@api/comment/domain/comment'
+import { CommentCreatedDate } from '@api/comment/domain/comment-created-date'
+import { CommentUpdatedDate } from '@api/comment/domain/comment-updated-date'
 
 export class CommentMapper {
     static fromSchema(commentSchema: CommentSchema): Comment {
@@ -14,8 +16,9 @@ export class CommentMapper {
         const userId: UserId = new UserId(from(commentSchema.userId).toString())
         const postId: PostId = new PostId(from(commentSchema.postId).toString())
         const ranking: CommentRanking = new CommentRanking(commentSchema.ranking)
-
-        return new Comment(id, content, userId, postId, ranking)
+        const createdDate: CommentCreatedDate = new CommentCreatedDate(commentSchema.createdDate)
+        const updatedDate: CommentUpdatedDate = new CommentUpdatedDate(commentSchema.updatedDate)
+        return new Comment(id, content, userId, postId, ranking, createdDate, updatedDate)
     }
 
     static toSchema(comment: Comment): CommentSchema {
@@ -25,6 +28,8 @@ export class CommentMapper {
         commentSchema.userId = from(comment.userId.value)
         commentSchema.postId = from(comment.postId.value)
         commentSchema.ranking = comment.ranking.value
+        commentSchema.createdDate = comment.createdDate.value
+        commentSchema.updatedDate = comment.updatedDate.value
         return commentSchema
     }
 }

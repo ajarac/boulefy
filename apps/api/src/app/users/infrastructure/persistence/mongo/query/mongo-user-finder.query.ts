@@ -20,7 +20,8 @@ export class MongoUserFinderQuery extends UserFinder {
             username: userSchema.username,
             email: userSchema.email,
             counterComments: userSchema.counterComments,
-            counterPosts: userSchema.counterPosts
+            counterPosts: userSchema.counterPosts,
+            createdDate: userSchema.createdDate
         }
     }
 }

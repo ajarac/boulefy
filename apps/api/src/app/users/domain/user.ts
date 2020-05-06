@@ -3,10 +3,11 @@ import { UserCreated } from '@backend/shared/domain/user/user-created'
 
 import { UserName } from '@backend/shared/domain/user/user-name'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserCounterPosts } from './user-counter-posts'
-import { UserCounterComments } from './user-counter-comments'
-import { UserEmail } from './user-email'
-import { UserPassword } from './user-password'
+import { UserCreatedDate } from '@api/users/domain/user-created-date'
+import { UserCounterPosts } from '@api/users/domain/user-counter-posts'
+import { UserPassword } from '@api/users/domain/user-password'
+import { UserEmail } from '@api/users/domain/user-email'
+import { UserCounterComments } from '@api/users/domain/user-counter-comments'
 
 export class User extends AggregateRoot {
     constructor(
@@ -15,7 +16,8 @@ export class User extends AggregateRoot {
         private _password: UserPassword,
         private _email: UserEmail,
         private _counterComments: UserCounterComments,
-        private _counterPosts: UserCounterPosts
+        private _counterPosts: UserCounterPosts,
+        private _createdDate: UserCreatedDate
     ) {
         super()
     }
@@ -44,6 +46,10 @@ export class User extends AggregateRoot {
         return this._counterPosts
     }
 
+    get createdDate(): UserCreatedDate {
+        return this._createdDate
+    }
+
     incrementCounterPost(): void {
         this._counterPosts = new UserCounterPosts(this._counterPosts.value + 1)
     }
@@ -60,9 +66,10 @@ export class User extends AggregateRoot {
         counterComments: UserCounterComments,
         counterPosts: UserCounterPosts
     ): User {
-        const user: User = new User(id, username, password, email, counterComments, counterPosts)
+        const createdDate: UserCreatedDate = UserCreatedDate.create()
+        const user: User = new User(id, username, password, email, counterComments, counterPosts, createdDate)
 
-        user.apply(new UserCreated(id.value, username.value, email.value, counterComments.value, counterPosts.value))
+        user.apply(new UserCreated(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value))
 
         return user
     }

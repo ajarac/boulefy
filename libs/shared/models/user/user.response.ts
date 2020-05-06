@@ -4,4 +4,5 @@ export interface UserResponse {
     email: string
     counterComments: number
     counterPosts: number
+    createdDate: Date
 }

@@ -7,6 +7,8 @@ import { PostContent } from '@api/post/domain/post-content'
 import { PostTitle } from '@api/post/domain/post-title'
 import { PostRanking } from '@api/post/domain/post-ranking'
 import { PostId } from '@api/shared/domain/post-id'
+import { PostCreatedDate } from '@api/post/domain/post-created-date'
+import { PostUpdateDate } from '@api/post/domain/post-update-date'
 
 export class Post extends AggregateRoot {
     constructor(
@@ -15,7 +17,9 @@ export class Post extends AggregateRoot {
         private _content: PostContent,
         private _counterComments: PostCounterComments,
         private _ranking: PostRanking,
-        private _userId: UserId
+        private _userId: UserId,
+        private _createdDate: PostCreatedDate,
+        private _updateDate: PostUpdateDate
     ) {
         super()
     }
@@ -44,17 +48,18 @@ export class Post extends AggregateRoot {
         return this._userId
     }
 
-    public static create(
-        id: PostId,
-        title: PostTitle,
-        content: PostContent,
-        counterComments: PostCounterComments,
-        ranking: PostRanking,
-        userId: UserId
-    ): Post {
-        const post: Post = new Post(id, title, content, counterComments, ranking, userId)
+    get createdDate(): PostCreatedDate {
+        return this._createdDate
+    }
 
-        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value))
+    public static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId): Post {
+        const counterComments: PostCounterComments = PostCounterComments.create()
+        const ranking: PostRanking = PostRanking.create()
+        const createdDate: PostCreatedDate = PostCreatedDate.create()
+        const updatedDate: PostUpdateDate = PostUpdateDate.create()
+        const post: Post = new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
+
+        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value, createdDate.value))
 
         return post
     }

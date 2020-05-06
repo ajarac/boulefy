@@ -7,4 +7,6 @@ export interface CommentResponse {
     }
     postId: string
     ranking: number
+    createdDate: Date
+    updatedDate: Date
 }

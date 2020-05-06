@@ -4,4 +4,8 @@ export class CommentRanking extends NumberValueObject {
     constructor(ranking: number) {
         super(ranking)
     }
+
+    static create(): CommentRanking {
+        return new CommentRanking(0)
+    }
 }

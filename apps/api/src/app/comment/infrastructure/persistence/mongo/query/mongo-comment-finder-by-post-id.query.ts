@@ -37,7 +37,9 @@ export class MongoCommentFinderByPostIdQuery extends CommentFinderByPostId {
                 content: true,
                 user: { $arrayElemAt: ['$user', 0] },
                 postId: true,
-                ranking: true
+                ranking: true,
+                createdDate: true,
+                updatedDate: true
             })
             .toArray()
 

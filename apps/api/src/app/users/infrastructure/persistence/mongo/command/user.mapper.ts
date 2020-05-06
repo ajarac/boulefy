@@ -7,6 +7,7 @@ import { UserEmail } from '@api/users/domain/user-email'
 import { UserCounterComments } from '@api/users/domain/user-counter-comments'
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
 import { User } from '@api/users/domain/user'
+import { UserCreatedDate } from '@api/users/domain/user-created-date'
 
 export class UserMapper {
     static fromSchema(userSchema: UserSchema): User {
@@ -16,8 +17,9 @@ export class UserMapper {
         const email: UserEmail = new UserEmail(userSchema.email)
         const counterComments: UserCounterComments = new UserCounterComments(userSchema.counterComments)
         const counterPosts: UserCounterPosts = new UserCounterPosts(userSchema.counterPosts)
+        const createdDate: UserCreatedDate = new UserCreatedDate(userSchema.createdDate)
 
-        return new User(id, name, password, email, counterComments, counterPosts)
+        return new User(id, name, password, email, counterComments, counterPosts, createdDate)
     }
 
     static toSchema(user: User): UserSchema {
@@ -28,6 +30,7 @@ export class UserMapper {
         userSchema.email = user.email.value
         userSchema.counterComments = user.counterComments.value
         userSchema.counterPosts = user.counterPosts.value
+        userSchema.createdDate = user.createdDate.value
         return userSchema
     }
 }

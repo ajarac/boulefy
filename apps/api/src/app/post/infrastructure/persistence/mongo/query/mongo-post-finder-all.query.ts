@@ -34,7 +34,9 @@ export class MongoPostFinderAllQuery extends PostFinderAll {
                 content: true,
                 counterComments: true,
                 ranking: true,
-                user: { $arrayElemAt: ['$user', 0] }
+                user: { $arrayElemAt: ['$user', 0] },
+                createdDate: true,
+                updatedDate: true
             })
             .toArray()
         list.forEach((postResponse: PostResponse) => {

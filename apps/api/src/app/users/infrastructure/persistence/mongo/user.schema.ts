@@ -20,4 +20,7 @@ export class UserSchema {
 
     @Column()
     counterPosts: number
+
+    @Column()
+    createdDate: Date
 }

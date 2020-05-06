@@ -4,6 +4,7 @@ export class UserCreated {
         public readonly name: string,
         public readonly email: string,
         public readonly counterComments: number,
-        public readonly counterPosts: number
+        public readonly counterPosts: number,
+        public readonly createdDate: Date
     ) {}
 }

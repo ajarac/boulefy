@@ -38,7 +38,9 @@ export class MongoPostFinderQuery extends PostFinder {
                 content: true,
                 counterComments: true,
                 ranking: true,
-                user: { $arrayElemAt: ['$user', 0] }
+                user: { $arrayElemAt: ['$user', 0] },
+                createdDate: true,
+                updatedDate: true
             })
             .next()
 

@@ -18,4 +18,10 @@ export class CommentSchema {
 
     @Column()
     ranking: number
+
+    @Column()
+    createdDate: Date
+
+    @Column()
+    updatedDate: Date
 }
