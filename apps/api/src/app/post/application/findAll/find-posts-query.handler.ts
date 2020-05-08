@@ -7,7 +7,7 @@ import { PostResponse } from '@shared/models/post/post.response'
 export class FindPostsQueryHandler implements IQueryHandler<FindPostsQuery, Array<PostResponse>> {
     constructor(private postFinder: PostFinderAll) {}
 
-    async execute(): Promise<Array<PostResponse>> {
-        return this.postFinder.findAll()
+    async execute({ page, limit }: FindPostsQuery): Promise<Array<PostResponse>> {
+        return this.postFinder.findAll(page, limit)
     }
 }

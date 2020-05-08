@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
@@ -9,6 +9,8 @@ import { CONTROLLERS } from './infrastructure/controllers'
 import { GUARDS } from './infrastructure/guards'
 import { PostRepository } from './domain/post.repository'
 import { QUERIES } from '@api/post/infrastructure/persistence/mongo/query'
+import { PagerMiddleware } from '@api/shared/infrastructure/middleware/pager.middleware'
+import { FindPostsController } from '@api/post/infrastructure/controllers/find-posts.controller'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([PostSchema])],
@@ -26,4 +28,8 @@ import { QUERIES } from '@api/post/infrastructure/persistence/mongo/query'
         }
     ]
 })
-export class PostModule {}
+export class PostModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(PagerMiddleware).forRoutes(FindPostsController)
+    }
+}

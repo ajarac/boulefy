@@ -7,6 +7,10 @@ export class LoadPosts {
     static type = `${KEY_STATE} Load Posts`
 }
 
+export class LoadPostNextPage {
+    static type = `${KEY_STATE} Load Post Next Page`
+}
+
 export class PostsLoaded {
     static type = `${KEY_STATE} Posts Loaded`
 

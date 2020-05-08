@@ -1,5 +1,5 @@
 <nb-card>
-    <nb-card-header [routerLink]="'post/' + post.id" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <nb-card-header [routerLink]="['post', post.id]" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <nb-user [name]="post.user.username"></nb-user>
         <h5>{{ post.title }}</h5>
     </nb-card-header>

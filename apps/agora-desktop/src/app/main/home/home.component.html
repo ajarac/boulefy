@@ -1,1 +1,3 @@
-<agora-post-item *ngFor="let post of posts$ | async" [post]="post"></agora-post-item>
+<cdk-virtual-scroll-viewport (scrolledIndexChange)="next()" itemSize="100">
+    <agora-post-item *cdkVirtualFor="let post of posts$ | async" [post]="post"></agora-post-item>
+</cdk-virtual-scroll-viewport>

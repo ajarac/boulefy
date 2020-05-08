@@ -12,9 +12,11 @@ export class MongoPostFinderAllQuery extends PostFinderAll {
         super()
     }
 
-    async findAll(): Promise<Array<PostResponse>> {
-        const list: Array<PostResponse> = await this.repository
+    async findAll(page = 1, limit = 25): Promise<Array<PostResponse>> {
+        const pagination: Array<PostResponse> = await this.repository
             .aggregate([
+                { $skip: limit * (page - 1) },
+                { $limit: limit },
                 {
                     $lookup: {
                         from: 'user_schema',
@@ -39,10 +41,11 @@ export class MongoPostFinderAllQuery extends PostFinderAll {
                 updatedDate: true
             })
             .toArray()
-        list.forEach((postResponse: PostResponse) => {
+
+        pagination.forEach((postResponse: PostResponse) => {
             postResponse.id = from(postResponse.id).toString()
             postResponse.user.id = from(postResponse.user.id).toString()
         })
-        return list
+        return pagination
     }
 }

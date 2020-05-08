@@ -13,12 +13,12 @@ export class MongoCommentFinderByPostIdQuery extends CommentFinderByPostId {
         super()
     }
 
-    async find(postId: PostId): Promise<Array<CommentResponse>> {
+    async find(postId: PostId, page: number, limit: number): Promise<Array<CommentResponse>> {
         const comments: Array<CommentResponse> = await this.repository
             .aggregate([
-                {
-                    $match: { postId: from(postId.value) }
-                },
+                { $match: { postId: from(postId.value) } },
+                { $skip: limit * (page - 1) },
+                { $limit: limit },
                 {
                     $lookup: {
                         from: 'user_schema',
@@ -42,7 +42,6 @@ export class MongoCommentFinderByPostIdQuery extends CommentFinderByPostId {
                 updatedDate: true
             })
             .toArray()
-
         comments.forEach((comment: CommentResponse) => {
             comment.id = from(comment.id).toString()
             comment.user.id = from(comment.user.id).toString()

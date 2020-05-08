@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -13,8 +13,9 @@ export class PostService {
 
     constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
 
-    getPosts(): Observable<PostResponse[]> {
-        return this.http.get<PostResponse[]>(this.baseUrl)
+    getPosts(page: number): Observable<PostResponse[]> {
+        const params: HttpParams = new HttpParams().set('page', page.toString())
+        return this.http.get<PostResponse[]>(this.baseUrl, { params })
     }
 
     getPostById(id: string): Observable<PostResponse> {

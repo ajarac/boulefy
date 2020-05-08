@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { CommentSchema } from '@api/comment/infrastructure/persistence/mongo/comment.schema'
@@ -7,6 +7,8 @@ import { MongoCommentRepository } from '@api/comment/infrastructure/persistence/
 import { CONTROLLERS } from '@api/comment/infrastructure/controllers'
 import { APPLICATION_SERVICES, COMMAND_HANDLERS, QUERY_HANDLERS } from '@api/comment/application'
 import { QUERIES } from '@api/comment/infrastructure/persistence/mongo/query'
+import { PagerMiddleware } from '@api/shared/infrastructure/middleware/pager.middleware'
+import { FindCommentsByPostIdController } from '@api/comment/infrastructure/controllers/find-comments-by-post-id.controller'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([CommentSchema])],
@@ -22,4 +24,8 @@ import { QUERIES } from '@api/comment/infrastructure/persistence/mongo/query'
         }
     ]
 })
-export class CommentModule {}
+export class CommentModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(PagerMiddleware).forRoutes(FindCommentsByPostIdController)
+    }
+}

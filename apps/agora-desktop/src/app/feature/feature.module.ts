@@ -11,6 +11,7 @@ import {
 } from '@nebular/theme'
 import { NbEvaIconsModule } from '@nebular/eva-icons'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { ScrollingModule } from '@angular/cdk/scrolling'
 
 @NgModule({
     exports: [
@@ -23,7 +24,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
         NbInputModule,
         NbButtonModule,
         NbUserModule,
-        NbBadgeModule
+        NbBadgeModule,
+        ScrollingModule
     ]
 })
 export class FeatureModule {}
