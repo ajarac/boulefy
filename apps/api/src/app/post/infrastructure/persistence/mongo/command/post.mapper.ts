@@ -8,6 +8,7 @@ import { PostRanking } from '@api/post/domain/post-ranking'
 import { PostId } from '@api/shared/domain/post-id'
 import { Post } from '@api/post/domain/post'
 import { PostCreatedDate } from '@api/post/domain/post-created-date'
+import { PostUpdateDate } from '@api/post/domain/post-update-date'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {
@@ -18,7 +19,8 @@ export class PostMapper {
         const ranking: PostRanking = new PostRanking(postSchema.ranking)
         const userId: UserId = new UserId(from(postSchema.userId).toString())
         const createdDate: PostCreatedDate = new PostCreatedDate(postSchema.createdDate)
-        return new Post(id, title, content, counterComments, ranking, userId, createdDate)
+        const updatedDate: PostUpdateDate = new PostUpdateDate(postSchema.updatedDate)
+        return new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
     }
 
     static toSchema(post: Post): PostSchema {
@@ -30,6 +32,7 @@ export class PostMapper {
         postSchema.ranking = post.ranking.value
         postSchema.userId = from(post.userId.value)
         postSchema.createdDate = post.createdDate.value
+        postSchema.updatedDate = post.updateDate.value
         return postSchema
     }
 }

@@ -52,6 +52,10 @@ export class Post extends AggregateRoot {
         return this._createdDate
     }
 
+    get updateDate(): PostUpdateDate {
+        return this._updateDate
+    }
+
     public static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId): Post {
         const counterComments: PostCounterComments = PostCounterComments.create()
         const ranking: PostRanking = PostRanking.create()

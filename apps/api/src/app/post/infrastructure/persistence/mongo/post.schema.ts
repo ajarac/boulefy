@@ -1,7 +1,7 @@
-import { BaseEntity, Column, Entity, ObjectIdColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, Index, ObjectIdColumn } from 'typeorm'
 import { MUUID } from 'uuid-mongodb'
 
-@Entity()
+@Entity({ synchronize: true })
 export class PostSchema extends BaseEntity {
     @ObjectIdColumn()
     _id: MUUID
@@ -19,6 +19,7 @@ export class PostSchema extends BaseEntity {
     ranking: number
 
     @Column()
+    @Index()
     userId: MUUID
 
     @Column()

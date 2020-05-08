@@ -1,7 +1,7 @@
 import { Column, Entity, Index, ObjectIdColumn } from 'typeorm'
 import { MUUID } from 'uuid-mongodb'
 
-@Entity()
+@Entity({ synchronize: true })
 export class CommentSchema {
     @ObjectIdColumn()
     _id: MUUID
@@ -12,8 +12,8 @@ export class CommentSchema {
     @Column()
     userId: MUUID
 
-    @Index()
     @Column()
+    @Index()
     postId: MUUID
 
     @Column()

@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm'
 import { MUUID } from 'uuid-mongodb'
 
-@Entity()
+@Entity({ synchronize: true })
 export class UserSchema {
     @ObjectIdColumn()
     _id: MUUID
