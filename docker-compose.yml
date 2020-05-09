@@ -27,12 +27,13 @@ services:
         working_dir: /app
         command: npm run nx serve api
         environment:
-            - DB_HOST=mongodb
+            - DB_HOST=cluster0-lvke5.mongodb.net/test?retryWrites=true&w=majority
             - DB_PORT=27017
+            - DB_USER=root
+            - DB_PASSWORD=kFK^pYe&NYO42&ecb6kE
             - REDIS_HOST=redis
             - REDIS_PORT=6379
-        depends_on:
-            - mongodb
+
         networks:
             - database
             - backend

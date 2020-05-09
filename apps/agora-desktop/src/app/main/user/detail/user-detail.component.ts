@@ -11,6 +11,5 @@ import { UserResponse } from '@shared/models/user/user.response'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserDetailComponent {
-    @Select(UserDetailState.user) user$: Observable<UserResponse>
-    @Select(UserDetailState.loading) loading$: Observable<boolean>
+    @Select(UserDetailState) user$: Observable<UserResponse>
 }
