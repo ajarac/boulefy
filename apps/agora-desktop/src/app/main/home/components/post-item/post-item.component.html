@@ -1,7 +1,7 @@
 <nb-card>
     <nb-card-body fxLayout="column" fxLayoutGap="10px">
         <a [routerLink]="['post', post.id]">{{ post.title }}</a>
-        <nb-user [name]="post.user.username"></nb-user>
+        <nb-user [routerLink]="['users', post.user.id]" [name]="post.user.username"></nb-user>
         <span>{{ post.content | truncate: 200:'...' }}</span>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <nb-actions>

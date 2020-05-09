@@ -7,13 +7,13 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
 
 import { environment } from '../../environments/environment'
 
-import { AuthModule } from '@agora-desktop/core/auth/auth.module'
-import { PostModule } from '@agora-desktop/core/post/post.module'
+import { CoreAuthModule } from '@agora-desktop/core/auth/core-auth.module'
+import { CorePostModule } from '@agora-desktop/core/post/core-post.module'
 import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
 import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
 import { CONFIG_TOKEN } from '@agora-desktop/core/shared/config/environment.config'
-import { CommentModule } from '@agora-desktop/core/comment/comment.module'
-import { UsersModule } from '@agora-desktop/core/users/users.module'
+import { CoreCommentModule } from '@agora-desktop/core/comment/core-comment.module'
+import { CoreUsersModule } from '@agora-desktop/core/users/core-users.module'
 
 @NgModule({
     imports: [
@@ -25,10 +25,10 @@ import { UsersModule } from '@agora-desktop/core/users/users.module'
             key: ['auth']
         }),
         CoreRouterModule,
-        PostModule,
-        CommentModule,
-        AuthModule,
-        UsersModule
+        CorePostModule,
+        CoreCommentModule,
+        CoreAuthModule,
+        CoreUsersModule
     ],
     providers: [
         {

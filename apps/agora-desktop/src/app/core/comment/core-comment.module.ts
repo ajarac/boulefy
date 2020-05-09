@@ -7,4 +7,4 @@ import { CommentState } from '@agora-desktop/core/comment/store/comment.state'
     imports: [NgxsModule.forFeature([CommentState])],
     providers: [CommentService]
 })
-export class CommentModule {}
+export class CoreCommentModule {}

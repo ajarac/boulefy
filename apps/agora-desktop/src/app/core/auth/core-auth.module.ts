@@ -9,4 +9,4 @@ import { ProfileService } from '@agora-desktop/core/auth/services/profile.servic
     imports: [NgxsModule.forFeature([AuthState, ProfileState])],
     providers: [AuthService, ProfileService]
 })
-export class AuthModule {}
+export class CoreAuthModule {}

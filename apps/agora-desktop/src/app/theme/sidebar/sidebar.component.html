@@ -1,5 +1,5 @@
 <nb-list>
     <nb-list-item *ngFor="let user of topUsers$ | async">
-        <span>{{user.username}} ({{user.counterComments}})</span>
+        <a [routerLink]="['/users', user.id]">{{user.username}} ({{user.counterComments}})</a>
     </nb-list-item>
 </nb-list>

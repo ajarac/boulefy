@@ -9,4 +9,4 @@ import { PostDetailState } from '@agora-desktop/core/post/store/detail/post-deta
     imports: [NgxsModule.forFeature([PostState, PostListState, PostDetailState])],
     providers: [PostService]
 })
-export class PostModule {}
+export class CorePostModule {}
