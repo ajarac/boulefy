@@ -1,3 +1,4 @@
-<cdk-virtual-scroll-viewport (scrolledIndexChange)="next()" itemSize="100">
-    <agora-post-item *cdkVirtualFor="let post of posts$ | async" [post]="post"></agora-post-item>
-</cdk-virtual-scroll-viewport>
+<div infiniteScroll (scrolled)="next()" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50">
+    <agora-loader *ngIf="loading$ | async"></agora-loader>
+    <agora-post-item *ngFor="let post of posts$ | async" [post]="post"></agora-post-item>
+</div>

@@ -7,11 +7,12 @@ import {
     NbContextMenuModule,
     NbIconModule,
     NbInputModule,
+    NbSpinnerModule,
     NbUserModule
 } from '@nebular/theme'
 import { NbEvaIconsModule } from '@nebular/eva-icons'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { ScrollingModule } from '@angular/cdk/scrolling'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 @NgModule({
     exports: [
@@ -25,7 +26,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling'
         NbButtonModule,
         NbUserModule,
         NbBadgeModule,
-        ScrollingModule
+        InfiniteScrollModule,
+        NbSpinnerModule
     ]
 })
 export class FeatureModule {}

@@ -1,8 +1,6 @@
-<cdk-virtual-scroll-viewport (scrolledIndexChange)="next()" itemSize="100">
-    <agora-post-item></agora-post-item>
-    <h5>Comments</h5>
-    <div fxLayout="column" fxLayoutGap="5px">
-        <agora-comment-item *cdkVirtualFor="let comment of comments$ | async" [comment]="comment"></agora-comment-item>
-    </div>
-    <agora-write-comment *ngIf="isLogged$ | async"></agora-write-comment>
-</cdk-virtual-scroll-viewport>
+<agora-post-item></agora-post-item>
+<h5>Comments</h5>
+<div (scrolled)="next()" fxLayout="column" fxLayoutGap="5px" infiniteScroll>
+    <agora-comment-item *ngFor="let comment of comments$ | async" [comment]="comment"></agora-comment-item>
+</div>
+<agora-write-comment *ngIf="isLogged$ | async"></agora-write-comment>

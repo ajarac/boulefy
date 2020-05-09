@@ -1,4 +1,4 @@
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Action, createSelector, Selector, State, StateContext } from '@ngxs/store'
 import { Injectable } from '@angular/core'
 import { LoadInitPosts, LoadPosts, LoadPostsNextPage, PostsLoaded, SetPostSearch } from '@agora-desktop/core/post/store/post.action'
 import { Observable } from 'rxjs'
@@ -14,6 +14,7 @@ interface IPostListState {
     page: number
     total: number
     search: string
+    loading: boolean
 }
 
 @State<IPostListState>({
@@ -22,7 +23,8 @@ interface IPostListState {
         list: [],
         page: 1,
         total: 0,
-        search: null
+        search: null,
+        loading: false
     }
 })
 @Injectable()
@@ -40,13 +42,8 @@ export class PostListState {
     }
 
     @Selector()
-    static getTotal({ total }: IPostListState): number {
-        return total
-    }
-
-    @Selector()
-    static isEnd({ total, list }: IPostListState): boolean {
-        return total === list.length
+    static loading({ loading }: IPostListState): boolean {
+        return loading
     }
 
     @Action(LoadPosts)
@@ -57,12 +54,13 @@ export class PostListState {
     @Action(LoadInitPosts)
     init({ dispatch, patchState }: StateContext<IPostListState>): void {
         const query: ListQuery = new ListQuery({ page: 1, search: '' })
-        patchState({ list: [] })
+        patchState({ list: [], loading: true })
         dispatch(new LoadPosts(query))
     }
 
     @Action(LoadPostsNextPage)
-    loadNextPage({ dispatch, getState }: StateContext<IPostListState>): void {
+    loadNextPage({ dispatch, getState, patchState }: StateContext<IPostListState>, {}): void {
+        patchState({ loading: true })
         const { page, search }: IPostListState = getState()
         const query: ListQuery = new ListQuery({ page: page + 1, search })
         dispatch(new LoadPosts(query))
@@ -70,7 +68,7 @@ export class PostListState {
 
     @Action(SetPostSearch)
     search({ patchState, dispatch }: StateContext<IPostListState>, { search }: SetPostSearch): void {
-        patchState({ search })
+        patchState({ search, loading: true })
         const query: ListQuery = new ListQuery({ page: 1, search })
         dispatch(new LoadPosts(query))
     }
@@ -78,7 +76,12 @@ export class PostListState {
     @Action(PostsLoaded)
     loaded({ setState }: StateContext<IPostListState>, { pagination: { results, metadata } }: PostsLoaded): void {
         setState(
-            patch<IPostListState>({ list: append<PostResponse>(results), page: metadata.page, total: metadata.total })
+            patch<IPostListState>({
+                list: append<PostResponse>(results),
+                page: metadata.page,
+                total: metadata.total,
+                loading: false
+            })
         )
     }
 }
