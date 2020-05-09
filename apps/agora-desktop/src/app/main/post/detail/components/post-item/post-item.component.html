@@ -1,0 +1,8 @@
+<nb-card *ngIf="post$ | async as post">
+    <nb-card-header>
+        <h1>{{ post.title }}</h1>
+    </nb-card-header>
+    <nb-card-body>
+        <span>{{ post.content }}</span>
+    </nb-card-body>
+</nb-card>

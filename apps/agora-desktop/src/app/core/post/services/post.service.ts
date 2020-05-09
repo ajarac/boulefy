@@ -1,21 +1,22 @@
-import { Inject, Injectable } from '@angular/core'
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-
-import { Environment } from '../../../../environments/environment.model'
 import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
 import { PostResponse } from '@shared/models/post/post.response'
+import { Pagination } from '@shared/models/pagination/pagination'
+import { BaseService } from '@agora-desktop/core/shared/services/base.service'
+import { ListQuery } from '@agora-desktop/core/shared/models/list-query'
 
 @Injectable()
-export class PostService {
+export class PostService extends BaseService {
     private readonly baseUrl: string = this.config.api + 'posts'
 
-    constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
+    constructor(injector: Injector) {
+        super(injector)
+    }
 
-    getPosts(page: number): Observable<PostResponse[]> {
-        const params: HttpParams = new HttpParams().set('page', page.toString())
-        return this.http.get<PostResponse[]>(this.baseUrl, { params })
+    getPosts(query: ListQuery): Observable<Pagination<PostResponse>> {
+        return this.http.get<Pagination<PostResponse>>(this.baseUrl, { params: query.getHttpParams() })
     }
 
     getPostById(id: string): Observable<PostResponse> {

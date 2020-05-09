@@ -1,29 +1,8 @@
-<nb-card *ngIf="post$ | async as post">
-    <nb-card-header>
-        <h1>{{ post.title }}</h1>
-    </nb-card-header>
-    <nb-card-body>
-        <span>{{ post.content }}</span>
-    </nb-card-body>
-</nb-card>
-
-<h1>Comments</h1>
-
-<nb-card *ngFor="let comment of comments$ | async">
-    <nb-card-header>
-        <nb-user [name]="comment.user.username"></nb-user>
-    </nb-card-header>
-    <nb-card-body>{{ comment.content }}</nb-card-body>
-</nb-card>
-
-<nb-card *ngIf="isLogged$ | async">
-    <nb-card-header>Write comment</nb-card-header>
-    <nb-card-body fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex="50" fxLayout="column" fxLayoutAlign="center">
-            <agora-text-area fxFlex="50" [formControl]="commentControl" placeholder="Comment"></agora-text-area>
-            <button (click)="createComment()" [disabled]="commentControl.invalid" nbButton shape="round" status="primary">
-                Create Comment
-            </button>
-        </div>
-    </nb-card-body>
-</nb-card>
+<cdk-virtual-scroll-viewport (scrolledIndexChange)="next()" itemSize="100">
+    <agora-post-item></agora-post-item>
+    <h5>Comments</h5>
+    <div fxLayout="column" fxLayoutGap="5px">
+        <agora-comment-item *cdkVirtualFor="let comment of comments$ | async" [comment]="comment"></agora-comment-item>
+    </div>
+    <agora-write-comment *ngIf="isLogged$ | async"></agora-write-comment>
+</cdk-virtual-scroll-viewport>

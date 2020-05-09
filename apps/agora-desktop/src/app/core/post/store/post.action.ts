@@ -1,20 +1,33 @@
 import { PostResponse } from '@shared/models/post/post.response'
-
+import { Pagination } from '@shared/models/pagination/pagination'
+import { ListQuery } from '@agora-desktop/core/shared/models/list-query'
 
 const KEY_STATE = '[POSTS]'
 
-export class LoadPosts {
-    static type = `${KEY_STATE} Load Posts`
+export class LoadInitPosts {
+    static type = `${KEY_STATE} Load Init Posts`
 }
 
-export class LoadPostNextPage {
-    static type = `${KEY_STATE} Load Post Next Page`
+export class LoadPosts {
+    static type = `${KEY_STATE} Load Posts`
+
+    constructor(public query: ListQuery) {}
 }
 
 export class PostsLoaded {
     static type = `${KEY_STATE} Posts Loaded`
 
-    constructor(public posts: PostResponse[]) {}
+    constructor(public pagination: Pagination<PostResponse>) {}
+}
+
+export class LoadPostsNextPage {
+    static type = `${KEY_STATE} Load Posts Next Page`
+}
+
+export class SetPostSearch {
+    static type = `${KEY_STATE} Set Post Search`
+
+    constructor(public search: string) {}
 }
 
 export class LoadPostById {

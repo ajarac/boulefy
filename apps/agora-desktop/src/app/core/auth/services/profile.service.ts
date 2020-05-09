@@ -1,14 +1,15 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
 import { UserResponse } from '@shared/models/user/user.response'
-import { HttpClient } from '@angular/common/http'
-import { Environment } from '../../../../environments/environment.model'
+import { BaseService } from '@agora-desktop/core/shared/services/base.service'
 
 @Injectable()
-export class ProfileService {
+export class ProfileService extends BaseService {
     private readonly baseUrl: string = this.config.api
 
-    constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
+    constructor(injector: Injector) {
+        super(injector)
+    }
 
     profile(): Observable<UserResponse> {
         return this.http.get<UserResponse>(this.baseUrl + 'profile')

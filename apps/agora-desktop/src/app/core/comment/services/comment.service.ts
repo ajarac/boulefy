@@ -1,20 +1,24 @@
-import { Inject, Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { Injectable, Injector } from '@angular/core'
+import { HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { CommentResponse } from '@shared/models/comment/comment.response'
-import { Environment } from '../../../../environments/environment.model'
 import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
+import { BaseService } from '@agora-desktop/core/shared/services/base.service'
+import { Pagination } from '@shared/models/pagination/pagination'
 
 @Injectable()
-export class CommentService {
+export class CommentService extends BaseService {
     private readonly baseUrl: string = this.config.api
 
-    constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
+    constructor(injector: Injector) {
+        super(injector)
+    }
 
-    getCommentsByPostId(postId: string): Observable<CommentResponse[]> {
+    getCommentsByPostId(postId: string, page: number): Observable<Pagination<CommentResponse>> {
         const url: string = `${this.baseUrl}posts/${postId}/comments`
-        return this.http.get<CommentResponse[]>(url)
+        const params: HttpParams = new HttpParams().set('page', page.toString())
+        return this.http.get<Pagination<CommentResponse>>(url, { params })
     }
 
     create(content: string, postId: string): Observable<string> {

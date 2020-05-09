@@ -4,8 +4,8 @@ import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { CreatePost, PostCreated } from '@agora-desktop/core/post/store/post.action'
 import { PostService } from '@agora-desktop/core/post/services/post.service'
-import { PostListState } from '@agora-desktop/core/post/store/post-list.state'
-import { PostDetailState } from '@agora-desktop/core/post/store/post-detail.state'
+import { PostListState } from '@agora-desktop/core/post/store/list/post-list.state'
+import { PostDetailState } from '@agora-desktop/core/post/store/detail/post-detail.state'
 
 @State<void>({
     name: 'post',

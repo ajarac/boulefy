@@ -1,17 +1,18 @@
-import { Inject, Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
 
 import { AccessToken } from '@shared/auth/accesst-token'
 import { UuidGeneratorService } from '@agora-desktop/core/shared/services/uuid-generator.service'
-import { Environment } from '../../../../environments/environment.model'
 import { map } from 'rxjs/operators'
+import { BaseService } from '@agora-desktop/core/shared/services/base.service'
 
 @Injectable()
-export class AuthService {
+export class AuthService extends BaseService {
     private readonly baseUrl: string = this.config.api
 
-    constructor(private http: HttpClient, @Inject('CONFIG') private config: Environment) {}
+    constructor(injector: Injector) {
+        super(injector)
+    }
 
     register(username: string, password: string, email: string): Observable<void> {
         const url: string = `${this.baseUrl}register/${UuidGeneratorService.generate()}`

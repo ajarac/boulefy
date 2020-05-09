@@ -4,6 +4,7 @@ import { MongoRepository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { PostResponse } from '@shared/models/post/post.response'
+import { Pagination } from '@shared/models/pagination/pagination'
 import { from } from 'uuid-mongodb'
 
 @Injectable()
@@ -12,40 +13,54 @@ export class MongoPostFinderAllQuery extends PostFinderAll {
         super()
     }
 
-    async findAll(page = 1, limit = 25): Promise<Array<PostResponse>> {
-        const pagination: Array<PostResponse> = await this.repository
+    async findAll(page = 1, limit = 25): Promise<Pagination<PostResponse>> {
+        const pagination: Pagination<PostResponse> = await this.repository
             .aggregate([
-                { $skip: limit * (page - 1) },
-                { $limit: limit },
                 {
-                    $lookup: {
-                        from: 'user_schema',
-                        let: { userId: '$userId' },
-                        pipeline: [
-                            { $match: { $expr: { $eq: ['$_id', '$$userId'] } } },
-                            { $project: { _id: 0, id: '$_id', username: true } }
-                        ],
-                        as: 'user'
+                    $facet: {
+                        metadata: [{ $count: 'total' }, { $addFields: { page, limit } }],
+                        results: [
+                            { $skip: limit * (page - 1) },
+                            { $limit: limit },
+                            {
+                                $lookup: {
+                                    from: 'user_schema',
+                                    let: { userId: '$userId' },
+                                    pipeline: [
+                                        { $match: { $expr: { $eq: ['$_id', '$$userId'] } } },
+                                        { $project: { _id: 0, id: '$_id', username: true } }
+                                    ],
+                                    as: 'user'
+                                }
+                            },
+                            {
+                                $project: {
+                                    _id: 0,
+                                    id: '$_id',
+                                    title: true,
+                                    content: true,
+                                    counterComments: true,
+                                    ranking: true,
+                                    user: { $arrayElemAt: ['$user', 0] },
+                                    createdDate: true,
+                                    updatedDate: true
+                                }
+                            }
+                        ]
                     }
                 }
             ])
             .project({
-                _id: 0,
-                id: '$_id',
-                title: true,
-                content: true,
-                counterComments: true,
-                ranking: true,
-                user: { $arrayElemAt: ['$user', 0] },
-                createdDate: true,
-                updatedDate: true
+                metadata: { $arrayElemAt: ['$metadata', 0] },
+                results: true
             })
-            .toArray()
+            .next()
 
-        pagination.forEach((postResponse: PostResponse) => {
+        pagination.results.forEach((postResponse: PostResponse) => {
             postResponse.id = from(postResponse.id).toString()
             postResponse.user.id = from(postResponse.user.id).toString()
         })
+
         return pagination
     }
 }

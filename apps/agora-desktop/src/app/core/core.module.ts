@@ -11,6 +11,8 @@ import { AuthModule } from '@agora-desktop/core/auth/auth.module'
 import { PostModule } from '@agora-desktop/core/post/post.module'
 import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
 import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
+import { CONFIG_TOKEN } from '@agora-desktop/core/shared/config/environment.config'
+import { CommentModule } from '@agora-desktop/core/comment/comment.module'
 
 @NgModule({
     imports: [
@@ -23,11 +25,12 @@ import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
         }),
         CoreRouterModule,
         PostModule,
+        CommentModule,
         AuthModule
     ],
     providers: [
         {
-            provide: 'CONFIG',
+            provide: CONFIG_TOKEN,
             useValue: environment
         },
         INTERCEPTORS

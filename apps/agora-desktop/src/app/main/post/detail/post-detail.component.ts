@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core'
 import { Select } from '@ngxs/store'
 import { Observable } from 'rxjs'
-import { PostDetailState } from '@agora-desktop/core/post/store/post-detail.state'
 import { AuthState } from '@agora-desktop/core/auth/store/auth/auth.state'
-import { FormControl, Validators } from '@angular/forms'
-import { Dispatch } from '@ngxs-labs/dispatch-decorator'
-import { CreateComment } from '@agora-desktop/core/post/store/comment.action'
-import { PostResponse } from '@shared/models/post/post.response'
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling'
+import { CommentState } from '@agora-desktop/core/comment/store/comment.state'
 import { CommentResponse } from '@shared/models/comment/comment.response'
+import { Dispatch } from '@ngxs-labs/dispatch-decorator'
+import { LoadCommentsNextPage } from '@agora-desktop/core/comment/store/comment.action'
+import { filter, map } from 'rxjs/operators'
 
 @Component({
     selector: 'agora-post',
@@ -16,11 +16,24 @@ import { CommentResponse } from '@shared/models/comment/comment.response'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostDetailComponent {
-    @Select(PostDetailState.getPost) post$: Observable<PostResponse>
-    @Select(PostDetailState.getComments) comments$: Observable<CommentResponse[]>
     @Select(AuthState.isLogged) isLogged$: Observable<boolean>
+    @ViewChild(CdkVirtualScrollViewport, { static: true })
+    viewport: CdkVirtualScrollViewport
 
-    commentControl: FormControl = new FormControl('', Validators.min(5))
+    @Select(CommentState.getList) comments$: Observable<CommentResponse[]>
+    @Select(CommentState.isEnd) isEnd$: Observable<boolean>
 
-    @Dispatch() createComment = (): CreateComment => new CreateComment(this.commentControl.value)
+    next(): void {
+        const end: number = this.viewport.getRenderedRange().end
+        const total: number = this.viewport.getDataLength()
+        if (total > 0 && end === total) {
+            this.nextPage()
+        }
+    }
+
+    @Dispatch() nextPage = (): Observable<LoadCommentsNextPage> =>
+        this.isEnd$.pipe(
+            filter((isEnd: boolean) => !isEnd),
+            map(() => new LoadCommentsNextPage())
+        )
 }

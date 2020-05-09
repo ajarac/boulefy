@@ -8,7 +8,8 @@ export class UserResponseMapper {
             username: user.username.value,
             email: user.email.value,
             counterComments: user.counterComments.value,
-            counterPosts: user.counterPosts.value
+            counterPosts: user.counterPosts.value,
+            createdDate: user.createdDate.value
         }
     }
 }
