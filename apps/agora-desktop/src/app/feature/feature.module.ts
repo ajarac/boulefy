@@ -7,6 +7,7 @@ import {
     NbContextMenuModule,
     NbIconModule,
     NbInputModule,
+    NbListModule,
     NbSpinnerModule,
     NbUserModule
 } from '@nebular/theme'
@@ -26,6 +27,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
         NbButtonModule,
         NbUserModule,
         NbBadgeModule,
+        NbListModule,
         InfiniteScrollModule,
         NbSpinnerModule
     ]

@@ -12,6 +12,7 @@ import { ValidateToken } from './validate-token/validate-token'
 
 import { IncrementUserCounterComment } from './comment-created/increment-user-counter-comment'
 import { IncrementUserCounterCommentOnCommentCreateHandler } from '@api/users/application/comment-created/increment-user-counter-comment-on-comment-create.handler'
+import { TopUsersQueryHandler } from '@api/users/application/top-users/top-users-query.handler'
 
 export const APPLICATION_SERVICES = [
     UserRegistration,
@@ -22,5 +23,5 @@ export const APPLICATION_SERVICES = [
     IncrementUserCounterComment
 ]
 export const COMMAND_HANDLERS = [RegisterUserCommandHandler, AuthUserCommandHandler, LoginUserCommandHandler, ValidateTokenQueryHandler]
-export const QUERY_HANDLERS = [FindUserQueryHandler]
+export const QUERY_HANDLERS = [FindUserQueryHandler, TopUsersQueryHandler]
 export const EVENT_HANDLERS = [IncrementUserCounterPostOnPostCreatedHandler, IncrementUserCounterCommentOnCommentCreateHandler]

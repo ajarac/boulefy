@@ -13,6 +13,7 @@ import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
 import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
 import { CONFIG_TOKEN } from '@agora-desktop/core/shared/config/environment.config'
 import { CommentModule } from '@agora-desktop/core/comment/comment.module'
+import { UsersModule } from '@agora-desktop/core/users/users.module'
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { CommentModule } from '@agora-desktop/core/comment/comment.module'
         CoreRouterModule,
         PostModule,
         CommentModule,
-        AuthModule
+        AuthModule,
+        UsersModule
     ],
     providers: [
         {

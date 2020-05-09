@@ -1,18 +1,17 @@
 <nb-card>
-    <nb-card-header [routerLink]="['post', post.id]" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <nb-card-body fxLayout="column" fxLayoutGap="10px">
+        <a [routerLink]="['post', post.id]">{{ post.title }}</a>
         <nb-user [name]="post.user.username"></nb-user>
-        <h5>{{ post.title }}</h5>
-    </nb-card-header>
-    <nb-card-body>
-        <span>{{ post.content }}</span>
+        <span>{{ post.content | truncate: 200:'...' }}</span>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <nb-actions>
+                <nb-action
+                    [badgeText]="post.counterComments.toString()"
+                    [title]="post.counterComments + 'comments'"
+                    icon="message-circle"
+                ></nb-action>
+            </nb-actions>
+            <agora-ranking [ranking]="post.ranking"></agora-ranking>
+        </div>
     </nb-card-body>
-    <nb-card-footer>
-        <nb-actions>
-            <nb-action
-                [badgeText]="post.counterComments.toString()"
-                [title]="post.counterComments + 'comments'"
-                icon="message-circle"
-            ></nb-action>
-        </nb-actions>
-    </nb-card-footer>
 </nb-card>
