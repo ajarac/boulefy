@@ -93,7 +93,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/apps/agora-desktop",
+                        "outputPath": "dist/apps/agora-desktop/browser",
                         "index": "apps/agora-desktop/src/index.html",
                         "main": "apps/agora-desktop/src/main.ts",
                         "polyfills": "apps/agora-desktop/src/polyfills.ts",
@@ -165,6 +165,62 @@
                         "tsConfig": "apps/agora-desktop/tsconfig.spec.json",
                         "passWithNoTests": true,
                         "setupFile": "apps/agora-desktop/src/test-setup.ts"
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/apps/agora-desktop/server",
+                        "main": "apps/agora-desktop/server.ts",
+                        "tsConfig": "apps/agora-desktop/tsconfig.server.json",
+                        "externalDependencies": [
+                            "@nestjs/microservices",
+                            "@nestjs/microservices/microservices-module",
+                            "@nestjs/websockets",
+                            "@nestjs/websockets/socket-module",
+                            "cache-manager"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputHashing": "media",
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/agora-desktop/src/environments/environment.ts",
+                                    "with": "apps/agora-desktop/src/environments/environment.prod.ts"
+                                },
+                                {
+                                    "replace": "apps/agora-desktop/server/environments/environment.ts",
+                                    "with": "apps/agora-desktop/server/environments/environment.prod.ts"
+                                }
+                            ],
+                            "sourceMap": false,
+                            "optimization": false
+                        }
+                    }
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "agora-desktop:build",
+                        "serverTarget": "agora-desktop:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "agora-desktop:build:production",
+                            "serverTarget": "agora-desktop:server:production"
+                        }
+                    }
+                },
+                "prerender": {
+                    "builder": "@nguniversal/builders:prerender",
+                    "options": {
+                        "browserTarget": "agora-desktop:build:production",
+                        "serverTarget": "agora-desktop:server:production",
+                        "routes": ["/"]
+                    },
+                    "configurations": {
+                        "production": {}
                     }
                 }
             }

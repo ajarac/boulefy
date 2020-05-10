@@ -30,8 +30,6 @@ services:
             #- DB_HOST=mongodb+srv://root:kFK^pYe&NYO42&ecb6kE@cluster0-lvke5.mongodb.net/test?retryWrites=true&w=majority
             - DB_HOST=mongodb
             - DB_PORT=27017
-            - REDIS_HOST=redis
-            - REDIS_PORT=6379
         networks:
             - database
             - backend

@@ -6,7 +6,7 @@ import { UserCounterComments } from '../../domain/user-counter-comments'
 import { UserCounterPosts } from '../../domain/user-counter-posts'
 import { User } from '../../domain/user'
 import { UserEmail } from '../../domain/user-email'
-import { UserPassword } from '../../domain/user-password';
+import { UserPassword } from '../../domain/user-password'
 
 @Injectable()
 export class UserRegistration {

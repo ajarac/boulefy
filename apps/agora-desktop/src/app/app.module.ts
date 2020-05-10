@@ -8,7 +8,7 @@ import { AppComponent } from '@agora-desktop/app.component'
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, ThemeModule, CoreModule],
+    imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), AppRoutingModule, ThemeModule, CoreModule],
     providers: [],
     bootstrap: [AppComponent]
 })

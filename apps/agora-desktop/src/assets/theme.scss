@@ -5,6 +5,10 @@ nb-user {
     cursor: pointer;
 }
 
-$nb-themes: nb-register-theme((
-    card-margin-bottom: 0rem
-), default, default);
+$nb-themes: nb-register-theme(
+    (
+        card-margin-bottom: 0rem
+    ),
+    default,
+    default
+);

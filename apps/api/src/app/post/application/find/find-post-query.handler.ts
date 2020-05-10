@@ -4,7 +4,6 @@ import { PostId } from '@api/shared/domain/post-id'
 import { PostResponse } from '@shared/models/post/post.response'
 import { PostFinder } from '@api/post/application/find/post-finder'
 
-
 @QueryHandler(FindPostQuery)
 export class FindPostQueryHandler implements IQueryHandler<FindPostQuery, PostResponse> {
     constructor(private findPost: PostFinder) {}

@@ -7,7 +7,7 @@ export interface PostResponse {
     user: {
         id: string
         username: string
-    },
+    }
     createdDate: Date
     updatedDate: Date
 }
