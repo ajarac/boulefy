@@ -1,13 +1,19 @@
-FROM node:lts AS builder
+FROM node:lts as builder
 
-VOLUME . /app
+WORKDIR /build
 
-WORKDIR /app
+COPY package*.json ./
+RUN npm install -g @angular/cli
+RUN npm ci
 
-RUN npm ci && nx run agora-desktop:build --configuration=production && nx run agora-desktop:server --configuration=production
+COPY . .
+
+RUN ng build agora-desktop --configuration=production && ng run agora-desktop:server --configuration=production
 
 FROM node:lts
 
-COPY --from=builder /app/dist/agora-desktop /app
+COPY --from=builder /build/dist/apps/agora-desktop /app
+
+WORKDIR /app
 
 CMD ["node", "server/main.js"]
