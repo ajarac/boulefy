@@ -1,8 +1,8 @@
 import { PostCreator } from '@api/post/application/create/post-creator'
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
-import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { PostMother } from '@api/test/post/domain/post.mother'
 import { CreatePostCommandHandler } from '@api/post/application/create/create-post-command.handler'
-import { CreatePostCommandMother } from '@api/test/forum/post/application/create/create-post-command.mother'
+import { CreatePostCommandMother } from '@api/test/post/application/create/create-post-command.mother'
 import { PostRepository } from '@api/post/domain/post.repository'
 import { Post } from '@api/post/domain/post'
 
@@ -10,16 +10,19 @@ describe('CreatePostCommandHandler', () => {
     let handler: CreatePostCommandHandler
     let postCreator: PostCreator
     let repositoryMock
+    let publisherMock
 
     beforeEach(() => {
-        const Mock = jest.fn<Partial<PostRepository>, []>(() => ({
+        const MockRepository = jest.fn<Partial<PostRepository>, []>(() => ({
             search: jest.fn(),
             save: jest.fn().mockReturnValue(null)
         }))
+        repositoryMock = new MockRepository()
+        publisherMock = {
+            mergeObjectContext: (value) => value
+        }
 
-        repositoryMock = new Mock()
-
-        postCreator = new PostCreator(repositoryMock, null)
+        postCreator = new PostCreator(repositoryMock, publisherMock)
         handler = new CreatePostCommandHandler(postCreator)
     })
 
@@ -31,9 +34,5 @@ describe('CreatePostCommandHandler', () => {
         await handler.execute(command)
 
         expect(repositoryMock.save).toHaveBeenCalledWith(post)
-    })
-
-    test('should not create a post existed', async () => {
-        repositoryMock.search.mockReturnValue(PostMother.random())
     })
 })

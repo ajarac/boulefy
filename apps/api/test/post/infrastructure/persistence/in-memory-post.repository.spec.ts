@@ -1,6 +1,6 @@
-import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { PostMother } from '@api/test/post/domain/post.mother'
 import { InMemoryPostRepository } from '@api/post/infrastructure/persistence/in-memory-post.repository'
-import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
+import { PostIdMother } from '@api/test/post/domain/post-id.mother'
 import { PostId } from '@api/shared/domain/post-id'
 import { Post } from '@api/post/domain/post'
 

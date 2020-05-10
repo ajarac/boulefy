@@ -1,7 +1,7 @@
-import * as faker from 'faker';
+import { lorem } from 'faker'
 
 export class WordMother {
     static random(): string {
-        return faker.lorem.word();
+        return lorem.word()
     }
 }

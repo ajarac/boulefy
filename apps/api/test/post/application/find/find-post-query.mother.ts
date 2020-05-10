@@ -1,4 +1,4 @@
-import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
+import { PostIdMother } from '@api/test/post/domain/post-id.mother'
 import { FindPostQuery } from '@api/post/application/find/find-post-query'
 import { PostId } from '@api/shared/domain/post-id'
 

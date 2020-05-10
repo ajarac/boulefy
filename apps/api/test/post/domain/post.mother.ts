@@ -4,15 +4,18 @@ import { PostTitle } from '@api/post/domain/post-title'
 import { PostRanking } from '@api/post/domain/post-ranking'
 import { PostId } from '@api/shared/domain/post-id'
 import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
-import { PostContentMother } from '@api/test/forum/post/domain/post-content.mother'
-import { PostTitleMother } from '@api/test/forum/post/domain/post-title.mother'
+import { PostContentMother } from '@api/test/post/domain/post-content.mother'
+import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
 import { UserId } from '@backend/shared/domain/user/user-id'
-import { PostRankingMother } from '@api/test/forum/post/domain/post-ranking.mother'
-import { PostIdMother } from '@api/test/forum/post/domain/post-id.mother'
+import { PostRankingMother } from '@api/test/post/domain/post-ranking.mother'
+import { PostIdMother } from '@api/test/post/domain/post-id.mother'
 import { PostContent } from '@api/post/domain/post-content'
-import { PostCounterCommentsMother } from '@api/test/forum/post/domain/post-counter-comments.mother'
+import { PostCounterCommentsMother } from '@api/test/post/domain/post-counter-comments.mother'
 import { Post } from '@api/post/domain/post'
-
+import { PostCreatedDate } from '@api/post/domain/post-created-date'
+import { PostUpdateDate } from '@api/post/domain/post-update-date'
+import { PostUpdateDateMother } from '@api/test/post/domain/post-update-date.mother'
+import { PostCreatedDateMother } from '@api/test/post/domain/post-created-date.mother'
 
 export class PostMother {
     static create(
@@ -21,9 +24,11 @@ export class PostMother {
         content: PostContent,
         counterComments: PostCounterComments,
         ranking: PostRanking,
-        userId: UserId
+        userId: UserId,
+        createdDate: PostCreatedDate,
+        updatedDate: PostUpdateDate
     ): Post {
-        return new Post(id, title, content, counterComments, ranking, userId)
+        return new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
     }
 
     static random(): Post {
@@ -33,7 +38,9 @@ export class PostMother {
             PostContentMother.random(),
             PostCounterCommentsMother.random(),
             PostRankingMother.random(),
-            UserIdMother.random()
+            UserIdMother.random(),
+            PostCreatedDateMother.random(),
+            PostUpdateDateMother.random()
         )
     }
 
@@ -44,7 +51,9 @@ export class PostMother {
             PostContentMother.create(request.content),
             PostCounterCommentsMother.create(0),
             PostRankingMother.create(0),
-            UserIdMother.create(request.userId)
+            UserIdMother.create(request.userId),
+            PostCreatedDateMother.create(new Date()),
+            PostUpdateDateMother.create(new Date())
         )
     }
 }

@@ -1,4 +1,4 @@
-import { PostMother } from '@api/test/forum/post/domain/post.mother'
+import { PostMother } from '@api/test/post/domain/post.mother'
 import { FindPostsQueryHandler } from '@api/post/application/findAll/find-posts-query.handler'
 import { PostFinderAll } from '@api/post/application/findAll/post-finder-all'
 import { PostRepository } from '@api/post/domain/post.repository'
