@@ -25,10 +25,10 @@ services:
         volumes:
             - .:/app
         working_dir: /app
-        command: npm run nx serve api
+        command: npm run ng serve api
         environment:
-            #- DB_HOST=mongodb+srv://root:kFK^pYe&NYO42&ecb6kE@cluster0-lvke5.mongodb.net/test?retryWrites=true&w=majority
-            - DB_HOST=mongodb
+            - DB_HOST=mongodb://root:kFK^pYe&NYO42&ecb6kE@cluster0-lvke5.mongodb.net/test?retryWrites=true&w=majority
+            #- DB_HOST=mongodb
             - DB_PORT=27017
         networks:
             - database

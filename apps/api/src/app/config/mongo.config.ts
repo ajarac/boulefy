@@ -6,8 +6,7 @@ import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.sche
 export const MONGO_DB_CONFIG: TypeOrmModuleOptions = {
     type: 'mongodb',
     useNewUrlParser: true,
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '27017'),
+    host: process.env.DB_HOST || 'localhost:27017',
     database: 'agora',
     entities: [UserSchema, PostSchema, CommentSchema]
 }
