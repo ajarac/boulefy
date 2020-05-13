@@ -5,13 +5,12 @@ import { BaseService } from '@agora-desktop/core/shared/services/base.service'
 
 @Injectable()
 export class ProfileService extends BaseService {
-    private readonly baseUrl: string = this.config.api
 
     constructor(injector: Injector) {
         super(injector)
     }
 
     profile(): Observable<UserResponse> {
-        return this.http.get<UserResponse>(this.baseUrl + 'profile')
+        return this.http.get<UserResponse>('profile')
     }
 }

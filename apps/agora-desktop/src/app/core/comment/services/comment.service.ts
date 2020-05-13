@@ -9,21 +9,20 @@ import { Pagination } from '@shared/models/pagination/pagination'
 
 @Injectable()
 export class CommentService extends BaseService {
-    private readonly baseUrl: string = this.config.api
 
     constructor(injector: Injector) {
         super(injector)
     }
 
     getCommentsByPostId(postId: string, page: number): Observable<Pagination<CommentResponse>> {
-        const url: string = `${this.baseUrl}posts/${postId}/comments`
+        const url: string = `posts/${postId}/comments`
         const params: HttpParams = new HttpParams().set('page', page.toString())
         return this.http.get<Pagination<CommentResponse>>(url, { params })
     }
 
     create(content: string, postId: string): Observable<string> {
         const id: string = UuidGeneratorService.generate()
-        const url: string = `${this.baseUrl}comments/${id}`
+        const url: string = `comments/${id}`
         return this.http
             .post<void>(url, { content, postId })
             .pipe(map(() => id))

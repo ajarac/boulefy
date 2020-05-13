@@ -9,7 +9,7 @@ import { ListQuery } from '@agora-desktop/core/shared/models/list-query'
 
 @Injectable()
 export class PostService extends BaseService {
-    private readonly baseUrl: string = this.config.api + 'posts'
+    private readonly baseUrl: string = 'posts'
 
     constructor(injector: Injector) {
         super(injector)

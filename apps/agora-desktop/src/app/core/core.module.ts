@@ -11,9 +11,10 @@ import { CoreAuthModule } from '@agora-desktop/core/auth/core-auth.module'
 import { CorePostModule } from '@agora-desktop/core/post/core-post.module'
 import { CoreRouterModule } from '@agora-desktop/core/router/core-router.module'
 import { INTERCEPTORS } from '@agora-desktop/core/shared/interceptors'
-import { CONFIG_TOKEN } from '@agora-desktop/core/shared/config/environment.config'
+import { ConfigService } from '@agora-desktop/core/shared/config/config.service'
 import { CoreCommentModule } from '@agora-desktop/core/comment/core-comment.module'
 import { CoreUsersModule } from '@agora-desktop/core/users/core-users.module'
+import { BrowserTransferStateModule } from '@angular/platform-browser'
 
 @NgModule({
     imports: [
@@ -24,18 +25,13 @@ import { CoreUsersModule } from '@agora-desktop/core/users/core-users.module'
         NgxsStoragePluginModule.forRoot({
             key: ['auth']
         }),
+        BrowserTransferStateModule,
         CoreRouterModule,
         CorePostModule,
         CoreCommentModule,
         CoreAuthModule,
         CoreUsersModule
     ],
-    providers: [
-        {
-            provide: CONFIG_TOKEN,
-            useValue: environment
-        },
-        INTERCEPTORS
-    ]
+    providers: [ConfigService, INTERCEPTORS]
 })
 export class CoreModule {}

@@ -7,9 +7,6 @@ services:
             - 27017:27017
         volumes:
             - mongodb_data_container:/data/db
-        networks:
-            - database
-            - admin
 
     mongoclient:
         image: mongoclient/mongoclient
@@ -17,8 +14,6 @@ services:
             - mongoclient:/data/db
         ports:
             - 3000:3000
-        networks:
-            - admin
 
     api:
         image: node:lts
@@ -27,12 +22,8 @@ services:
         working_dir: /app
         command: npm run ng serve api
         environment:
-            - DB_HOST=mongodb://root:kFK^pYe&NYO42&ecb6kE@cluster0-lvke5.mongodb.net/test?retryWrites=true&w=majority
-            #- DB_HOST=mongodb
+            - DB_HOST=mongodb
             - DB_PORT=27017
-        networks:
-            - database
-            - backend
 
     frontend:
         build:
@@ -41,9 +32,7 @@ services:
         volumes:
             - .:/app
         working_dir: /app
-        command: nx serve agora-desktop "--host=0.0.0.0"
-        networks:
-            - frontend
+        command: nx run agora-desktop:serve-ssr "--host=0.0.0.0"
 
     nginx:
         build:
@@ -54,16 +43,8 @@ services:
             - frontend
         ports:
             - 8000:8000
-        networks:
-            - backend
-            - frontend
 
 volumes:
     mongodb_data_container: {}
     mongoclient: {}
 
-networks:
-    admin:
-    database:
-    backend:
-    frontend:

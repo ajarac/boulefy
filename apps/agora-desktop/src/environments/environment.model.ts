@@ -1,4 +1,9 @@
+interface PlatformConfig {
+    api: string
+}
+
 export interface Environment {
     production: boolean
-    api: string
+    browser: PlatformConfig
+    server: PlatformConfig
 }

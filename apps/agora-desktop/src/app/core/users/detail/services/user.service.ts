@@ -5,7 +5,7 @@ import { UserResponse } from '@shared/models/user/user.response'
 
 @Injectable()
 export class UserService extends BaseService {
-    private readonly baseUrl: string = this.config.api + 'users'
+    private readonly baseUrl: string = 'users'
 
     constructor(injector: Injector) {
         super(injector)
