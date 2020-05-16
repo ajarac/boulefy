@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+    worker:
+        build:
+            context: .
+            dockerfile: compose/production/worker/Dockerfile
+
     mongodb:
         image: mongo:latest
         ports:
@@ -16,6 +21,8 @@ services:
             dockerfile: compose/production/frontend/Dockerfile
         networks:
             - frontend
+        depends_on:
+            - worker
 
     api:
         build:
@@ -25,7 +32,8 @@ services:
             - DB_HOST=mongodb
             - DB_PORT=27017
         depends_on:
-          - mongodb
+            - worker
+            - mongodb
         networks:
             - backend
             - database

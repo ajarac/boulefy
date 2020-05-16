@@ -1,12 +1,8 @@
 FROM node:lts as builder
 
+VOLUME . /build
+
 WORKDIR /build
-
-COPY package*.json ./
-RUN npm install -g @angular/cli
-RUN npm ci
-
-COPY . .
 
 RUN ng build agora-desktop --configuration=production && ng run agora-desktop:server --configuration=production
 

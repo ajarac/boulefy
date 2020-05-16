@@ -1,9 +1,24 @@
+variables:
+    REGISTRY_HOST: hublab.example.com
+
 stages:
     - build
-    - test
     - deploy
 
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
         - node_modules/
+
+build:
+    stage: build
+    script:
+        - docker-compose -f docker-compose.prod.yml build
+
+deploy:
+    stage: deploy
+    script:
+        - docker login -u $CI_REGISTRY_USER -p $CI_BUILD_TOKEN $REGISTRY_HOST
+        - docker build -t $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_SHA -t $REGISTRY_HOST/$CI_PROJECT_PATH:latest -f docker-compose-prod.yml
+        - docker push $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_SHA
+        - docker push $REGISTRY_HOST/$CI_PROJECT_PATH:latest

@@ -1,17 +1,10 @@
 FROM node:lts AS builder
 
+VOLUME . /build
+
 WORKDIR /build
 
-COPY package*.json ./
-
-RUN npm install -g @angular/cli
-
-RUN npm ci
-
-COPY . .
-
 RUN ng run api:build
-
 
 FROM node:lts
 
