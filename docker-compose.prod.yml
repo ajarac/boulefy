@@ -1,34 +1,59 @@
 version: '3'
 
 services:
-    forum:
+    worker:
         build:
             context: .
-            dockerfile: compose/production/forum/Dockerfile
-        expose:
-            - 3333
-        depends_on:
-            - redis
-            - mongodb
+            dockerfile: compose/production/worker/Dockerfile
 
-    users:
+    mongodb:
+        image: mongo:latest
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb_data_container:/data/db
+        networks:
+            - database
+
+    frontend:
         build:
             context: .
-            dockerfile: compose/production/users/Dockerfile
-        expose:
-            - 3333
+            dockerfile: compose/production/frontend/Dockerfile
+        networks:
+            - frontend
         depends_on:
-            - redis
+            - worker
+
+    api:
+        build:
+            context: .
+            dockerfile: compose/production/api/Dockerfile
+        environment:
+            - DB_HOST=mongodb
+            - DB_PORT=27017
+        depends_on:
+            - worker
             - mongodb
+        networks:
+            - backend
+            - database
 
     nginx:
         build:
             context: .
-            dockerfile: nginx/local/Dockerfile
+            dockerfile: compose/production/nginx/Dockerfile
         depends_on:
-            - forum
-            - users
+            - frontend
+            - api
         ports:
-            - '3000:3000'
+            - 8000:80
+        networks:
+            - backend
+            - frontend
 volumes:
     mongodb_data_container: {}
+
+networks:
+    database:
+    backend:
+    frontend:

@@ -47,7 +47,7 @@ export class CommentState {
 
     @Action(LoadInitCommentsByPostId)
     loadInit({ dispatch, patchState }: StateContext<ICommentState>, { postId }: LoadInitCommentsByPostId): void {
-        patchState({ postId, list: [] })
+        patchState({ postId, list: [], page: 1 })
         dispatch(new LoadComments())
     }
 
