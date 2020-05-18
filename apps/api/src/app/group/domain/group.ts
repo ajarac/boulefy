@@ -6,12 +6,14 @@ import { GroupCounterPosts } from '@api/group/domain/group-counter-posts'
 import { GroupCounterUsers } from '@api/group/domain/group-counter-users'
 import { GroupCreatedDate } from '@api/group/domain/group-created-date'
 import { GroupCreateEvent } from '@api/shared/domain/group/group-create-event'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 export class Group extends AggregateRoot {
     constructor(
         private _id: GroupId,
         private _name: GroupName,
         private _description: GroupDescription,
+        private _userId: UserId,
         private _counterPosts: GroupCounterPosts,
         private _counterUsers: GroupCounterUsers,
         private _createdDate: GroupCreatedDate
@@ -43,12 +45,12 @@ export class Group extends AggregateRoot {
         return this._createdDate
     }
 
-    static create(id: GroupId, name: GroupName, description: GroupDescription): Group {
+    static create(id: GroupId, name: GroupName, description: GroupDescription, userId: UserId): Group {
         const counterPosts: GroupCounterPosts = new GroupCounterPosts(0)
         const counterUsers: GroupCounterUsers = new GroupCounterUsers(0)
         const createdDate: GroupCreatedDate = GroupCreatedDate.create()
 
-        const group: Group = new Group(id, name, description, counterPosts, counterUsers, createdDate)
+        const group: Group = new Group(id, name, description, userId, counterPosts, counterUsers, createdDate)
 
         group.apply(
             new GroupCreateEvent(id.value, name.value, description.value, counterPosts.value, counterUsers.value, createdDate.value)

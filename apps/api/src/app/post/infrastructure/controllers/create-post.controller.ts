@@ -1,7 +1,7 @@
 import { CommandBus } from '@nestjs/cqrs'
 import { Body, Request, Controller, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common'
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
-import { AuthGuard } from '@api/post/infrastructure/guards/auth.guard'
+import { AuthGuard } from '@api/shared/infrastructure/guards/auth.guard'
 
 @Controller('posts')
 export class CreatePostController {

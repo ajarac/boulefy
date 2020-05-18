@@ -16,7 +16,7 @@ import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
 import { PostIdMother } from '@api/test/post/domain/post-id.mother'
 import { ClientProxy } from '@nestjs/microservices'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
-import { AuthGuard } from '@api/post/infrastructure/guards/auth.guard'
+import { AuthGuard } from '@api/shared/infrastructure/guards/auth.guard'
 import { Post } from '@api/post/domain/post'
 
 describe('CreatePostController', () => {

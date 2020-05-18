@@ -9,9 +9,10 @@ import { APPLICATION_SERVICES, COMMAND_HANDLERS, QUERY_HANDLERS } from '@api/com
 import { QUERIES } from '@api/comment/infrastructure/persistence/mongo/query'
 import { PagerMiddleware } from '@api/shared/infrastructure/middleware/pager.middleware'
 import { FindCommentsByPostIdController } from '@api/comment/infrastructure/controllers/find-comments-by-post-id.controller'
+import { SharedModule } from '@api/shared/shared.module'
 
 @Module({
-    imports: [CqrsModule, TypeOrmModule.forFeature([CommentSchema])],
+    imports: [CqrsModule, TypeOrmModule.forFeature([CommentSchema]), SharedModule],
     controllers: [...CONTROLLERS],
     providers: [
         ...APPLICATION_SERVICES,

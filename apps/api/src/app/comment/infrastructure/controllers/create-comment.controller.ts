@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Param, Request, Post, UseGuards } from '@nestjs/common'
 import { CommandBus } from '@nestjs/cqrs'
 import { CreateCommentCommand } from '@api/comment/application/create/create-comment-command'
-import { AuthGuard } from '@api/post/infrastructure/guards/auth.guard'
+import { AuthGuard } from '@api/shared/infrastructure/guards/auth.guard'
 
 @Controller('comments')
 export class CreateCommentController {
