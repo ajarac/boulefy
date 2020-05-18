@@ -1,4 +1,4 @@
-import { Identifier } from '@backend/shared/domain/identifier'
+import { Identifier } from '@api/shared/domain/identifier'
 
 export class CommentId extends Identifier {
     constructor(id: string) {

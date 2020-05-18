@@ -1,6 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common'
-import { HttpErrorResponse } from '@backend/shared/intrastructure/filters/http-error.response'
 import { PostNotFound } from '@api/post/domain/post-not-found'
+import { HttpErrorResponse } from '@api/shared/infrastructure/filters/http-error.response'
 
 @Catch(PostNotFound)
 export class PostNotFoundFilter implements ExceptionFilter {

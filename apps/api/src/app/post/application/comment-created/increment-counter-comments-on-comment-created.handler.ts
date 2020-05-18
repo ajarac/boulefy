@@ -1,7 +1,7 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs'
-import { CommentCreatedEvent } from '@backend/shared/domain/comment/comment-created-event'
 import { IncrementCounterComment } from '@api/post/application/comment-created/increment-counter-comment'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
+import { CommentCreatedEvent } from '@api/shared/domain/comment/comment-created-event'
 
 @EventsHandler(CommentCreatedEvent)
 export class IncrementCounterCommentsOnCommentCreatedHandler implements IEventHandler<CommentCreatedEvent> {

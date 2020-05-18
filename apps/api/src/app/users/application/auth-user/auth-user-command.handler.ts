@@ -1,9 +1,9 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { AuthUserCommand } from './auth-user-command'
-import { AuthUser } from './auth-user'
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserPassword } from '../../domain/user-password'
 import { UserResponse } from '@shared/models/user/user.response'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { AuthUserCommand } from '@api/users/application/auth-user/auth-user-command'
+import { UserPassword } from '@api/users/domain/user-password'
+import { AuthUser } from '@api/users/application/auth-user/auth-user'
 
 @CommandHandler(AuthUserCommand)
 export class AuthUserCommandHandler implements ICommandHandler<AuthUserCommand> {

@@ -1,5 +1,3 @@
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '@backend/shared/domain/user/user-name'
 import { from } from 'uuid-mongodb'
 import { UserCounterPosts } from '@api/users/domain/user-counter-posts'
 import { UserPassword } from '@api/users/domain/user-password'
@@ -8,6 +6,8 @@ import { UserCounterComments } from '@api/users/domain/user-counter-comments'
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
 import { User } from '@api/users/domain/user'
 import { UserCreatedDate } from '@api/users/domain/user-created-date'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 export class UserMapper {
     static fromSchema(userSchema: UserSchema): User {

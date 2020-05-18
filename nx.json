@@ -22,9 +22,6 @@
         "api": {
             "tags": []
         },
-        "backend-shared": {
-            "tags": []
-        },
         "agora-desktop": {
             "tags": []
         },

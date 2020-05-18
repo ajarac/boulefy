@@ -1,12 +1,12 @@
 import { AggregateRoot } from '@nestjs/cqrs'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { CommentCreatedEvent } from '@backend/shared/domain/comment/comment-created-event'
 import { CommentContent } from '@api/comment/domain/comment-content'
 import { CommentRanking } from '@api/comment/domain/comment-ranking'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { CommentId } from '@api/comment/domain/comment-id'
 import { CommentCreatedDate } from '@api/comment/domain/comment-created-date'
 import { CommentUpdatedDate } from '@api/comment/domain/comment-updated-date'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { CommentCreatedEvent } from '@api/shared/domain/comment/comment-created-event'
 
 export class Comment extends AggregateRoot {
     constructor(

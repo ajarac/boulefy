@@ -6,7 +6,7 @@ import { from } from 'uuid-mongodb'
 import { PostResponse } from '@shared/models/post/post.response'
 
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { PostFinder } from '@api/post/application/find/post-finder'
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { PostCreator } from '@api/post/application/create/post-creator'
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { PostContent } from '@api/post/domain/post-content'
 import { PostTitle } from '@api/post/domain/post-title'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 @CommandHandler(CreatePostCommand)
 export class CreatePostCommandHandler implements ICommandHandler<CreatePostCommand> {

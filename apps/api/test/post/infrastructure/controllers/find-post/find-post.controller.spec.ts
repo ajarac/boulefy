@@ -8,7 +8,7 @@ import { FindPostController } from '@api/post/infrastructure/controllers/find-po
 import { mongoConfig } from '@api/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { MongoPostRepository } from '@api/post/infrastructure/persistence/mongo/command/mongo-post.repository'
 import { CqrsModule } from '@nestjs/cqrs'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { PostRepository } from '@api/post/domain/post.repository'
 import { PostMother } from '@api/test/post/domain/post.mother'
 import { PostIdMother } from '@api/test/post/domain/post-id.mother'

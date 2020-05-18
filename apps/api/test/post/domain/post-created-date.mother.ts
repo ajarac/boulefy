@@ -1,5 +1,5 @@
 import { PostCreatedDate } from '@api/post/domain/post-created-date'
-import { DateMother } from '@backend/shared/test/domain/date.mother'
+import { DateMother } from '@api/test/shared/domain/date.mother'
 
 export class PostCreatedDateMother {
     static create(value: Date): PostCreatedDate {

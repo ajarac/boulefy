@@ -2,11 +2,9 @@ import { CreatePostCommand } from '@api/post/application/create/create-post-comm
 import { PostCounterComments } from '@api/post/domain/post-counter-comments'
 import { PostTitle } from '@api/post/domain/post-title'
 import { PostRanking } from '@api/post/domain/post-ranking'
-import { PostId } from '@api/shared/domain/post-id'
-import { UserIdMother } from '@backend/shared/test/domain/user/user-id.mother'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { PostContentMother } from '@api/test/post/domain/post-content.mother'
 import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { PostRankingMother } from '@api/test/post/domain/post-ranking.mother'
 import { PostIdMother } from '@api/test/post/domain/post-id.mother'
 import { PostContent } from '@api/post/domain/post-content'
@@ -16,6 +14,8 @@ import { PostCreatedDate } from '@api/post/domain/post-created-date'
 import { PostUpdateDate } from '@api/post/domain/post-update-date'
 import { PostUpdateDateMother } from '@api/test/post/domain/post-update-date.mother'
 import { PostCreatedDateMother } from '@api/test/post/domain/post-created-date.mother'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserIdMother } from '@api/test/shared/domain/user/user-id.mother'
 
 export class PostMother {
     static create(

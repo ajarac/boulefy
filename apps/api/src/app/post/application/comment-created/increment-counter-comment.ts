@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { PostRepository } from '@api/post/domain/post.repository'
 import { Post } from '@api/post/domain/post'
 

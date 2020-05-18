@@ -1,14 +1,14 @@
-import { PostSchema } from '../post.schema'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { from } from 'uuid-mongodb'
 import { PostCounterComments } from '@api/post/domain/post-counter-comments'
 import { PostContent } from '@api/post/domain/post-content'
 import { PostTitle } from '@api/post/domain/post-title'
 import { PostRanking } from '@api/post/domain/post-ranking'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { Post } from '@api/post/domain/post'
 import { PostCreatedDate } from '@api/post/domain/post-created-date'
 import { PostUpdateDate } from '@api/post/domain/post-update-date'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {

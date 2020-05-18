@@ -1,13 +1,12 @@
 import { AggregateRoot } from '@nestjs/cqrs'
-import { UserCreated } from '@backend/shared/domain/user/user-created'
-
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { UserCreatedDate } from '@api/users/domain/user-created-date'
 import { UserCounterPosts } from '@api/users/domain/user-counter-posts'
 import { UserPassword } from '@api/users/domain/user-password'
 import { UserEmail } from '@api/users/domain/user-email'
 import { UserCounterComments } from '@api/users/domain/user-counter-comments'
+import { UserCreatedEvent } from '@api/shared/domain/user/user-created-event'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 export class User extends AggregateRoot {
     constructor(
@@ -69,7 +68,7 @@ export class User extends AggregateRoot {
         const createdDate: UserCreatedDate = UserCreatedDate.create()
         const user: User = new User(id, username, password, email, counterComments, counterPosts, createdDate)
 
-        user.apply(new UserCreated(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value))
+        user.apply(new UserCreatedEvent(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value))
 
         return user
     }

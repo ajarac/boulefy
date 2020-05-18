@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { UserTokenGenerator } from '../../domain/user-token.generator'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '@backend/shared/domain/user/user-name'
 import { AccessToken } from '@shared/auth/accesst-token'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserTokenGenerator } from '@api/users/domain/user-token.generator'
 
 @Injectable()
 export class LoginUser {

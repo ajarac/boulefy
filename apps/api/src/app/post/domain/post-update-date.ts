@@ -1,4 +1,4 @@
-import { DateValueObject } from '@backend/shared/domain/date-value-object'
+import { DateValueObject } from '@api/shared/domain/date-value-object'
 
 export class PostUpdateDate extends DateValueObject {
     constructor(value: Date) {

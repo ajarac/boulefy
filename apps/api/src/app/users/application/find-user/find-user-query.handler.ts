@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
-import { FindUserQuery } from './find-user-query'
-import { UserFinder } from './user-finder'
 import { UserResponse } from '@shared/models/user/user.response'
-import { UserId } from '@backend/shared/domain/user/user-id'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserFinder } from '@api/users/application/find-user/user-finder'
+import { FindUserQuery } from '@api/users/application/find-user/find-user-query'
 
 @QueryHandler(FindUserQuery)
 export class FindUserQueryHandler implements IQueryHandler<FindUserQuery> {

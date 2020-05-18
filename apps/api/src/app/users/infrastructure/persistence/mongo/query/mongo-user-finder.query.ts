@@ -4,8 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
 import { MongoRepository } from 'typeorm'
 import { UserResponse } from '@shared/models/user/user.response'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { from } from 'uuid-mongodb'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 @Injectable()
 export class MongoUserFinderQuery extends UserFinder {

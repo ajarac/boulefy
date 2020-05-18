@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserRepository } from '../../domain/user.repository'
-import { User } from '../../domain/user'
+import { UserRepository } from '@api/users/domain/user.repository'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { User } from '@api/users/domain/user'
 
 @Injectable()
 export class IncrementUserCounterComment {

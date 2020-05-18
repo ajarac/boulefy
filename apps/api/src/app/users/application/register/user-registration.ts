@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
-import { UserRepository } from '../../domain/user.repository'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserCounterComments } from '../../domain/user-counter-comments'
-import { UserCounterPosts } from '../../domain/user-counter-posts'
-import { User } from '../../domain/user'
-import { UserEmail } from '../../domain/user-email'
-import { UserPassword } from '../../domain/user-password'
+import { UserRepository } from '@api/users/domain/user.repository'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserCounterPosts } from '@api/users/domain/user-counter-posts'
+import { UserPassword } from '@api/users/domain/user-password'
+import { UserEmail } from '@api/users/domain/user-email'
+import { UserCounterComments } from '@api/users/domain/user-counter-comments'
+import { User } from '@api/users/domain/user'
 
 @Injectable()
 export class UserRegistration {

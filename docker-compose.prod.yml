@@ -2,9 +2,10 @@ version: '3'
 
 services:
     worker:
-        build:
-            context: .
-            dockerfile: compose/production/worker/Dockerfile
+        image: node:lts
+        volumes:
+            - .:/app
+
 
     mongodb:
         image: mongo:latest

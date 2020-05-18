@@ -1,4 +1,4 @@
-import { PostId } from '../../shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 
 export class PostNotFound extends Error {
     constructor(id: PostId) {

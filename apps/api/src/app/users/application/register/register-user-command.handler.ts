@@ -1,12 +1,12 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { RegisterUserCommand } from './register-user-command'
-import { UserRegistration } from './user-registration'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserCounterComments } from '../../domain/user-counter-comments'
-import { UserCounterPosts } from '../../domain/user-counter-posts'
-import { UserEmail } from '../../domain/user-email'
-import { UserPassword } from '../../domain/user-password'
+import { RegisterUserCommand } from '@api/users/application/register/register-user-command'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserCounterPosts } from '@api/users/domain/user-counter-posts'
+import { UserPassword } from '@api/users/domain/user-password'
+import { UserRegistration } from '@api/users/application/register/user-registration'
+import { UserEmail } from '@api/users/domain/user-email'
+import { UserCounterComments } from '@api/users/domain/user-counter-comments'
 
 @CommandHandler(RegisterUserCommand)
 export class RegisterUserCommandHandler implements ICommandHandler<RegisterUserCommand> {

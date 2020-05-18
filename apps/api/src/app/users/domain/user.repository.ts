@@ -1,7 +1,7 @@
-import { User } from './user'
-import { UserId } from '@backend/shared/domain/user/user-id'
-import { UserName } from '@backend/shared/domain/user/user-name'
-import { UserPassword } from './user-password'
+import { UserName } from '@api/shared/domain/user/user-name'
+import { UserId } from '@api/shared/domain/user/user-id'
+import { UserPassword } from '@api/users/domain/user-password'
+import { User } from '@api/users/domain/user'
 
 export abstract class UserRepository {
     abstract search(id: UserId): Promise<User>

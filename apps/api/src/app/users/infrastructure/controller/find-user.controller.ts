@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { QueryBus } from '@nestjs/cqrs'
 import { UserResponse } from '@shared/models/user/user.response'
-import { FindUserQuery } from '../../application/find-user/find-user-query'
+import { FindUserQuery } from '@api/users/application/find-user/find-user-query'
 
 @Controller('users')
 export class FindUserController {

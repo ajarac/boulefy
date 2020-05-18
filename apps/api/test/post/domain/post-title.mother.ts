@@ -1,5 +1,5 @@
-import { WordMother } from '@backend/shared/test/domain/word.mother'
 import { PostTitle } from '@api/post/domain/post-title'
+import { WordMother } from '@api/test/shared/domain/word.mother'
 
 export class PostTitleMother {
     static create(value: string): PostTitle {

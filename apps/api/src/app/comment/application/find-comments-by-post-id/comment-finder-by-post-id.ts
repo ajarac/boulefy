@@ -1,5 +1,5 @@
 import { CommentResponse } from '@shared/models/comment/comment.response'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { Pagination } from '@shared/models/pagination/pagination'
 
 export abstract class CommentFinderByPostId {

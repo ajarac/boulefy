@@ -1,10 +1,10 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { CommentCreator } from '@api/comment/application/create/comment.creator'
 import { CommentContent } from '@api/comment/domain/comment-content'
-import { UserId } from '@backend/shared/domain/user/user-id'
 import { CreateCommentCommand } from '@api/comment/application/create/create-comment-command'
-import { PostId } from '@api/shared/domain/post-id'
+import { PostId } from '@api/shared/domain/post/post-id'
 import { CommentId } from '@api/comment/domain/comment-id'
+import { UserId } from '@api/shared/domain/user/user-id'
 
 @CommandHandler(CreateCommentCommand)
 export class CreateCommentCommandHandler implements ICommandHandler<CreateCommentCommand> {

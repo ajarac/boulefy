@@ -70,8 +70,8 @@ describe('CreatePostController', () => {
     test('POST Create post', () => {
         const id = PostIdMother.random().value
         const body = {
-            title: PostTitleMother.random().value,
-            content: PostContentMother.random().value
+            title: PostTitleMother.random(),
+            content: PostContentMother.random()
         }
         const userRequest = { sub: id }
         clientProxyMock.send.mockReturnValue(of(userRequest))
@@ -86,8 +86,8 @@ describe('CreatePostController', () => {
     test('POST Create a valid post', async () => {
         const id = PostIdMother.random().value
         const body = {
-            title: PostTitleMother.random().value,
-            content: PostContentMother.random().value
+            title: PostTitleMother.random(),
+            content: PostContentMother.random()
         }
         const request = {
             user: {

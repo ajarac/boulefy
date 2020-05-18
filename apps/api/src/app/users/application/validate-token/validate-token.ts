@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { UserValidateToken } from '../../domain/user-validate-token'
+import { UserValidateToken } from '@api/users/domain/user-validate-token'
 
 @Injectable()
 export class ValidateToken {
