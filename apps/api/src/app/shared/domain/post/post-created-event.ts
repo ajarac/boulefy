@@ -5,6 +5,7 @@ export class PostCreatedEvent {
         public readonly counterComments: number,
         public readonly ranking: number,
         public readonly userId: string,
+        public readonly groupId: string,
         public readonly createdDate: Date
     ) {}
 }

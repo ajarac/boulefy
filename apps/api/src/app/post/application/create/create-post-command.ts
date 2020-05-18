@@ -3,6 +3,7 @@ export class CreatePostCommand {
         public readonly id: string,
         public readonly title: string,
         public readonly content: string,
-        public readonly userId: string
+        public readonly userId: string,
+        public readonly groupId: string
     ) {}
 }

@@ -13,6 +13,9 @@ export class GroupSchema extends BaseEntity {
     description: string
 
     @Column()
+    userId: MUUID
+
+    @Column()
     counterPosts: number
 
     @Column()

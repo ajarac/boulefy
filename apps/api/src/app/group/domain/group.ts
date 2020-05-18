@@ -33,6 +33,10 @@ export class Group extends AggregateRoot {
         return this._description
     }
 
+    get userId(): UserId {
+        return this._userId
+    }
+
     get counterPosts(): GroupCounterPosts {
         return this._counterPosts
     }

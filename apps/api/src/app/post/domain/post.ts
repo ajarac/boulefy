@@ -9,6 +9,7 @@ import { PostCreatedDate } from '@api/post/domain/post-created-date'
 import { PostUpdateDate } from '@api/post/domain/post-update-date'
 import { UserId } from '@api/shared/domain/user/user-id'
 import { PostCreatedEvent } from '@api/shared/domain/post/post-created-event'
+import { GroupId } from '@api/shared/domain/group/group-id'
 
 export class Post extends AggregateRoot {
     constructor(
@@ -18,6 +19,7 @@ export class Post extends AggregateRoot {
         private _counterComments: PostCounterComments,
         private _ranking: PostRanking,
         private _userId: UserId,
+        private _groupId: GroupId,
         private _createdDate: PostCreatedDate,
         private _updateDate: PostUpdateDate
     ) {
@@ -44,6 +46,10 @@ export class Post extends AggregateRoot {
         return this._ranking
     }
 
+    get groupId(): GroupId {
+        return this._groupId
+    }
+
     get userId(): UserId {
         return this._userId
     }
@@ -56,14 +62,24 @@ export class Post extends AggregateRoot {
         return this._updateDate
     }
 
-    public static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId): Post {
+    public static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId, groupId: GroupId): Post {
         const counterComments: PostCounterComments = PostCounterComments.create()
         const ranking: PostRanking = PostRanking.create()
         const createdDate: PostCreatedDate = PostCreatedDate.create()
         const updatedDate: PostUpdateDate = PostUpdateDate.create()
-        const post: Post = new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
+        const post: Post = new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
 
-        post.apply(new PostCreatedEvent(id.value, title.value, counterComments.value, ranking.value, userId.value, createdDate.value))
+        post.apply(
+            new PostCreatedEvent(
+                id.value,
+                title.value,
+                counterComments.value,
+                ranking.value,
+                userId.value,
+                groupId.value,
+                createdDate.value
+            )
+        )
 
         return post
     }
