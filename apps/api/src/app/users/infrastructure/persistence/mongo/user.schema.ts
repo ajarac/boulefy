@@ -1,8 +1,8 @@
-import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, ObjectIdColumn } from 'typeorm'
 import { MUUID } from 'uuid-mongodb'
 
 @Entity({ synchronize: true })
-export class UserSchema {
+export class UserSchema extends BaseEntity {
     @ObjectIdColumn()
     _id: MUUID
 

@@ -6,7 +6,7 @@ import { PostId } from '@api/shared/domain/post/post-id'
 import { PostContentMother } from '@api/test/post/domain/post-content.mother'
 import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
 import { PostRankingMother } from '@api/test/post/domain/post-ranking.mother'
-import { PostIdMother } from '@api/test/post/domain/post-id.mother'
+import { PostIdMother } from '@api/test/shared/domain/post/post-id.mother'
 import { PostContent } from '@api/post/domain/post-content'
 import { PostCounterCommentsMother } from '@api/test/post/domain/post-counter-comments.mother'
 import { Post } from '@api/post/domain/post'
@@ -16,6 +16,8 @@ import { PostUpdateDateMother } from '@api/test/post/domain/post-update-date.mot
 import { PostCreatedDateMother } from '@api/test/post/domain/post-created-date.mother'
 import { UserId } from '@api/shared/domain/user/user-id'
 import { UserIdMother } from '@api/test/shared/domain/user/user-id.mother'
+import { GroupId } from '@api/shared/domain/group/group-id'
+import { GroupIdMother } from '@api/test/shared/domain/group/group-id.mother'
 
 export class PostMother {
     static create(
@@ -25,10 +27,11 @@ export class PostMother {
         counterComments: PostCounterComments,
         ranking: PostRanking,
         userId: UserId,
+        groupId: GroupId,
         createdDate: PostCreatedDate,
         updatedDate: PostUpdateDate
     ): Post {
-        return new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
+        return new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
     }
 
     static random(): Post {
@@ -39,6 +42,7 @@ export class PostMother {
             PostCounterCommentsMother.random(),
             PostRankingMother.random(),
             UserIdMother.random(),
+            GroupIdMother.random(),
             PostCreatedDateMother.random(),
             PostUpdateDateMother.random()
         )
@@ -52,6 +56,7 @@ export class PostMother {
             PostCounterCommentsMother.create(0),
             PostRankingMother.create(0),
             UserIdMother.create(request.userId),
+            GroupIdMother.create(request.groupId),
             PostCreatedDateMother.create(new Date()),
             PostUpdateDateMother.create(new Date())
         )

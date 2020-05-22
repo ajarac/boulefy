@@ -11,12 +11,15 @@ import { CqrsModule } from '@nestjs/cqrs'
 import { PostId } from '@api/shared/domain/post/post-id'
 import { PostRepository } from '@api/post/domain/post.repository'
 import { PostMother } from '@api/test/post/domain/post.mother'
-import { PostIdMother } from '@api/test/post/domain/post-id.mother'
+import { PostIdMother } from '@api/test/shared/domain/post/post-id.mother'
 import { HttpError } from '@shared/http.error'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { FindPostQueryHandler } from '@api/post/application/find/find-post-query.handler'
-import { PostResponse } from '@api/post/application/post.response'
 import { Post } from '@api/post/domain/post'
+import { MongoPostFinderQuery } from '@api/post/infrastructure/persistence/mongo/query/mongo-post-finder.query'
+import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
+import { from } from 'uuid-mongodb'
+import { PostResponseMother } from '@api/test/post/application/post-response.mother'
 
 describe('FindPostController', () => {
     let app: INestApplication
@@ -28,7 +31,10 @@ describe('FindPostController', () => {
             imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('findPostTest')), TypeOrmModule.forFeature([PostSchema])],
             controllers: [FindPostController],
             providers: [
-                PostFinder,
+                {
+                    provide: PostFinder,
+                    useClass: MongoPostFinderQuery
+                },
                 FindPostQueryHandler,
                 {
                     provide: PostRepository,
@@ -55,12 +61,18 @@ describe('FindPostController', () => {
     test('Get Find Post', async () => {
         const post: Post = PostMother.random()
         await mongoPostRepository.save(post)
+        const userSchema: UserSchema = new UserSchema()
+        userSchema._id = from(post.userId.value)
+        userSchema.username = 'username'
+        await userSchema.save()
 
         const response: request.Response = await request(app.getHttpServer())
             .get('/posts/' + post.id.value)
             .expect(HttpStatus.OK)
 
-        expect(JSON.parse(response.text)).toEqual(PostResponse.fromAggregate(post))
+        expect(JSON.parse(response.text)).toEqual(
+            PostResponseMother.fromAggregate(post, { id: userSchema._id.toString(), username: userSchema.username })
+        )
     })
 
     test('Get Find post not found', () => {

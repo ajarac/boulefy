@@ -8,6 +8,7 @@
         "build": "ng build",
         "build:all": "ng affected:build --all --production",
         "test": "ng test",
+        "test:docker": "docker-compose -f docker-compose.test.yml up",
         "lint": "ng workspace-lint && nx lint",
         "e2e": "ng e2e",
         "affected:apps": "nx affected:apps",

@@ -9,6 +9,7 @@ import { PostCreatedDate } from '@api/post/domain/post-created-date'
 import { PostUpdateDate } from '@api/post/domain/post-update-date'
 import { UserId } from '@api/shared/domain/user/user-id'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
+import { GroupId } from '@api/shared/domain/group/group-id'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {
@@ -18,9 +19,10 @@ export class PostMapper {
         const counterComments: PostCounterComments = new PostCounterComments(postSchema.counterComments)
         const ranking: PostRanking = new PostRanking(postSchema.ranking)
         const userId: UserId = new UserId(from(postSchema.userId).toString())
+        const groupId: GroupId = new GroupId(from(postSchema.groupId).toString())
         const createdDate: PostCreatedDate = new PostCreatedDate(postSchema.createdDate)
         const updatedDate: PostUpdateDate = new PostUpdateDate(postSchema.updatedDate)
-        return new Post(id, title, content, counterComments, ranking, userId, createdDate, updatedDate)
+        return new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
     }
 
     static toSchema(post: Post): PostSchema {
@@ -31,6 +33,7 @@ export class PostMapper {
         postSchema.counterComments = post.counterComments.value
         postSchema.ranking = post.ranking.value
         postSchema.userId = from(post.userId.value)
+        postSchema.groupId = from(post.groupId.value)
         postSchema.createdDate = post.createdDate.value
         postSchema.updatedDate = post.updateDate.value
         return postSchema

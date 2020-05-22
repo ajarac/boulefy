@@ -2,7 +2,7 @@ version: '3'
 
 services:
     worker:
-        image: node:lts
+        image: node:lts-slim
         volumes:
             - .:/app
 

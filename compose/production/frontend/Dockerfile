@@ -1,4 +1,4 @@
-FROM node:lts as builder
+FROM node:lts-slim as builder
 
 VOLUME . /build
 
@@ -6,7 +6,7 @@ WORKDIR /build
 
 RUN ng build agora-desktop --configuration=production && ng run agora-desktop:server --configuration=production
 
-FROM node:lts
+FROM node:lts-slim
 
 COPY --from=builder /build/dist/apps/agora-desktop /app
 

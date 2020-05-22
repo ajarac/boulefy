@@ -5,10 +5,10 @@ import { PostId } from '@api/shared/domain/post/post-id'
 import { PostContentMother } from '@api/test/post/domain/post-content.mother'
 import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
 import { PostRankingMother } from '@api/test/post/domain/post-ranking.mother'
-import { PostIdMother } from '@api/test/post/domain/post-id.mother'
+import { PostIdMother } from '@api/test/shared/domain/post/post-id.mother'
 import { PostContent } from '@api/post/domain/post-content'
 import { PostCounterCommentsMother } from '@api/test/post/domain/post-counter-comments.mother'
-import { PostResponse } from '@shared/models/post/post.response'
+import { PostResponse, PostUserResponse } from '@shared/models/post/post.response'
 import { PostCreatedDate } from '@api/post/domain/post-created-date'
 import { PostUpdateDate } from '@api/post/domain/post-update-date'
 import { PostCreatedDateMother } from '@api/test/post/domain/post-created-date.mother'
@@ -17,6 +17,8 @@ import { UserNameMother } from '@api/test/shared/domain/user/user-name.mother'
 import { UserName } from '@api/shared/domain/user/user-name'
 import { UserId } from '@api/shared/domain/user/user-id'
 import { UserIdMother } from '@api/test/shared/domain/user/user-id.mother'
+import { Post } from '@api/post/domain/post'
+import { from } from 'uuid-mongodb'
 
 export class PostResponseMother {
     static create(
@@ -37,8 +39,8 @@ export class PostResponseMother {
             counterComments: counterComments.value,
             ranking: ranking.value,
             user: { id: userId.value, username: username.value },
-            createdDate: createdDate.value,
-            updatedDate: updatedDate.value
+            createdDate: createdDate.value.toISOString(),
+            updatedDate: updatedDate.value.toISOString()
         }
     }
 
@@ -54,5 +56,18 @@ export class PostResponseMother {
             PostCreatedDateMother.random(),
             PostUpdateDateMother.random()
         )
+    }
+
+    static fromAggregate(post: Post, user: PostUserResponse): PostResponse {
+        return {
+            id: from(post.id.value).toString(),
+            title: post.title.value,
+            content: post.content.value,
+            counterComments: post.counterComments.value,
+            ranking: post.ranking.value,
+            user,
+            createdDate: post.createdDate.value.toISOString(),
+            updatedDate: post.updateDate.value.toISOString()
+        }
     }
 }

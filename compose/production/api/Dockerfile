@@ -1,4 +1,4 @@
-FROM node:lts AS builder
+FROM node:lts-slim AS builder
 
 VOLUME . /build
 
@@ -6,7 +6,7 @@ WORKDIR /build
 
 RUN ng run api:build
 
-FROM node:lts
+FROM node:lts-slim
 
 WORKDIR /dist
 

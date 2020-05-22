@@ -23,6 +23,10 @@ export class PostSchema extends BaseEntity {
     userId: MUUID
 
     @Column()
+    @Index()
+    groupId: MUUID
+
+    @Column()
     createdDate: Date
 
     @Column()

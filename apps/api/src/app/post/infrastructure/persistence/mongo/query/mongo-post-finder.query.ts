@@ -8,6 +8,7 @@ import { PostResponse } from '@shared/models/post/post.response'
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { PostId } from '@api/shared/domain/post/post-id'
 import { PostFinder } from '@api/post/application/find/post-finder'
+import { PostNotFound } from '@api/post/domain/post-not-found'
 
 @Injectable()
 export class MongoPostFinderQuery extends PostFinder {
@@ -43,9 +44,12 @@ export class MongoPostFinderQuery extends PostFinder {
                 updatedDate: true
             })
             .next()
-
-        postResponse.id = from(postResponse.id).toString()
-        postResponse.user.id = from(postResponse.user.id).toString()
+        if (postResponse) {
+            postResponse.id = from(postResponse.id).toString()
+            postResponse.user.id = from(postResponse.user.id).toString()
+        } else {
+            throw new PostNotFound(id)
+        }
         return postResponse
     }
 }
