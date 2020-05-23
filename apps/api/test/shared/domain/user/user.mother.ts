@@ -37,4 +37,16 @@ export class UserMother {
             UserCreatedDate.create()
         )
     }
+
+    static randomById(id: UserId): User {
+        return UserMother.create(
+            id,
+            UserNameMother.random(),
+            UserPasswordMother.random(),
+            UserEmailMother.random(),
+            UserCounterCommentsMother.random(),
+            UserCounterPostsMother.random(),
+            UserCreatedDate.create()
+        )
+    }
 }

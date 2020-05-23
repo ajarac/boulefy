@@ -67,7 +67,7 @@ export class PostResponseMother {
             ranking: post.ranking.value,
             user,
             createdDate: post.createdDate.value.toISOString(),
-            updatedDate: post.updateDate.value.toISOString()
+            updatedDate: post.updatedDate.value.toISOString()
         }
     }
 }

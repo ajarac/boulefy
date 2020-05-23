@@ -20,6 +20,7 @@ import { MongoPostFinderQuery } from '@api/post/infrastructure/persistence/mongo
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
 import { from } from 'uuid-mongodb'
 import { PostResponseMother } from '@api/test/post/application/post-response.mother'
+import { UserSchemaMother } from '@api/test/shared/intrastructure/user/user-schema.mother'
 
 describe('FindPostController', () => {
     let app: INestApplication
@@ -61,9 +62,7 @@ describe('FindPostController', () => {
     test('Get Find Post', async () => {
         const post: Post = PostMother.random()
         await mongoPostRepository.save(post)
-        const userSchema: UserSchema = new UserSchema()
-        userSchema._id = from(post.userId.value)
-        userSchema.username = 'username'
+        const userSchema: UserSchema = UserSchemaMother.randomById(post.userId)
         await userSchema.save()
 
         const response: request.Response = await request(app.getHttpServer())

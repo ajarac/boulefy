@@ -17,3 +17,10 @@ services:
         environment:
             - DB_HOST=mongodb
             - DB_PORT=27017
+
+    frontend:
+        image: node:lts-slim
+        volumes:
+            - .:/app
+        working_dir: /app
+        command: npm run test agora-desktop

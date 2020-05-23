@@ -13,7 +13,7 @@ export class PostCreator {
     constructor(private repository: PostRepository, private publisher: EventPublisher) {}
 
     async create(id: PostId, title: PostTitle, content: PostContent, userId: UserId, groupId: GroupId): Promise<void> {
-        const post: Post = this.publisher.mergeObjectContext(Post.create(id, title, content, userId, groupId))
+        const post: Post = this.publisher.mergeObjectContext(Post.create({ id, title, content, userId, groupId }))
 
         await this.repository.save(post)
 

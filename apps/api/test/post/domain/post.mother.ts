@@ -1,64 +1,45 @@
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
-import { PostCounterComments } from '@api/post/domain/post-counter-comments'
-import { PostTitle } from '@api/post/domain/post-title'
-import { PostRanking } from '@api/post/domain/post-ranking'
-import { PostId } from '@api/shared/domain/post/post-id'
 import { PostContentMother } from '@api/test/post/domain/post-content.mother'
 import { PostTitleMother } from '@api/test/post/domain/post-title.mother'
 import { PostRankingMother } from '@api/test/post/domain/post-ranking.mother'
 import { PostIdMother } from '@api/test/shared/domain/post/post-id.mother'
-import { PostContent } from '@api/post/domain/post-content'
 import { PostCounterCommentsMother } from '@api/test/post/domain/post-counter-comments.mother'
-import { Post } from '@api/post/domain/post'
-import { PostCreatedDate } from '@api/post/domain/post-created-date'
-import { PostUpdateDate } from '@api/post/domain/post-update-date'
+import { Post, PostArgs } from '@api/post/domain/post'
 import { PostUpdateDateMother } from '@api/test/post/domain/post-update-date.mother'
 import { PostCreatedDateMother } from '@api/test/post/domain/post-created-date.mother'
-import { UserId } from '@api/shared/domain/user/user-id'
 import { UserIdMother } from '@api/test/shared/domain/user/user-id.mother'
-import { GroupId } from '@api/shared/domain/group/group-id'
 import { GroupIdMother } from '@api/test/shared/domain/group/group-id.mother'
 
 export class PostMother {
-    static create(
-        id: PostId,
-        title: PostTitle,
-        content: PostContent,
-        counterComments: PostCounterComments,
-        ranking: PostRanking,
-        userId: UserId,
-        groupId: GroupId,
-        createdDate: PostCreatedDate,
-        updatedDate: PostUpdateDate
-    ): Post {
-        return new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
+    static create(postArgs: PostArgs): Post {
+        return new Post(postArgs)
     }
 
-    static random(): Post {
-        return PostMother.create(
-            PostIdMother.random(),
-            PostTitleMother.random(),
-            PostContentMother.random(),
-            PostCounterCommentsMother.random(),
-            PostRankingMother.random(),
-            UserIdMother.random(),
-            GroupIdMother.random(),
-            PostCreatedDateMother.random(),
-            PostUpdateDateMother.random()
-        )
+    static random(postArgs: Partial<PostArgs> = {}): Post {
+        return PostMother.create({
+            id: postArgs.id || PostIdMother.random(),
+            title: postArgs.title || PostTitleMother.random(),
+            content: postArgs.content || PostContentMother.random(),
+            counterComments: postArgs.counterComments || PostCounterCommentsMother.random(),
+            ranking: postArgs.ranking || PostRankingMother.random(),
+            userId: postArgs.userId || UserIdMother.random(),
+            groupId: postArgs.groupId || GroupIdMother.random(),
+            createdDate: postArgs.createdDate || PostCreatedDateMother.random(),
+            updatedDate: postArgs.updatedDate || PostUpdateDateMother.random()
+        })
     }
 
     static fromRequest(request: CreatePostCommand): Post {
-        return PostMother.create(
-            PostIdMother.create(request.id),
-            PostTitleMother.create(request.title),
-            PostContentMother.create(request.content),
-            PostCounterCommentsMother.create(0),
-            PostRankingMother.create(0),
-            UserIdMother.create(request.userId),
-            GroupIdMother.create(request.groupId),
-            PostCreatedDateMother.create(new Date()),
-            PostUpdateDateMother.create(new Date())
-        )
+        return PostMother.create({
+            id: PostIdMother.create(request.id),
+            title: PostTitleMother.create(request.title),
+            content: PostContentMother.create(request.content),
+            counterComments: PostCounterCommentsMother.create(0),
+            ranking: PostRankingMother.create(0),
+            userId: UserIdMother.create(request.userId),
+            groupId: GroupIdMother.create(request.groupId),
+            createdDate: PostCreatedDateMother.create(new Date()),
+            updatedDate: PostUpdateDateMother.create(new Date())
+        })
     }
 }

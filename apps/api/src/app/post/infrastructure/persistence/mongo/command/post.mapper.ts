@@ -13,16 +13,17 @@ import { GroupId } from '@api/shared/domain/group/group-id'
 
 export class PostMapper {
     static fromSchema(postSchema: PostSchema): Post {
-        const id: PostId = new PostId(from(postSchema._id).toString())
-        const title: PostTitle = new PostTitle(postSchema.title)
-        const content: PostContent = new PostContent(postSchema.content)
-        const counterComments: PostCounterComments = new PostCounterComments(postSchema.counterComments)
-        const ranking: PostRanking = new PostRanking(postSchema.ranking)
-        const userId: UserId = new UserId(from(postSchema.userId).toString())
-        const groupId: GroupId = new GroupId(from(postSchema.groupId).toString())
-        const createdDate: PostCreatedDate = new PostCreatedDate(postSchema.createdDate)
-        const updatedDate: PostUpdateDate = new PostUpdateDate(postSchema.updatedDate)
-        return new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
+        return new Post({
+            id: new PostId(from(postSchema._id).toString()),
+            title: new PostTitle(postSchema.title),
+            content: new PostContent(postSchema.content),
+            counterComments: new PostCounterComments(postSchema.counterComments),
+            ranking: new PostRanking(postSchema.ranking),
+            userId: new UserId(from(postSchema.userId).toString()),
+            groupId: new GroupId(from(postSchema.groupId).toString()),
+            createdDate: new PostCreatedDate(postSchema.createdDate),
+            updatedDate: new PostUpdateDate(postSchema.updatedDate)
+        })
     }
 
     static toSchema(post: Post): PostSchema {
@@ -35,7 +36,7 @@ export class PostMapper {
         postSchema.userId = from(post.userId.value)
         postSchema.groupId = from(post.groupId.value)
         postSchema.createdDate = post.createdDate.value
-        postSchema.updatedDate = post.updateDate.value
+        postSchema.updatedDate = post.updatedDate.value
         return postSchema
     }
 }

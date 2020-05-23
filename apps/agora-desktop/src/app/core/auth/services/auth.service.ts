@@ -13,7 +13,7 @@ export class AuthService extends BaseService {
     }
 
     register(username: string, password: string, email: string): Observable<void> {
-        const url: string = `register/${UuidGeneratorService.generate()}`
+        const url = `register/${UuidGeneratorService.generate()}`
         return this.http.post<void>(url, { username, password, email })
     }
 

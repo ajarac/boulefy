@@ -11,19 +11,48 @@ import { UserId } from '@api/shared/domain/user/user-id'
 import { PostCreatedEvent } from '@api/shared/domain/post/post-created-event'
 import { GroupId } from '@api/shared/domain/group/group-id'
 
+interface PostCreateArgs {
+    id: PostId
+    title: PostTitle
+    content: PostContent
+    userId: UserId
+    groupId: GroupId
+}
+
+export interface PostArgs {
+    id: PostId
+    title: PostTitle
+    content: PostContent
+    counterComments: PostCounterComments
+    ranking: PostRanking
+    userId: UserId
+    groupId: GroupId
+    createdDate: PostCreatedDate
+    updatedDate: PostUpdateDate
+}
+
 export class Post extends AggregateRoot {
-    constructor(
-        private _id: PostId,
-        private _title: PostTitle,
-        private _content: PostContent,
-        private _counterComments: PostCounterComments,
-        private _ranking: PostRanking,
-        private _userId: UserId,
-        private _groupId: GroupId,
-        private _createdDate: PostCreatedDate,
-        private _updateDate: PostUpdateDate
-    ) {
+    private readonly _id: PostId
+    private readonly _title: PostTitle
+    private readonly _content: PostContent
+    private _counterComments: PostCounterComments
+    private readonly _ranking: PostRanking
+    private readonly _userId: UserId
+    private readonly _groupId: GroupId
+    private readonly _createdDate: PostCreatedDate
+    private readonly _updatedDate: PostUpdateDate
+
+    constructor(postArgs: PostArgs) {
         super()
+        this._id = postArgs.id
+        this._title = postArgs.title
+        this._content = postArgs.content
+        this._counterComments = postArgs.counterComments
+        this._ranking = postArgs.ranking
+        this._userId = postArgs.userId
+        this._groupId = postArgs.groupId
+        this._createdDate = postArgs.createdDate
+        this._updatedDate = postArgs.updatedDate
     }
 
     get id(): PostId {
@@ -58,27 +87,27 @@ export class Post extends AggregateRoot {
         return this._createdDate
     }
 
-    get updateDate(): PostUpdateDate {
-        return this._updateDate
+    get updatedDate(): PostUpdateDate {
+        return this._updatedDate
     }
 
-    public static create(id: PostId, title: PostTitle, content: PostContent, userId: UserId, groupId: GroupId): Post {
+    public static create({ id, title, content, userId, groupId }: PostCreateArgs): Post {
         const counterComments: PostCounterComments = PostCounterComments.create()
         const ranking: PostRanking = PostRanking.create()
         const createdDate: PostCreatedDate = PostCreatedDate.create()
         const updatedDate: PostUpdateDate = PostUpdateDate.create()
-        const post: Post = new Post(id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate)
+        const post: Post = new Post({ id, title, content, counterComments, ranking, userId, groupId, createdDate, updatedDate })
 
         post.apply(
-            new PostCreatedEvent(
-                id.value,
-                title.value,
-                counterComments.value,
-                ranking.value,
-                userId.value,
-                groupId.value,
-                createdDate.value
-            )
+            new PostCreatedEvent({
+                id: id.value,
+                title: title.value,
+                counterComments: counterComments.value,
+                ranking: ranking.value,
+                userId: userId.value,
+                groupId: groupId.value,
+                createdDate: createdDate.value
+            })
         )
 
         return post

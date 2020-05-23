@@ -8,17 +8,43 @@ import { UserCreatedEvent } from '@api/shared/domain/user/user-created-event'
 import { UserName } from '@api/shared/domain/user/user-name'
 import { UserId } from '@api/shared/domain/user/user-id'
 
+export interface UserArgs {
+    id: UserId
+    username: UserName
+    password: UserPassword
+    email: UserEmail
+    counterComments: UserCounterComments
+    counterPosts: UserCounterPosts
+    createdDate: UserCreatedDate
+}
+
+export interface UserCreateArgs {
+    id: UserId
+    username: UserName
+    password: UserPassword
+    email: UserEmail
+    counterComments: UserCounterComments
+    counterPosts: UserCounterPosts
+}
+
 export class User extends AggregateRoot {
-    constructor(
-        private _id: UserId,
-        private _username: UserName,
-        private _password: UserPassword,
-        private _email: UserEmail,
-        private _counterComments: UserCounterComments,
-        private _counterPosts: UserCounterPosts,
-        private _createdDate: UserCreatedDate
-    ) {
+    private readonly _id: UserId
+    private readonly _username: UserName
+    private readonly _password: UserPassword
+    private readonly _email: UserEmail
+    private _counterComments: UserCounterComments
+    private _counterPosts: UserCounterPosts
+    private readonly _createdDate: UserCreatedDate
+
+    constructor(userArgs: UserArgs) {
         super()
+        this._id = userArgs.id
+        this._username = userArgs.username
+        this._password = userArgs.password
+        this._email = userArgs.email
+        this._counterComments = userArgs.counterComments
+        this._counterPosts = userArgs.counterPosts
+        this._createdDate = userArgs.createdDate
     }
 
     get id(): UserId {
@@ -57,18 +83,13 @@ export class User extends AggregateRoot {
         this._counterComments = new UserCounterComments(this._counterComments.value + 1)
     }
 
-    public static create(
-        id: UserId,
-        username: UserName,
-        password: UserPassword,
-        email: UserEmail,
-        counterComments: UserCounterComments,
-        counterPosts: UserCounterPosts
-    ): User {
+    public static create({ id, username, password, email, counterComments, counterPosts }: UserCreateArgs): User {
         const createdDate: UserCreatedDate = UserCreatedDate.create()
-        const user: User = new User(id, username, password, email, counterComments, counterPosts, createdDate)
+        const user: User = new User({ id, username, password, email, counterComments, counterPosts, createdDate })
 
-        user.apply(new UserCreatedEvent(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value))
+        user.apply(
+            new UserCreatedEvent(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value)
+        )
 
         return user
     }

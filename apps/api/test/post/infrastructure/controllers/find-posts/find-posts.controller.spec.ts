@@ -13,8 +13,10 @@ import { FindPostsQueryHandler } from '@api/post/application/findAll/find-posts-
 import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
 import { PostRepository } from '@api/post/domain/post.repository'
 import { PostFinderAll } from '@api/post/application/findAll/post-finder-all'
-import { PostResponse } from '@api/post/application/post.response'
 import { Post } from '@api/post/domain/post'
+import { MongoPostFinderAllQuery } from '@api/post/infrastructure/persistence/mongo/query/mongo-post-finder-all.query'
+import { PostResponse } from '@shared/models/post/post.response'
+import { PostResponseMother } from '@api/test/post/application/post-response.mother'
 
 describe('FindPostsController', () => {
     let app: INestApplication
@@ -26,7 +28,10 @@ describe('FindPostsController', () => {
             imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('findPostsTest')), TypeOrmModule.forFeature([PostSchema])],
             controllers: [FindPostsController],
             providers: [
-                PostFinderAll,
+                {
+                    provide: PostFinderAll,
+                    useClass: MongoPostFinderAllQuery
+                },
                 FindPostsQueryHandler,
                 {
                     provide: PostRepository,
@@ -60,7 +65,7 @@ describe('FindPostsController', () => {
         const responseBody: PostResponse[] = JSON.parse(response.text)
 
         expect(response.status).toBe(HttpStatus.OK)
-        expect(responseBody).toEqual(list.map((post: Post) => PostResponse.fromAggregate(post)))
+        expect(responseBody).toEqual(list.map((post: Post) => PostResponseMother.fromAggregate(post, null)))
     })
 
     test('Get Find Posts empty list', () => {
