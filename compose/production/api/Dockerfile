@@ -1,10 +1,10 @@
 FROM node:lts-slim AS builder
 
-VOLUME . /build
+COPY . /build
 
 WORKDIR /build
-
-RUN ng run api:build
+RUN npm ci
+RUN npm run api:build
 
 FROM node:lts-slim
 

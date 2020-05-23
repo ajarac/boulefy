@@ -1,10 +1,10 @@
 FROM node:lts-slim as builder
 
-VOLUME . /build
+COPY . /build
 
 WORKDIR /build
-
-RUN ng build agora-desktop --configuration=production && ng run agora-desktop:server --configuration=production
+RUN npm ci
+RUN npm run agora-desktop:build --configuration=production && ng run agora-desktop:server --configuration=production
 
 FROM node:lts-slim
 
