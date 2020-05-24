@@ -6,7 +6,7 @@ export class DummyDataController {
     constructor(private service: DummyDataService) {}
 
     @Post()
-    async generate(): Promise<void> {
-        return this.service.generate()
+    generate(): void {
+        this.service.generate().then()
     }
 }

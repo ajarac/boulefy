@@ -12,7 +12,7 @@ export class CreateGroupController {
     @UseGuards(AuthGuard)
     create(@Param('id') id: string, @Body() { name, description }: RequestBody, @Request() request): void {
         const userId: string = request.user.id
-        const command: CreateGroupCommand = new CreateGroupCommand(id, name, description, userId)
+        const command: CreateGroupCommand = new CreateGroupCommand({ id, name, description, userId })
         this.commandBus.execute(command)
     }
 }

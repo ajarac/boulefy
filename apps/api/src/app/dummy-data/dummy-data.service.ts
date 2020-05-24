@@ -4,6 +4,7 @@ import * as faker from 'faker'
 import { CommandBus } from '@nestjs/cqrs'
 import { CreatePostCommand } from '@api/post/application/create/create-post-command'
 import { CreateCommentCommand } from '@api/comment/application/create/create-comment-command'
+import { CreateGroupCommand } from '@api/group/application/create/create-group-command'
 
 @Injectable()
 export class DummyDataService {
@@ -18,13 +19,22 @@ export class DummyDataService {
         })
     }
 
-    private static generateCreatePostCommand(userId: string): CreatePostCommand {
+    private static generateCreateGroupCommand(userId: string): CreateGroupCommand {
+        return new CreateGroupCommand({
+            id: faker.random.uuid(),
+            name: faker.lorem.words() + faker.random.uuid(),
+            description: faker.lorem.paragraph(),
+            userId
+        })
+    }
+
+    private static generateCreatePostCommand(userId: string, groupId: string): CreatePostCommand {
         return new CreatePostCommand({
             id: faker.random.uuid(),
             title: faker.lorem.words(),
             content: faker.lorem.paragraphs(),
-            userId: userId,
-            groupId: faker.random.uuid()
+            userId,
+            groupId
         })
     }
 
@@ -40,12 +50,17 @@ export class DummyDataService {
     async generate(): Promise<void> {
         const users: RegisterUserCommand[] = this.registerUsers(50)
         const userIds: string[] = users.map((user) => user.id)
-        const posts: CreatePostCommand[] = this.createPosts(500, userIds)
+        const groups: CreateGroupCommand[] = this.createGroups(20, userIds)
+        const groupIds: string[] = groups.map((group) => group.id)
+        const posts: CreatePostCommand[] = this.createPosts(500, userIds, groupIds)
         const postsId: string[] = posts.map((post) => post.id)
         const comments: CreateCommentCommand[] = this.createComments(200, userIds, postsId)
 
         for (const user of users) {
             await this.commandBus.execute(user)
+        }
+        for (const group of groups) {
+            await this.commandBus.execute(group)
         }
         for (const post of posts) {
             await this.commandBus.execute(post)
@@ -59,8 +74,14 @@ export class DummyDataService {
         return new Array(count).fill('').map(() => DummyDataService.generateRegisterUserCommand())
     }
 
-    createPosts(count: number, userIds: string[]): CreatePostCommand[] {
-        return new Array(count).fill('').map(() => DummyDataService.generateCreatePostCommand(faker.random.arrayElement(userIds)))
+    createGroups(count: number, userIds: string[]): CreateGroupCommand[] {
+        return new Array(count).fill('').map(() => DummyDataService.generateCreateGroupCommand(faker.random.arrayElement(userIds)))
+    }
+
+    createPosts(count: number, userIds: string[], groupIds: string[]): CreatePostCommand[] {
+        return new Array(count)
+            .fill('')
+            .map(() => DummyDataService.generateCreatePostCommand(faker.random.arrayElement(userIds), faker.random.arrayElement(groupIds)))
     }
 
     createComments(countByPost: number, userIds: string[], postIds: string[]): CreateCommentCommand[] {

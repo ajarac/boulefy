@@ -30,7 +30,7 @@ export class Group extends AggregateRoot {
     private readonly _name: GroupName
     private readonly _description: GroupDescription
     private readonly _userId: UserId
-    private readonly _counterPosts: GroupCounterPosts
+    private _counterPosts: GroupCounterPosts
     private readonly _counterUsers: GroupCounterUsers
     private readonly _createdDate: GroupCreatedDate
 
@@ -71,6 +71,10 @@ export class Group extends AggregateRoot {
 
     get createdDate(): GroupCreatedDate {
         return this._createdDate
+    }
+
+    incrementCounterPosts(): void {
+        this._counterPosts = new GroupCounterPosts(this._counterPosts.value + 1)
     }
 
     static create({ id, name, description, userId }: GroupCreateArgs): Group {

@@ -28,13 +28,11 @@ services:
             - DB_PORT=27017
 
     frontend:
-        build:
-            context: .
-            dockerfile: compose/local/frontend/Dockerfile
+        image: node:lts-slim
         volumes:
             - .:/app
         working_dir: /app
-        command: nx run agora-desktop:serve-ssr "--host=0.0.0.0"
+        command: npm run dev:ssr
 
     nginx:
         build:

@@ -8,5 +8,8 @@ export const MONGO_DB_CONFIG: TypeOrmModuleOptions = {
     type: 'mongodb',
     host: process.env.DB_HOST || 'localhost:27017',
     database: 'agora',
+    useNewUrlParser: true,
+    synchronize: true,
+    logging: true,
     entities: [UserSchema, PostSchema, CommentSchema, GroupSchema]
 }
