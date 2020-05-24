@@ -30,8 +30,8 @@ describe('CreatePostCommandHandler', () => {
         repositoryMock.search.mockReturnValue(null)
 
         const command: CreatePostCommand = CreatePostCommandMother.random()
-        const post: Post = PostMother.fromRequest(command)
         await handler.execute(command)
+        const post: Post = PostMother.fromRequest(command)
 
         expect(repositoryMock.save).toHaveBeenCalledWith(post)
     })

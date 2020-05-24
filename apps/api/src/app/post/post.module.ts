@@ -2,15 +2,15 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { MongoPostRepository } from './infrastructure/persistence/mongo/command/mongo-post.repository'
-import { APPLICATION_SERVICES, COMMAND_HANDLERS, EVENT_HANDLERS, QUERY_HANDLERS } from './application'
-import { PostSchema } from './infrastructure/persistence/mongo/post.schema'
-import { CONTROLLERS } from './infrastructure/controllers'
-import { PostRepository } from './domain/post.repository'
 import { QUERIES } from '@api/post/infrastructure/persistence/mongo/query'
 import { PagerMiddleware } from '@api/shared/infrastructure/middleware/pager.middleware'
 import { FindPostsController } from '@api/post/infrastructure/controllers/find-posts.controller'
 import { SharedModule } from '@api/shared/shared.module'
+import { MongoPostRepository } from '@api/post/infrastructure/persistence/mongo/command/mongo-post.repository'
+import { PostSchema } from '@api/post/infrastructure/persistence/mongo/post.schema'
+import { PostRepository } from '@api/post/domain/post.repository'
+import { CONTROLLERS } from '@api/post/infrastructure/controllers'
+import { APPLICATION_SERVICES, COMMAND_HANDLERS, EVENT_HANDLERS, QUERY_HANDLERS } from '@api/post/application'
 
 @Module({
     imports: [CqrsModule, TypeOrmModule.forFeature([PostSchema]), SharedModule],

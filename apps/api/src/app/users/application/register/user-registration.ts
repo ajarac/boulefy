@@ -21,7 +21,7 @@ export class UserRegistration {
         counterPosts: UserCounterPosts
     ): Promise<void> {
         if (await this.ensureUserNotExist(id)) {
-            const user: User = User.create(id, username, password, email, counterComments, counterPosts)
+            const user: User = User.create({ id, username, password, email, counterComments, counterPosts })
 
             await this.repository.register(user)
 

@@ -9,7 +9,6 @@ import { Pagination } from '@shared/models/pagination/pagination'
 
 @Injectable()
 export class CommentService extends BaseService {
-
     constructor(injector: Injector) {
         super(injector)
     }

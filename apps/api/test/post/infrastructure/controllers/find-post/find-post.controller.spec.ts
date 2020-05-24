@@ -5,7 +5,6 @@ import { Test } from '@nestjs/testing'
 import { PostFinder } from '@api/post/application/find/post-finder'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { FindPostController } from '@api/post/infrastructure/controllers/find-post.controller'
-import { mongoConfig } from '@api/test/post/infrastructure/persistence/mongo/mongo.config.testing'
 import { MongoPostRepository } from '@api/post/infrastructure/persistence/mongo/command/mongo-post.repository'
 import { CqrsModule } from '@nestjs/cqrs'
 import { PostId } from '@api/shared/domain/post/post-id'
@@ -18,9 +17,9 @@ import { FindPostQueryHandler } from '@api/post/application/find/find-post-query
 import { Post } from '@api/post/domain/post'
 import { MongoPostFinderQuery } from '@api/post/infrastructure/persistence/mongo/query/mongo-post-finder.query'
 import { UserSchema } from '@api/users/infrastructure/persistence/mongo/user.schema'
-import { from } from 'uuid-mongodb'
 import { PostResponseMother } from '@api/test/post/application/post-response.mother'
 import { UserSchemaMother } from '@api/test/shared/intrastructure/user/user-schema.mother'
+import { mongoConfig } from '@api/test/shared/intrastructure/mongo/mongo-config.testing'
 
 describe('FindPostController', () => {
     let app: INestApplication
@@ -29,7 +28,11 @@ describe('FindPostController', () => {
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [CqrsModule, TypeOrmModule.forRoot(mongoConfig('findPostTest')), TypeOrmModule.forFeature([PostSchema])],
+            imports: [
+                CqrsModule,
+                TypeOrmModule.forRoot(mongoConfig('findPostTest', [PostSchema, UserSchema])),
+                TypeOrmModule.forFeature([PostSchema])
+            ],
             controllers: [FindPostController],
             providers: [
                 {
@@ -62,8 +65,7 @@ describe('FindPostController', () => {
     test('Get Find Post', async () => {
         const post: Post = PostMother.random()
         await mongoPostRepository.save(post)
-        const userSchema: UserSchema = UserSchemaMother.randomById(post.userId)
-        await userSchema.save()
+        const userSchema: UserSchema = await UserSchemaMother.saveRandom({ id: post.userId })
 
         const response: request.Response = await request(app.getHttpServer())
             .get('/posts/' + post.id.value)

@@ -6,9 +6,6 @@ import { GroupSchema } from '@api/group/insfrastructure/mongo/group.schema'
 
 export const MONGO_DB_CONFIG: TypeOrmModuleOptions = {
     type: 'mongodb',
-    useNewUrlParser: true,
-    synchronize: true,
-    logging: true,
     host: process.env.DB_HOST || 'localhost:27017',
     database: 'agora',
     entities: [UserSchema, PostSchema, CommentSchema, GroupSchema]

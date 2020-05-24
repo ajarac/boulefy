@@ -18,7 +18,7 @@ export interface UserArgs {
     createdDate: UserCreatedDate
 }
 
-export interface UserCreateArgs {
+interface UserCreateArgs {
     id: UserId
     username: UserName
     password: UserPassword
@@ -88,7 +88,14 @@ export class User extends AggregateRoot {
         const user: User = new User({ id, username, password, email, counterComments, counterPosts, createdDate })
 
         user.apply(
-            new UserCreatedEvent(id.value, username.value, email.value, counterComments.value, counterPosts.value, createdDate.value)
+            new UserCreatedEvent({
+                id: id.value,
+                username: username.value,
+                email: email.value,
+                counterComments: counterComments.value,
+                counterPosts: counterPosts.value,
+                createdDate: createdDate.value
+            })
         )
 
         return user

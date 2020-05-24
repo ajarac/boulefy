@@ -2,7 +2,7 @@
     <h1>
         <a routerLink="/">Agora</a>
     </h1>
-    <nb-actions *ngIf="!(isLogged$ | async)">
+    <nb-actions *ngIf="(isLogged$ | async) === false">
         <nb-action icon="log-in" title="Sign In" link="/login/sign-in"></nb-action>
         <nb-action icon="person-add" title="Register" link="/login/register"></nb-action>
     </nb-actions>

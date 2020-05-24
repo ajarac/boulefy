@@ -11,15 +11,15 @@ import { UserId } from '@api/shared/domain/user/user-id'
 
 export class UserMapper {
     static fromSchema(userSchema: UserSchema): User {
-        const id: UserId = new UserId(from(userSchema._id).toString())
-        const name: UserName = new UserName(userSchema.username)
-        const password: UserPassword = new UserPassword(userSchema.password)
-        const email: UserEmail = new UserEmail(userSchema.email)
-        const counterComments: UserCounterComments = new UserCounterComments(userSchema.counterComments)
-        const counterPosts: UserCounterPosts = new UserCounterPosts(userSchema.counterPosts)
-        const createdDate: UserCreatedDate = new UserCreatedDate(userSchema.createdDate)
-
-        return new User(id, name, password, email, counterComments, counterPosts, createdDate)
+        return new User({
+            id: new UserId(from(userSchema._id).toString()),
+            username: new UserName(userSchema.username),
+            password: new UserPassword(userSchema.password),
+            email: new UserEmail(userSchema.email),
+            counterComments: new UserCounterComments(userSchema.counterComments),
+            counterPosts: new UserCounterPosts(userSchema.counterPosts),
+            createdDate: new UserCreatedDate(userSchema.createdDate)
+        })
     }
 
     static toSchema(user: User): UserSchema {

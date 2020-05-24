@@ -10,10 +10,10 @@ export class CreatePostController {
     @Post(':id')
     @HttpCode(HttpStatus.ACCEPTED)
     @UseGuards(AuthGuard)
-    createPost(@Param('id') id: string, @Body() { title, content, groupId }: RequestBody, @Request() request): void {
+    createPost(@Param('id') id: string, @Body() { title, content, groupId }: RequestBody, @Request() request): Promise<void> {
         const userId: string = request.user.id
-        const command: CreatePostCommand = new CreatePostCommand(id, title, content, userId, groupId)
-        this.commandBus.execute(command)
+        const command: CreatePostCommand = new CreatePostCommand({ id, title, content, userId, groupId })
+        return this.commandBus.execute(command)
     }
 }
 

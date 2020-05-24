@@ -5,7 +5,6 @@ import { BaseService } from '@agora-desktop/core/shared/services/base.service'
 
 @Injectable()
 export class ProfileService extends BaseService {
-
     constructor(injector: Injector) {
         super(injector)
     }

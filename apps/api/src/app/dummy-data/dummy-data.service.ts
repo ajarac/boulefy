@@ -14,7 +14,13 @@ export class DummyDataService {
     }
 
     private static generateCreatePostCommand(userId: string): CreatePostCommand {
-        return new CreatePostCommand(faker.random.uuid(), faker.lorem.words(), faker.lorem.paragraphs(), userId)
+        return new CreatePostCommand({
+            id: faker.random.uuid(),
+            title: faker.lorem.words(),
+            content: faker.lorem.paragraphs(),
+            userId: userId,
+            groupId: faker.random.uuid()
+        })
     }
 
     private static generateCreateCommentCommand(postId: string, userId: string): CreateCommentCommand {
