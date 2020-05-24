@@ -28,11 +28,11 @@ jobs:
               with:
                   mongodb-version: ${{ matrix.mongodb-version }}
                   mongodb-replica-set: insert-replica-set-name
-            - name: node_modules
+            - name: Install Node Modules
               run: npm ci
-            - name: lint
+            - name: Lint
               run: npm run lint
-            - name: build
+            - name: Build All
               run: npm run build:all
-            - name: test
+            - name: Test
               run: npm run test

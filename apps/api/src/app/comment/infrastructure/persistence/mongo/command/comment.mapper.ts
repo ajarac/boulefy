@@ -11,14 +11,15 @@ import { UserId } from '@api/shared/domain/user/user-id'
 
 export class CommentMapper {
     static fromSchema(commentSchema: CommentSchema): Comment {
-        const id: CommentId = new CommentId(from(commentSchema._id).toString())
-        const content: CommentContent = new CommentContent(commentSchema.content)
-        const userId: UserId = new UserId(from(commentSchema.userId).toString())
-        const postId: PostId = new PostId(from(commentSchema.postId).toString())
-        const ranking: CommentRanking = new CommentRanking(commentSchema.ranking)
-        const createdDate: CommentCreatedDate = new CommentCreatedDate(commentSchema.createdDate)
-        const updatedDate: CommentUpdatedDate = new CommentUpdatedDate(commentSchema.updatedDate)
-        return new Comment(id, content, userId, postId, ranking, createdDate, updatedDate)
+        return new Comment({
+            id: new CommentId(from(commentSchema._id).toString()),
+            content: new CommentContent(commentSchema.content),
+            userId: new UserId(from(commentSchema.userId).toString()),
+            postId: new PostId(from(commentSchema.postId).toString()),
+            ranking: new CommentRanking(commentSchema.ranking),
+            createdDate: new CommentCreatedDate(commentSchema.createdDate),
+            updatedDate: new CommentUpdatedDate(commentSchema.updatedDate)
+        })
     }
 
     static toSchema(comment: Comment): CommentSchema {

@@ -5,20 +5,44 @@ import { GroupDescription } from '@api/group/domain/group-description'
 import { GroupCounterPosts } from '@api/group/domain/group-counter-posts'
 import { GroupCounterUsers } from '@api/group/domain/group-counter-users'
 import { GroupCreatedDate } from '@api/group/domain/group-created-date'
-import { GroupCreateEvent } from '@api/shared/domain/group/group-create-event'
+import { GroupCreatedEvent } from '@api/shared/domain/group/group-created-event'
 import { UserId } from '@api/shared/domain/user/user-id'
 
+export interface GroupArgs {
+    id: GroupId
+    name: GroupName
+    description: GroupDescription
+    userId: UserId
+    counterPosts: GroupCounterPosts
+    counterUsers: GroupCounterUsers
+    createdDate: GroupCreatedDate
+}
+
+export interface GroupCreateArgs {
+    id: GroupId
+    name: GroupName
+    description: GroupDescription
+    userId: UserId
+}
+
 export class Group extends AggregateRoot {
-    constructor(
-        private _id: GroupId,
-        private _name: GroupName,
-        private _description: GroupDescription,
-        private _userId: UserId,
-        private _counterPosts: GroupCounterPosts,
-        private _counterUsers: GroupCounterUsers,
-        private _createdDate: GroupCreatedDate
-    ) {
+    private readonly _id: GroupId
+    private readonly _name: GroupName
+    private readonly _description: GroupDescription
+    private readonly _userId: UserId
+    private readonly _counterPosts: GroupCounterPosts
+    private readonly _counterUsers: GroupCounterUsers
+    private readonly _createdDate: GroupCreatedDate
+
+    constructor(groupArgs: GroupArgs) {
         super()
+        this._id = groupArgs.id
+        this._name = groupArgs.name
+        this._description = groupArgs.description
+        this._userId = groupArgs.userId
+        this._counterPosts = groupArgs.counterPosts
+        this._counterUsers = groupArgs.counterUsers
+        this._createdDate = groupArgs.createdDate
     }
 
     get id(): GroupId {
@@ -49,15 +73,22 @@ export class Group extends AggregateRoot {
         return this._createdDate
     }
 
-    static create(id: GroupId, name: GroupName, description: GroupDescription, userId: UserId): Group {
+    static create({ id, name, description, userId }: GroupCreateArgs): Group {
         const counterPosts: GroupCounterPosts = new GroupCounterPosts(0)
         const counterUsers: GroupCounterUsers = new GroupCounterUsers(0)
         const createdDate: GroupCreatedDate = GroupCreatedDate.create()
 
-        const group: Group = new Group(id, name, description, userId, counterPosts, counterUsers, createdDate)
+        const group: Group = new Group({ id, name, description, userId, counterPosts, counterUsers, createdDate })
 
         group.apply(
-            new GroupCreateEvent(id.value, name.value, description.value, counterPosts.value, counterUsers.value, createdDate.value)
+            new GroupCreatedEvent({
+                id: id.value,
+                name: name.value,
+                description: description.value,
+                counterPosts: counterPosts.value,
+                counterUsers: counterUsers.value,
+                createdDate: createdDate.value
+            })
         )
 
         return group

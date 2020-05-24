@@ -16,6 +16,6 @@ export class CreateGroupCommandHandler implements ICommandHandler<CreateGroupCom
         const description: GroupDescription = new GroupDescription(command.description)
         const userId: UserId = new UserId(command.userId)
 
-        return this.groupCreator.create(id, name, description, userId)
+        return this.groupCreator.create({id, name, description, userId})
     }
 }

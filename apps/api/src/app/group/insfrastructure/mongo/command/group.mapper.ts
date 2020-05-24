@@ -11,15 +11,15 @@ import { UserId } from '@api/shared/domain/user/user-id'
 
 export class GroupMapper {
     static fromSchema(groupSchema: GroupSchema): Group {
-        const id: GroupId = new GroupId(from(groupSchema._id).toString())
-        const name: GroupName = new GroupName(groupSchema.name)
-        const description: GroupDescription = new GroupDescription(groupSchema.description)
-        const userId: UserId = new UserId(from(groupSchema.userId).toString())
-        const counterPosts: GroupCounterPosts = new GroupCounterPosts(groupSchema.counterPosts)
-        const counterUsers: GroupCounterUsers = new GroupCounterUsers(groupSchema.counterUsers)
-        const createdDate: GroupCreatedDate = new GroupCreatedDate(groupSchema.createdDate)
-
-        return new Group(id, name, description, userId, counterPosts, counterUsers, createdDate)
+        return new Group({
+            id: new GroupId(from(groupSchema._id).toString()),
+            name: new GroupName(groupSchema.name),
+            description: new GroupDescription(groupSchema.description),
+            userId: new UserId(from(groupSchema.userId).toString()),
+            counterPosts: new GroupCounterPosts(groupSchema.counterPosts),
+            counterUsers: new GroupCounterUsers(groupSchema.counterUsers),
+            createdDate: new GroupCreatedDate(groupSchema.createdDate)
+        })
     }
 
     static toSchema(group: Group): GroupSchema {

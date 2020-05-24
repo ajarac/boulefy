@@ -8,7 +8,7 @@ export class RegisterUserController {
 
     @Post(':id')
     registerUser(@Param('id') id: string, @Body() { username, password, email }: Request): void {
-        const command: RegisterUserCommand = new RegisterUserCommand(id, username, password, email)
+        const command: RegisterUserCommand = new RegisterUserCommand({ id, username, password, email })
         this.commandBus.execute(command)
     }
 }

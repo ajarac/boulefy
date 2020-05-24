@@ -4,7 +4,7 @@ COPY . /build
 
 WORKDIR /build
 RUN npm ci
-RUN npm run api:build
+RUN npm run build:api
 
 FROM node:lts-slim
 

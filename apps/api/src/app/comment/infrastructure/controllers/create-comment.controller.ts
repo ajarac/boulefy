@@ -12,7 +12,7 @@ export class CreateCommentController {
     @UseGuards(AuthGuard)
     create(@Param('id') id: string, @Body() { content, postId }: Request, @Request() request): void {
         const userId: string = request.user.id
-        const command: CreateCommentCommand = new CreateCommentCommand(id, content, userId, postId)
+        const command: CreateCommentCommand = new CreateCommentCommand({ id, content, userId, postId })
         this.commandBus.execute(command)
     }
 }

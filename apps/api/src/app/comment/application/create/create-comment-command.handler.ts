@@ -16,6 +16,6 @@ export class CreateCommentCommandHandler implements ICommandHandler<CreateCommen
         const userId: UserId = new UserId(command.userId)
         const postId: PostId = new PostId(command.postId)
 
-        return this.commentCreator.create(id, content, userId, postId)
+        return this.commentCreator.create({ id, content, userId, postId })
     }
 }

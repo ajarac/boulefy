@@ -10,7 +10,12 @@ export class DummyDataService {
     constructor(private commandBus: CommandBus) {}
 
     private static generateRegisterUserCommand(): RegisterUserCommand {
-        return new RegisterUserCommand(faker.random.uuid(), faker.internet.userName(), faker.lorem.word(), faker.internet.email())
+        return new RegisterUserCommand({
+            id: faker.random.uuid(),
+            username: faker.internet.userName(),
+            password: faker.lorem.word(),
+            email: faker.internet.email()
+        })
     }
 
     private static generateCreatePostCommand(userId: string): CreatePostCommand {
@@ -24,7 +29,12 @@ export class DummyDataService {
     }
 
     private static generateCreateCommentCommand(postId: string, userId: string): CreateCommentCommand {
-        return new CreateCommentCommand(faker.random.uuid(), faker.lorem.paragraphs(), userId, postId)
+        return new CreateCommentCommand({
+            id: faker.random.uuid(),
+            content: faker.lorem.paragraphs(),
+            userId,
+            postId
+        })
     }
 
     async generate(): Promise<void> {

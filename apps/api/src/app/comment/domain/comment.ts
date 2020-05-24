@@ -8,17 +8,41 @@ import { CommentUpdatedDate } from '@api/comment/domain/comment-updated-date'
 import { UserId } from '@api/shared/domain/user/user-id'
 import { CommentCreatedEvent } from '@api/shared/domain/comment/comment-created-event'
 
+export interface CommentArgs {
+    id: CommentId
+    content: CommentContent
+    userId: UserId
+    postId: PostId
+    ranking: CommentRanking
+    createdDate: CommentCreatedDate
+    updatedDate: CommentUpdatedDate
+}
+
+export interface CommentCreateArgs {
+    id: CommentId
+    content: CommentContent
+    userId: UserId
+    postId: PostId
+}
+
 export class Comment extends AggregateRoot {
-    constructor(
-        private _id: CommentId,
-        private _content: CommentContent,
-        private _userId: UserId,
-        private _postId: PostId,
-        private _ranking: CommentRanking,
-        private _createdDate: CommentCreatedDate,
-        private _updatedDate: CommentUpdatedDate
-    ) {
+    private readonly _id: CommentId
+    private readonly _content: CommentContent
+    private readonly _userId: UserId
+    private readonly _postId: PostId
+    private readonly _ranking: CommentRanking
+    private readonly _createdDate: CommentCreatedDate
+    private readonly _updatedDate: CommentUpdatedDate
+
+    constructor(commentArgs: CommentArgs) {
         super()
+        this._id = commentArgs.id
+        this._content = commentArgs.content
+        this._userId = commentArgs.userId
+        this._postId = commentArgs.postId
+        this._ranking = commentArgs.ranking
+        this._createdDate = commentArgs.createdDate
+        this._updatedDate = commentArgs.updatedDate
     }
 
     get id(): CommentId {
@@ -49,11 +73,11 @@ export class Comment extends AggregateRoot {
         return this._updatedDate
     }
 
-    public static create(id: CommentId, content: CommentContent, userId: UserId, postId: PostId): Comment {
+    public static create({ id, content, userId, postId }: CommentCreateArgs): Comment {
         const ranking: CommentRanking = CommentRanking.create()
         const createdDate: CommentCreatedDate = CommentCreatedDate.create()
         const updatedDate: CommentUpdatedDate = CommentUpdatedDate.create()
-        const comment: Comment = new Comment(id, content, userId, postId, ranking, createdDate, updatedDate)
+        const comment: Comment = new Comment({ id, content, userId, postId, ranking, createdDate, updatedDate })
 
         comment.apply(new CommentCreatedEvent(id.value, content.value, userId.value, postId.value, ranking.value))
 
