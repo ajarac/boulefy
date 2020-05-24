@@ -12,11 +12,13 @@ import { GroupId } from '@api/shared/domain/group/group-id'
 export class PostCreator {
     constructor(private repository: PostRepository, private publisher: EventPublisher) {}
 
-    async create(id: PostId, title: PostTitle, content: PostContent, userId: UserId, groupId: GroupId): Promise<void> {
+    async create(id: PostId, title: PostTitle, content: PostContent, userId: UserId, groupId: GroupId): Promise<Post> {
         const post: Post = this.publisher.mergeObjectContext(Post.create({ id, title, content, userId, groupId }))
 
         await this.repository.save(post)
 
         post.commit()
+
+        return post
     }
 }
